@@ -1,0 +1,9 @@
+/* Custom styles to remove avatar border/circle */
+#avatar {
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+#avatar img {
+  border-radius: 0 !important;
+}

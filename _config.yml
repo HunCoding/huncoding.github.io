@@ -1,5 +1,6 @@
 lang: pt-BR
 timezone: America/Sao_Paulo
+theme: jekyll-theme-chirpy
 title: Huncoding
 tagline: Crie, Code e Compartilhe
 description: O blog oficial do canal Huncoding. Conteúdo sobre programação, tecnologia e projetos.
@@ -18,7 +19,7 @@ social:
       url: https://youtube.com/@huncoding
       icon: "fab fa-fw fa-youtube"
 theme_mode: dark
-avatar: "/assets/huncoding_logo.png"
+avatar: "/assets/huncoding_logo.svg"
 analytics:
   google:
     id: ${{ secrets.GOOGLE_ANALYTICS_ID }}
@@ -35,6 +36,13 @@ paginate_path: /page:num/
 permalink: /:title/
 github:
   username: HunCoding
+
+plugins:
+  - jekyll-paginate
+  - jekyll-include-cache
+  - jekyll-archives
+  - jekyll-sitemap
+  - jekyll-seo-tag
 
 kramdown:
   footnote_backlink: "&#8617;&#xfe0e;"
