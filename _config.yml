@@ -14,7 +14,7 @@ theme_mode: dark
 avatar: "/assets/huncoding_logo.svg"
 analytics:
   google:
-    id: ${{ env.GOOGLE_ANALYTICS_ID }}
+    id: ${{ secrets.GOOGLE_ANALYTICS_ID }}
 comments:
   provider: giscus
   giscus:
