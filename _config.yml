@@ -7,7 +7,7 @@ description: O blog oficial do canal Huncoding. Conteúdo sobre programação, t
 url: "https://huncoding.github.io"
 social:
   name: Otavio Celestino dos Santos
-  email: ${{ secrets.BLOG_EMAIL }}
+  email: huntercoding0@gmail.com
   links:
     - https://github.com/HunCoding
 theme_mode: dark
