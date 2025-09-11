@@ -1,0 +1,96 @@
+lang: pt
+timezone: America/Sao_Paulo
+title: Huncoding
+tagline: Crie, Code e Compartilhe
+description: O blog oficial do canal Huncoding. Conteúdo sobre programação, tecnologia e projetos.
+url: "https://huncoding.github.io"
+social:
+  name: Otavio Celestino dos Santos
+  email: ${{ secrets.BLOG_EMAIL }}
+  links:
+    - name: GitHub
+      url: https://github.com/HunCoding
+      icon: "fab fa-fw fa-github"
+    - name: LinkedIn
+      url: https://www.linkedin.com/in/otaviocelestino/
+      icon: "fab fa-fw fa-linkedin"
+    - name: YouTube
+      url: https://youtube.com/@huncoding
+      icon: "fab fa-fw fa-youtube"
+theme_mode: dark
+avatar: "/assets/huncoding_logo.png"
+analytics:
+  google:
+    id: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+comments:
+  provider: giscus
+  giscus:
+    repo: HunCoding/huncoding.github.io
+    repo_id: ${{ secrets.GISCUS_REPO_ID }}
+    category: Ideas
+    category_id: ${{ secrets.GISCUS_CATEGORY_ID }}
+highlighter_theme: github-dark-high-contrast
+paginate: 10
+paginate_path: /page:num/
+permalink: /:title/
+kramdown:
+  footnote_backlink: "&#8617;&#xfe0e;"
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+collections:
+  tabs:
+    output: true
+    sort_by: order
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: true
+      toc: true
+      permalink: /:title/
+  - scope:
+      path: _drafts
+    values:
+      comments: false
+  - scope:
+      path: ""
+      type: tabs
+    values:
+      layout: page
+      permalink: /:title/
+sass:
+  style: compressed
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  blanklines: false
+  ignore:
+    envs: [development]
+exclude:
+  - "*.gem"
+  - "*.gemspec"
+  - docs
+  - tools
+  - README.md
+  - LICENSE
+  - purgecss.js
+  - "*.config.js"
+  - "package*.json"
+jekyll-archives:
+  enabled: [categories, tags]
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    tag: /tags/:name/
+    category: /categories/:name/
