@@ -114,3 +114,7 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+
+# Ensure .nojekyll is included in the build
+include:
+  - .nojekyll
