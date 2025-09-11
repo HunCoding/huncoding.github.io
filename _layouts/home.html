@@ -2,8 +2,8 @@
 layout: default
 ---
 
-{% assign all_pinned = site.posts | where_exp: 'item', 'item.pin == true' %}
-{% assign all_normal = site.posts | where_exp: 'item', 'item.pin != true and item.hidden != true' %}
+{% assign all_pinned = site.posts | where_exp: "item", "item.pin == true" %}
+{% assign all_normal = site.posts | where_exp: "item", "item.pin != true and item.hidden != true" %}
 
 {% assign posts = '' | split: '' %}
 
