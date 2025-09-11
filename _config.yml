@@ -96,9 +96,7 @@ defaults:
 include:
   - .nojekyll
 
-# Open Graph and Social Media
-og_image: "/assets/img/og-image.png"
-twitter_image: "/assets/img/og-image.png"
+social_preview_image: "/assets/img/og-image.png"
 
 # Social Media Meta Tags
 twitter:
@@ -111,7 +109,7 @@ defaults:
       path: ""
       type: pages
     values:
-      og_image: "/assets/img/og-image.png"
+      social_preview_image: "/assets/img/og-image.png"
       twitter_image: "/assets/img/og-image.png"
 
 # Jekyll SEO Tag configuration
