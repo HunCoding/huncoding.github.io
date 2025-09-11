@@ -1,5 +1,7 @@
 lang: pt
-theme: jekyll-theme-chirpy
+remote_theme: cotes2020/jekyll-theme-chirpy@main
+plugins:
+  - jekyll-remote-theme
 timezone: America/Sao_Paulo
 title: Huncoding
 tagline: Crie, Code e Compartilhe
