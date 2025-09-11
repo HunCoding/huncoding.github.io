@@ -19,9 +19,9 @@ comments:
   provider: giscus
   giscus:
     repo: HunCoding/huncoding.github.io
-    repo_id: 1054909805
+    repo_id: R_kgDOPuClbQ
     category: Ideas
-    category_id: 45956610
+    category_id: DIC_kwDOPuClbc4CvT4C
 highlighter_theme: github-dark-high-contrast
 paginate: 10
 paginate_path: /page:num/
