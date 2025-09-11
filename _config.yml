@@ -96,7 +96,7 @@ defaults:
 include:
   - .nojekyll
 
-social_preview_image: "/assets/img/og-image.png"
+social_preview_image: "https://huncoding.github.io/assets/img/og-image.png"
 
 # Social Media Meta Tags
 twitter:
@@ -109,15 +109,15 @@ defaults:
       path: ""
       type: pages
     values:
-      social_preview_image: "/assets/img/og-image.png"
-      twitter_image: "/assets/img/og-image.png"
+      social_preview_image: "https://huncoding.github.io/assets/img/og-image.png"
+      twitter_image: "https://huncoding.github.io/assets/img/og-image.png"
 
 # Jekyll SEO Tag configuration
 seo:
   type: "WebSite"
   name: "Huncoding"
   description: "O blog oficial do canal Huncoding. Conteúdo sobre programação, tecnologia e projetos."
-  image: "/assets/img/og-image.png"
+  image: "https://huncoding.github.io/assets/img/og-image.png"
   twitter:
     card: "summary_large_image"
     site: "@huncoding"
