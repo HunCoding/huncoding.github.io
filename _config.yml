@@ -95,3 +95,31 @@ defaults:
 # Ensure .nojekyll is included in the build
 include:
   - .nojekyll
+
+# Open Graph and Social Media
+og_image: "/assets/img/og-image.png"
+twitter_image: "/assets/img/og-image.png"
+
+# Social Media Meta Tags
+twitter:
+  username: huncoding
+  card: summary_large_image
+
+# Open Graph defaults
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      og_image: "/assets/img/og-image.png"
+      twitter_image: "/assets/img/og-image.png"
+
+# Jekyll SEO Tag configuration
+seo:
+  type: "WebSite"
+  name: "Huncoding"
+  description: "O blog oficial do canal Huncoding. Conteúdo sobre programação, tecnologia e projetos."
+  image: "/assets/img/og-image.png"
+  twitter:
+    card: "summary_large_image"
+    site: "@huncoding"
