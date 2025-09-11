@@ -28,6 +28,14 @@ jobs:
           ruby-version: 3.2
           bundler-cache: true
 
+      - name: Replace secrets in config
+        run: |
+          # Replace secrets in _config.yml
+          sed -i "s/\${{ secrets.BLOG_EMAIL }}/${{ secrets.BLOG_EMAIL }}/g" _config.yml
+          sed -i "s/\${{ secrets.GOOGLE_ANALYTICS_ID }}/${{ secrets.GOOGLE_ANALYTICS_ID }}/g" _config.yml
+          sed -i "s/\${{ secrets.GISCUS_REPO_ID }}/${{ secrets.GISCUS_REPO_ID }}/g" _config.yml
+          sed -i "s/\${{ secrets.GISCUS_CATEGORY_ID }}/${{ secrets.GISCUS_CATEGORY_ID }}/g" _config.yml
+
       - name: Build with Jekyll (Local)
         run: |
           bundle exec jekyll build --destination ./_site
