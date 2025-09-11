@@ -1,5 +1,6 @@
 lang: pt
 timezone: America/Sao_Paulo
+theme: jekyll-theme-chirpy
 title: Huncoding
 tagline: Crie, Code e Compartilhe
 description: O blog oficial do canal Huncoding. Conteúdo sobre programação, tecnologia e projetos.
