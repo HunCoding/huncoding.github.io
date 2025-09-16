@@ -20,6 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
+      JEKYLL_ENV: production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,6 +33,7 @@ jobs:
           
       - name: Build with Jekyll (Local)
         env:
+          JEKYLL_ENV: production
           GOOGLE_ANALYTICS_ID: ${{ secrets.GOOGLE_ANALYTICS_ID }}
         run: |
           bundle exec jekyll build --destination ./_site
