@@ -1,0 +1,40 @@
+# Automatic keyword linking for internal SEO
+- keyword: "Terraform"
+  url: "/tags/terraform/"
+  title: "Posts sobre Terraform"
+
+- keyword: "Kubernetes"
+  url: "/tags/kubernetes/"
+  title: "Posts sobre Kubernetes"
+
+- keyword: "Go"
+  url: "/tags/golang/"
+  title: "Posts sobre Go/Golang"
+
+- keyword: "DevOps"
+  url: "/tags/devops/"
+  title: "Posts sobre DevOps"
+
+- keyword: "Docker"
+  url: "/tags/docker/"
+  title: "Posts sobre Docker"
+
+- keyword: "AWS"
+  url: "/tags/aws/"
+  title: "Posts sobre AWS"
+
+- keyword: "Git"
+  url: "/tags/git/"
+  title: "Posts sobre Git"
+
+- keyword: "Linux"
+  url: "/tags/linux/"
+  title: "Posts sobre Linux"
+
+- keyword: "Python"
+  url: "/tags/python/"
+  title: "Posts sobre Python"
+
+- keyword: "JavaScript"
+  url: "/tags/javascript/"
+  title: "Posts sobre JavaScript"

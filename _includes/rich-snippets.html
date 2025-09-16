@@ -1,0 +1,128 @@
+<!-- Advanced Rich Snippets -->
+
+{% if page.layout == 'post' %}
+  <!-- Article Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ page.title | escape }}",
+    "description": "{{ page.excerpt | default: page.description | strip_html | escape }}",
+    "image": "{{ page.image | default: site.social_preview_image | absolute_url }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.social.name }}",
+      "url": "{{ site.url }}",
+      "sameAs": [
+        {% for link in site.social.links %}
+          "{{ link }}"{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ site.title }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site.avatar | absolute_url }}",
+        "width": 112,
+        "height": 112
+      }
+    },
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ page.url | absolute_url }}"
+    },
+    "keywords": "{{ page.tags | join: ', ' | escape }}",
+    "articleSection": "{{ page.categories | first | escape }}",
+    "wordCount": "{{ content | strip_html | number_of_words }}",
+    "inLanguage": "{{ site.lang }}",
+    "isPartOf": {
+      "@type": "Blog",
+      "name": "{{ site.title }}",
+      "url": "{{ site.url }}"
+    }
+  }
+  </script>
+
+  <!-- FAQ Rich Snippets (if page has FAQ) -->
+  {% if page.faq %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {% for faq in page.faq %}
+          {
+            "@type": "Question",
+            "name": "{{ faq.question | escape }}",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "{{ faq.answer | escape }}"
+            }
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }
+    </script>
+  {% endif %}
+
+  <!-- How-to Rich Snippets (if page has steps) -->
+  {% if page.how_to %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "{{ page.title | escape }}",
+      "description": "{{ page.description | escape }}",
+      "image": "{{ page.image | absolute_url }}",
+      "totalTime": "{{ page.how_to.total_time | default: 'PT30M' }}",
+      "supply": [
+        {% for supply in page.how_to.supplies %}
+          {
+            "@type": "HowToSupply",
+            "name": "{{ supply | escape }}"
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ],
+      "step": [
+        {% for step in page.how_to.steps %}
+          {
+            "@type": "HowToStep",
+            "name": "{{ step.name | escape }}",
+            "text": "{{ step.text | escape }}",
+            {% if step.image %}
+            "image": "{{ step.image | absolute_url }}",
+            {% endif %}
+            "url": "{{ page.url | absolute_url }}#step-{{ forloop.index }}"
+          }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+      ]
+    }
+    </script>
+  {% endif %}
+{% endif %}
+
+<!-- Organization Rich Snippets -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{{ site.title }}",
+  "url": "{{ site.url }}",
+  "logo": "{{ site.avatar | absolute_url }}",
+  "description": "{{ site.description }}",
+  "foundingDate": "2024",
+  "founder": {
+    "@type": "Person",
+    "name": "{{ site.social.name }}"
+  },
+  "sameAs": [
+    {% for link in site.social.links %}
+      "{{ link }}"{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  ]
+}
+</script>

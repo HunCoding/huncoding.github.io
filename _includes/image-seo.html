@@ -1,0 +1,50 @@
+<!-- Advanced Image SEO Optimization -->
+
+{% if include.src %}
+  {% assign image_src = include.src %}
+  {% assign image_alt = include.alt | default: page.title | escape %}
+  {% assign image_title = include.title | default: image_alt %}
+  {% assign image_class = include.class | default: 'img-fluid' %}
+  {% assign image_loading = include.loading | default: 'lazy' %}
+  {% assign image_width = include.width %}
+  {% assign image_height = include.height %}
+
+  <!-- Responsive Image with SEO -->
+  <picture>
+    <!-- WebP format for modern browsers -->
+    <source 
+      srcset="{{ image_src | replace: '.jpg', '.webp' | replace: '.png', '.webp' | replace: '.jpeg', '.webp' }}"
+      type="image/webp"
+    >
+    
+    <!-- Fallback for older browsers -->
+    <img 
+      src="{{ image_src | relative_url }}"
+      alt="{{ image_alt }}"
+      title="{{ image_title }}"
+      class="{{ image_class }}"
+      loading="{{ image_loading }}"
+      {% if image_width %}width="{{ image_width }}"{% endif %}
+      {% if image_height %}height="{{ image_height }}"{% endif %}
+      decoding="async"
+      onerror="this.style.display='none'"
+    >
+  </picture>
+
+  <!-- Image Schema.org for rich snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ImageObject",
+    "url": "{{ image_src | absolute_url }}",
+    "caption": "{{ image_alt }}",
+    "name": "{{ image_title }}",
+    {% if image_width and image_height %}
+    "width": {{ image_width }},
+    "height": {{ image_height }},
+    {% endif %}
+    "contentUrl": "{{ image_src | absolute_url }}",
+    "encodingFormat": "image/jpeg"
+  }
+  </script>
+{% endif %}

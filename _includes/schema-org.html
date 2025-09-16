@@ -1,0 +1,115 @@
+<!-- Schema.org JSON-LD for rich snippets -->
+
+{% if page.layout == 'post' %}
+  <!-- Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ page.title | escape }}",
+    "description": "{{ page.excerpt | default: page.description | strip_html | escape }}",
+    "image": "{{ page.image | default: site.social_preview_image | absolute_url }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.social.name }}",
+      "url": "{{ site.url }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ site.title }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site.avatar | absolute_url }}"
+      }
+    },
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ page.url | absolute_url }}"
+    },
+    "keywords": "{{ page.tags | join: ', ' | escape }}",
+    "articleSection": "{{ page.categories | first | escape }}",
+    "wordCount": "{{ content | strip_html | number_of_words }}"
+  }
+  </script>
+{% endif %}
+
+{% if page.layout == 'home' %}
+  <!-- Website Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "{{ site.title }}",
+    "description": "{{ site.description }}",
+    "url": "{{ site.url }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.social.name }}",
+      "url": "{{ site.url }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ site.title }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site.avatar | absolute_url }}"
+      }
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "{{ site.url }}/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+{% endif %}
+
+{% if page.layout == 'page' %}
+  <!-- WebPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "{{ page.title | escape }}",
+    "description": "{{ page.description | default: page.excerpt | strip_html | escape }}",
+    "url": "{{ page.url | absolute_url }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ site.social.name }}",
+      "url": "{{ site.url }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ site.title }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site.avatar | absolute_url }}"
+      }
+    },
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}"
+  }
+  </script>
+{% endif %}
+
+<!-- BreadcrumbList Schema -->
+{% if page.breadcrumb %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {% for item in page.breadcrumb %}
+        {
+          "@type": "ListItem",
+          "position": {{ forloop.index }},
+          "name": "{{ item.label | escape }}",
+          "item": "{{ item.url | absolute_url }}"
+        }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+  }
+  </script>
+{% endif %}

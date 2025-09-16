@@ -160,3 +160,84 @@ sitemap:
   priority: 0.7
   lastmod: true
 
+
+seo:
+  type: "WebSite"
+  name: "Huncoding"
+  description: "O blog oficial do canal Huncoding. Conteúdo sobre programação, tecnologia e projetos."
+  image: "https://huncoding.github.io/assets/img/og-image.png"
+  twitter:
+    card: "summary_large_image"
+    site: "@huncoding"
+  facebook:
+    app_id: ""
+  google:
+    site_verification: ""
+  bing:
+    site_verification: ""
+  yandex:
+    site_verification: ""
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  startings: [html, head, body]
+
+image_optimization:
+  enabled: true
+  formats: [webp, jpeg, png]
+  quality: 85
+  lazy_loading: true
+
+content_optimization:
+  reading_time: true
+  word_count: true
+  internal_linking: true
+  related_posts: true
+
+analytics:
+  google:
+    id: G-G5FT1G68EL
+  google_search_console:
+    verification: ""
+  facebook_pixel:
+    id: ""
+
+social_media:
+  facebook:
+    app_id: ""
+  linkedin:
+    company_id: ""
+  instagram:
+    username: ""
+
+search_engine_optimization:
+  robots_txt: true
+  sitemap: true
+  canonical_urls: true
+  hreflang: true
+  schema_org: true
+  rich_snippets: true
+  meta_tags: true
+  open_graph: true
+  twitter_cards: true
+
+content_management:
+  last_modified: false
+  breadcrumbs: true
+  pagination: true
+  archives: true
+  categories: true
+  tags: true
+  related_posts: true
+  internal_linking: true
+
+performance:
+  minification: true
+  compression: true
+  caching: true
+  cdn: false
+  lazy_loading: true
+  preloading: true
+  resource_hints: true
