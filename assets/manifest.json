@@ -1,0 +1,28 @@
+{
+  "name": "HunCoding Blog",
+  "short_name": "HunCoding",
+  "description": "O blog oficial do canal HunCoding. Conteúdo sobre programação, tecnologia e projetos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1b1b1e",
+  "theme_color": "#4b33bb",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/img/favicons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/img/favicons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "technology", "programming"],
+  "lang": "pt-BR",
+  "scope": "/",
+  "prefer_related_applications": false
+}

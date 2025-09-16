@@ -15,6 +15,9 @@ Hoje vou te mostrar como criar um **Operador Kubernetes** do zero que monitora m
 
 Se você quer ver o processo completo em ação, dá uma olhada no [vídeo no YouTube](https://youtu.be/ibYkWAGisb0) que gravei sobre isso!
 
+{% include embed/youtube.html id="ibYkWAGisb0" %}
+
+
 ## Por que isso é útil?
 
 Imagine que você tem uma aplicação rodando no Kubernetes e precisa alterar uma configuração. Ao invés de fazer restart da aplicação inteira, você pode:
