@@ -2,7 +2,7 @@
 layout: post
 title: "Criando um Provider Terraform Customizado do Zero"
 date: 2025-09-15 00:00:00 -0000
-categories: [terraform, go, devops]
+categories: [Terraform, Go, DevOps]
 tags: [terraform, go, provider, sdk, api]
 image: "/assets/img/posts/provider-terraform-customizado.png"
 ---
