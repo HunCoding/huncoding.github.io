@@ -36,6 +36,18 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
 
+
+# Jekyll Archives configuration
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    category: /categories/:name/
+    tag: /tags/:name/
 kramdown:
   footnote_backlink: "&#8617;&#xfe0e;"
   syntax_highlighter: rouge
