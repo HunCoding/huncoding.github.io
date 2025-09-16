@@ -2,9 +2,8 @@
 
 {% assign words = include.content | strip_html | number_of_words: 'auto' %}
 
-<!-- words per minute -->
-
-{% assign wpm = 180 %}
+<!-- Customized reading speed for technical content -->
+{% assign wpm = 200 %}
 {% assign min_time = 1 %}
 
 {% assign read_time = words | divided_by: wpm %}
@@ -17,21 +16,16 @@
   {{- site.data.locales[include.lang].post.read_time.prompt -}}
 {% endcapture %}
 
-<!-- return element -->
+<!-- Enhanced return element with better styling -->
 <span
-  class="readtime"
+  class="readtime badge bg-secondary"
   data-bs-toggle="tooltip"
   data-bs-placement="bottom"
-  title="{{ words }} {{ site.data.locales[include.lang].post.words }}"
+  title="📖 {{ words }} palavras • ⚡ Velocidade: {{ wpm }} palavras/min"
+  style="font-size: 0.8em; margin-left: 0.5rem;"
 >
-  <em>
-    {{- read_time -}}
-    {{ ' ' }}
-    {{- site.data.locales[include.lang].post.read_time.unit -}}
-  </em>
-  {%- if include.prompt -%}
-    {%- assign _prompt_words = read_prompt | number_of_words: 'auto' -%}
-    {%- unless _prompt_words > 1 -%}{{ ' ' }}{%- endunless -%}
-    {{ read_prompt }}
-  {%- endif -%}
+  <i class="fas fa-clock me-1"></i>
+  {{- read_time -}}
+  {{ ' ' }}
+  {{- site.data.locales[include.lang].post.read_time.unit -}}
 </span>

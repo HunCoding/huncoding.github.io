@@ -1,10 +1,45 @@
----
-permalink: /robots.txt
-# The robots rules
----
-
 User-agent: *
+Allow: /
 
-Disallow: /norobots/
+# Disallow private directories
+Disallow: /_site/
+Disallow: /_posts/
+Disallow: /_layouts/
+Disallow: /_includes/
+Disallow: /_sass/
+Disallow: /_data/
+Disallow: /_plugins/
+Disallow: /_tabs/
+Disallow: /assets/js/
+Disallow: /assets/css/
+Disallow: /assets/lib/
+Disallow: /node_modules/
+Disallow: /tools/
+Disallow: /docs/
+Disallow: /.github/
+Disallow: /.git/
+Disallow: /.gitignore
+Disallow: /Gemfile
+Disallow: /Gemfile.lock
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /rollup.config.js
+Disallow: /purgecss.js
+Disallow: /eslint.config.js
+Disallow: /README.md
+Disallow: /LICENSE
+Disallow: /CHANGELOG.md
+Disallow: /CONTRIBUTING.md
+Disallow: /CODE_OF_CONDUCT.md
+Disallow: /SECURITY.md
+Disallow: /test_final.html
+Disallow: /linkedin-post-terraform.md
+Disallow: /.env
+Disallow: /.nojekyll
+Disallow: /404.html
 
-Sitemap: {{ '/sitemap.xml' | absolute_url }}
+# Sitemap location
+Sitemap: https://huncoding.github.io/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1

@@ -153,3 +153,10 @@ seo:
   twitter:
     card: "summary_large_image"
     site: "@huncoding"
+
+# Sitemap configuration for better SEO
+sitemap:
+  changefreq: weekly
+  priority: 0.7
+  lastmod: true
+
