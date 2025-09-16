@@ -7,6 +7,7 @@ date: 2025-09-11 10:00:00 -0300
 categories: [Kubernetes, Go, Devops]
 tags: [kubernetes, operator, golang, devops]
 comments: true
+image: "/assets/img/posts/kubernetes-operator-preview.png"
 ---
 E aí, pessoal!
 
