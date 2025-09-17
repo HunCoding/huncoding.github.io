@@ -2,15 +2,12 @@
 
 _Primeiro de tudo, obrigado por considerar contribuir para este projeto!_
 
-Existem muitas maneiras de contribuir, desde escrever tutoriais ou posts no blog, melhorar a documentação, enviar relatórios de bugs e solicitações de recursos, ou escrever código que pode ser incorporado ao projeto. Para proporcionar uma boa experiência tanto para contribuidores quanto para mantenedores, comece com as "[Regras Gerais](#regras-gerais)" antes de tomar outras ações.
+Existem muitas maneiras de contribuir, desde escrever tutoriais ou posts no blog, melhorar a documentação, enviar relatórios de bugs e solicitações de recursos, ou escrever código que pode ser incorporado ao projeto.
 
 ## Índice
 
-- [Regras Gerais](#regras-gerais)
 - [Contribuindo com Posts para o Blog](#contribuindo-com-posts-para-o-blog)
-- [Perguntas e Solicitações de Ajuda](#perguntas-e-solicitações-de-ajuda)
 - [Relatando um Bug](#relatando-um-bug)
-- [Sugerindo uma Nova Funcionalidade](#sugerindo-uma-nova-funcionalidade)
 - [Contribuindo com Código/Documentação](#contribuindo-com-códigodocumentação)
 - [Recursos Úteis](#recursos-úteis)
 
