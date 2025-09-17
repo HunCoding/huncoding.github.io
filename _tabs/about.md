@@ -40,3 +40,5 @@ Você pode me encontrar e acompanhar meus projetos nos seguintes links:
 
 **Crie, Code e Compartilhe!**
 {: .prompt-tip }
+
+{% include ko-fi-button.html %}
