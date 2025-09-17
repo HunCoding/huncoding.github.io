@@ -7,6 +7,7 @@ Existem muitas maneiras de contribuir, desde escrever tutoriais ou posts no blog
 ## Índice
 
 - [Regras Gerais](#regras-gerais)
+- [Contribuindo com Posts para o Blog](#contribuindo-com-posts-para-o-blog)
 - [Perguntas e Solicitações de Ajuda](#perguntas-e-solicitações-de-ajuda)
 - [Relatando um Bug](#relatando-um-bug)
 - [Sugerindo uma Nova Funcionalidade](#sugerindo-uma-nova-funcionalidade)
@@ -26,6 +27,83 @@ Todos os tipos de contribuições (_pull requests_, _issues_ e _discussions_) de
 - NÃO envie e-mails ou tweets diretamente para os desenvolvedores e mantenedores do projeto, tudo sobre o projeto deve ser deixado no GitHub.
 
 **Dica**: Se você é novo na comunidade open-source, leia "[Como Fazer Perguntas da Maneira Inteligente][ext-reading]" antes de contribuir.
+
+## Contribuindo com Posts para o Blog
+
+O HunCoding é um blog técnico focado em programação, DevOps, Kubernetes, Terraform e Go. Se você tem conhecimento para compartilhar, adoraríamos receber sua contribuição!
+
+### Tipos de Posts Aceitos
+
+- **Tutoriais práticos**: Guias passo-a-passo para implementar soluções
+- **Análises técnicas**: Deep dives em tecnologias e ferramentas
+- **Experiências reais**: Casos de uso e lições aprendidas em projetos
+- **Comparações**: Análise comparativa entre ferramentas ou abordagens
+- **Dicas e truques**: Pequenas otimizações e melhorias de produtividade
+
+### Processo para Contribuir com Posts
+
+1. **Proposta Inicial**: Abra uma [issue][feat-request] descrevendo sua ideia de post
+2. **Aprovação**: Aguarde a aprovação da equipe antes de começar a escrever
+3. **Estrutura do Post**: Siga o template padrão do blog
+4. **Revisão**: Seu post passará por revisão técnica e editorial
+5. **Publicação**: Após aprovação, o post será publicado com créditos
+
+### Template para Posts
+
+```markdown
+---
+layout: post
+title: "Título do Seu Post"
+subtitle: "Subtítulo descritivo do conteúdo"
+author: seu_nome
+date: YYYY-MM-DD HH:MM:SS -0300
+categories: [Categoria1, Categoria2]
+tags: [tag1, tag2, tag3]
+comments: true
+image: "/assets/img/posts/sua-imagem.png"
+---
+
+## Introdução
+
+Breve introdução sobre o que será abordado no post.
+
+## Desenvolvimento
+
+Conteúdo principal do post com exemplos práticos.
+
+## Conclusão
+
+Resumo dos pontos principais e próximos passos.
+```
+
+### Diretrizes de Conteúdo
+
+- **Linguagem**: Português brasileiro claro e objetivo
+- **Tom**: Profissional mas acessível, como uma conversa entre colegas
+- **Exemplos**: Sempre inclua exemplos práticos e código funcional
+- **Imagens**: Use imagens, diagramas ou screenshots quando apropriado
+- **Links**: Referencie fontes oficiais e documentação relevante
+- **Tamanho**: Posts devem ter entre 1000-3000 palavras
+
+### Estrutura de Arquivos
+
+- **Localização**: `_posts/YYYY-MM-DD-titulo-do-post.md`
+- **Imagens**: `assets/img/posts/nome-da-imagem.png`
+- **Formato**: Markdown com front matter do Jekyll
+
+### Processo de Revisão
+
+1. **Revisão Técnica**: Verificação da precisão técnica do conteúdo
+2. **Revisão Editorial**: Correção de gramática, estilo e clareza
+3. **Teste Prático**: Validação de exemplos de código
+4. **Aprovação Final**: Confirmação antes da publicação
+
+### Direitos e Créditos
+
+- Você mantém os direitos autorais do seu conteúdo
+- O post será publicado sob licença CC BY 4.0
+- Seu nome e biografia aparecerão no post
+- Você pode republicar o conteúdo em seu próprio blog após 30 dias
 
 ## Perguntas e Solicitações de Ajuda
 
