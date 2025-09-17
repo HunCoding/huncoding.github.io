@@ -14,20 +14,6 @@ Existem muitas maneiras de contribuir, desde escrever tutoriais ou posts no blog
 - [Contribuindo com Código/Documentação](#contribuindo-com-códigodocumentação)
 - [Recursos Úteis](#recursos-úteis)
 
-## Regras Gerais
-
-Todos os tipos de contribuições (_pull requests_, _issues_ e _discussions_) devem seguir estas regras:
-
-- Você deve ler a documentação do projeto para entender as funcionalidades e como usá-lo adequadamente. Isso é para respeitar o tempo dos desenvolvedores e mantenedores do projeto e economizar sua energia para outros problemas que realmente precisam ser resolvidos.
-
-- Use a [versão mais recente][latest-ver]. Se sua contribuição envolver mudanças de código/documentação, atualize para a versão mais recente da branch padrão (`main`).
-
-- Evite fazer contribuições duplicadas pesquisando por [issues][issues] / [discussions][discus] / [pull requests][pr] existentes, mas não deixe comentários inúteis como "Tenho o mesmo problema". Prefira usar [reações][gh-reactions] se você simplesmente quiser "+1" uma issue existente.
-
-- NÃO envie e-mails ou tweets diretamente para os desenvolvedores e mantenedores do projeto, tudo sobre o projeto deve ser deixado no GitHub.
-
-**Dica**: Se você é novo na comunidade open-source, leia "[Como Fazer Perguntas da Maneira Inteligente][ext-reading]" antes de contribuir.
-
 ## Contribuindo com Posts para o Blog
 
 Se você tem conhecimento para compartilhar, adoraríamos receber sua contribuição!
