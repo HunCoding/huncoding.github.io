@@ -22,8 +22,7 @@
     "lint:js": "eslint",
     "lint:scss": "stylelint _sass/**/*.scss",
     "lint:fix:scss": "npm run lint:scss -- --fix",
-    "test": "npm run lint:js && npm run lint:scss",
-    "prepare": "husky"
+    "test": "npm run lint:js && npm run lint:scss"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
@@ -34,8 +33,6 @@
     "@babel/plugin-transform-class-properties": "^7.27.1",
     "@babel/plugin-transform-private-methods": "^7.27.1",
     "@babel/preset-env": "^7.27.2",
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^0.4.4",
@@ -46,7 +43,6 @@
     "conventional-changelog-conventionalcommits": "^8.0.0",
     "eslint": "^9.27.0",
     "globals": "^16.1.0",
-    "husky": "^9.1.7",
     "purgecss": "^7.0.2",
     "rollup": "^4.41.0",
     "semantic-release": "^24.2.4",
@@ -61,17 +57,6 @@
     "> 0.2%",
     "not dead"
   ],
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "rules": {
-      "body-max-line-length": [
-        0,
-        "always"
-      ]
-    }
-  },
   "release": {
     "branches": [
       "production"

@@ -30,7 +30,7 @@ Todos os tipos de contribuições (_pull requests_, _issues_ e _discussions_) de
 
 ## Contribuindo com Posts para o Blog
 
-O HunCoding é um blog técnico focado em programação, DevOps, Kubernetes, Terraform e Go. Se você tem conhecimento para compartilhar, adoraríamos receber sua contribuição!
+Se você tem conhecimento para compartilhar, adoraríamos receber sua contribuição!
 
 ### Tipos de Posts Aceitos
 
@@ -104,12 +104,6 @@ Resumo dos pontos principais e próximos passos.
 - O post será publicado sob licença CC BY 4.0
 - Seu nome e biografia aparecerão no post
 - Você pode republicar o conteúdo em seu próprio blog após 30 dias
-
-## Perguntas e Solicitações de Ajuda
-
-Esperamos que toda pergunta razoável que você fizer seja respondida adequadamente. Se você quiser uma resposta rápida e oportuna, faça perguntas no [Jekyll Talk][jekyll-talk] e [StackOverflow][stack-overflow], onde há muitos geeks entusiasmados que responderão positivamente suas perguntas desafiadoras.
-
-Se você não conseguir uma resposta de nenhuma das maneiras acima, crie uma nova [discussion][discus]. Contanto que não seja uma duplicata e um problema [RTFM][rtfm] / [STFW][stfw], responderemos o mais rápido possível.
 
 ## Relatando um Bug
 
