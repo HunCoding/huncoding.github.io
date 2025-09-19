@@ -17,7 +17,7 @@
         <input 
           type="email" 
           id="newsletter-email" 
-          name="email" 
+          name="EMAIL" 
           class="newsletter-input" 
           placeholder="{{ site.data.newsletter.placeholder | default: 'Seu email' }}"
           required
@@ -43,6 +43,10 @@
       {% if site.data.newsletter.provider == 'mailchimp' %}
         <input type="hidden" name="u" value="{{ site.data.newsletter.mailchimp.user_id }}">
         <input type="hidden" name="id" value="{{ site.data.newsletter.mailchimp.list_id }}">
+        <!-- Mailchimp bot protection field -->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+          <input type="text" name="b_{{ site.data.newsletter.mailchimp.user_id }}_{{ site.data.newsletter.mailchimp.list_id }}" tabindex="-1" value="">
+        </div>
       {% endif %}
 
       {% if site.data.newsletter.provider == 'convertkit' %}
