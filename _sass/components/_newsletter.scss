@@ -1,0 +1,223 @@
+/* Newsletter Styles */
+
+.newsletter-wrapper {
+  margin: 1.5rem 0;
+}
+
+.newsletter-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.newsletter-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.newsletter-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  i {
+    color: var(--link-color);
+  }
+}
+
+.newsletter-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.newsletter-form {
+  width: 100%;
+}
+
+.newsletter-input-group {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+  }
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  background: var(--input-bg);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+
+  &:focus {
+    outline: none;
+    border-color: var(--link-color);
+    box-shadow: 0 0 0 2px rgba(var(--link-color-rgb), 0.2);
+  }
+
+  &::placeholder {
+    color: var(--text-muted);
+  }
+
+  &:invalid {
+    border-color: var(--danger-color, #dc3545);
+  }
+}
+
+.newsletter-button {
+  padding: 0.75rem 1.5rem;
+  background: var(--link-color);
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+
+  &:hover {
+    background: var(--link-hover-color);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .button-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.newsletter-message {
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 1rem;
+
+  &.success {
+    background: rgba(var(--success-color-rgb, 40, 167, 69), 0.1);
+    color: var(--success-color, #28a745);
+    border: 1px solid rgba(var(--success-color-rgb, 40, 167, 69), 0.2);
+  }
+
+  &.error {
+    background: rgba(var(--danger-color-rgb, 220, 53, 69), 0.1);
+    color: var(--danger-color, #dc3545);
+    border: 1px solid rgba(var(--danger-color-rgb, 220, 53, 69), 0.2);
+  }
+}
+
+/* Dark mode adjustments */
+[data-mode="dark"] {
+  .newsletter-card {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+  }
+
+  .newsletter-input {
+    background: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--text-color);
+
+    &:focus {
+      border-color: var(--link-color);
+    }
+  }
+}
+
+/* Sidebar newsletter styles */
+#panel-wrapper .newsletter-wrapper {
+  margin: 0 0 1.5rem 0;
+}
+
+#panel-wrapper .newsletter-card {
+  padding: 1rem;
+}
+
+#panel-wrapper .newsletter-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+#panel-wrapper .newsletter-subtitle {
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+#panel-wrapper .newsletter-input-group {
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#panel-wrapper .newsletter-button {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Home page newsletter styles */
+#post-list + .newsletter-wrapper {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .newsletter-card {
+    padding: 1.25rem;
+  }
+
+  .newsletter-title {
+    font-size: 1.1rem;
+  }
+
+  .newsletter-subtitle {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .newsletter-card {
+    padding: 1rem;
+  }
+
+  .newsletter-input-group {
+    gap: 0.75rem;
+  }
+
+  .newsletter-button {
+    width: 100%;
+  }
+}

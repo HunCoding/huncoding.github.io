@@ -119,3 +119,8 @@ refactor: true
 {% if paginator.total_pages > 1 %}
   {% include post-paginator.html %}
 {% endif %}
+
+<!-- Newsletter on home page -->
+{% if site.data.newsletter.enabled and site.data.newsletter.display.show_on_home %}
+  {% include newsletter.html %}
+{% endif %}

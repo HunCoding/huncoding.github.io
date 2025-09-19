@@ -40,6 +40,11 @@
     </ul>
   </nav>
 
+  <!-- Newsletter in sidebar -->
+  {% if site.data.newsletter.enabled and site.data.newsletter.display.show_on_sidebar %}
+    {% include newsletter.html %}
+  {% endif %}
+
   <div class="sidebar-bottom d-flex flex-wrap  align-items-center w-100">
     {% unless site.theme_mode %}
       <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">

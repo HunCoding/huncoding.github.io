@@ -8,3 +8,4 @@ export { loadMermaid } from './components/mermaid';
 export { modeWatcher } from './components/mode-toggle';
 export { back2top } from './components/back-to-top';
 export { loadTooptip } from './components/tooltip-loader';
+export { default as Newsletter } from './components/newsletter';

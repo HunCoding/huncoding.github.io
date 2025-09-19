@@ -1,0 +1,40 @@
+# Newsletter configuration
+
+# Newsletter service provider
+# Options: mailchimp, convertkit, custom, none
+provider: mailchimp
+
+# Newsletter settings
+enabled: true
+title: "Newsletter"
+subtitle: "Receba as últimas atualizações do blog diretamente no seu email"
+placeholder: "Seu email"
+button_text: "Inscrever-se"
+success_message: "Obrigado por se inscrever! Verifique seu email para confirmar."
+error_message: "Ops! Algo deu errado. Tente novamente."
+
+# Mailchimp configuration
+mailchimp:
+  action_url: "https://github.us16.list-manage.com/subscribe/post?u=001a2f2d81402c62d8f8c0e46&id=6e29b0bfd6&f_id=00c5c2e1f0" # Your Mailchimp form action URL
+  list_id: "6e29b0bfd6" # Your Mailchimp list ID
+  user_id: "001a2f2d81402c62d8f8c0e46" # Your Mailchimp user ID
+
+# ConvertKit configuration
+convertkit:
+  form_id: "" # Your ConvertKit form ID
+  api_key: "" # Your ConvertKit API key
+
+# Custom newsletter settings
+custom:
+  endpoint: "" # Your custom newsletter endpoint
+  method: "POST" # HTTP method (POST, GET)
+  fields:
+    email: "email" # Field name for email
+    name: "name" # Field name for name (optional)
+
+# Newsletter display settings
+display:
+  show_on_home: true # Show newsletter on home page
+  show_on_sidebar: false # Show newsletter in sidebar
+  show_on_posts: false # Show newsletter on post pages
+  show_on_pages: false # Show newsletter on static pages

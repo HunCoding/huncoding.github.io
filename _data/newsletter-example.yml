@@ -1,0 +1,52 @@
+# Newsletter Configuration Example
+# Copy this file to newsletter.yml and configure with your settings
+
+# Newsletter service provider
+# Options: mailchimp, convertkit, custom, none
+provider: mailchimp
+
+# Newsletter settings
+enabled: true
+title: "Newsletter"
+subtitle: "Receba as últimas atualizações do blog diretamente no seu email"
+placeholder: "Seu email"
+button_text: "Inscrever-se"
+success_message: "Obrigado por se inscrever! Verifique seu email para confirmar."
+error_message: "Ops! Algo deu errado. Tente novamente."
+
+# Mailchimp configuration
+# To get these values:
+# 1. Go to your Mailchimp account
+# 2. Create a new audience/list
+# 3. Go to Signup forms > Embedded forms
+# 4. Copy the form action URL and extract the user_id and list_id
+mailchimp:
+  action_url: "https://yourusername.us1.list-manage.com/subscribe/post?u=YOUR_USER_ID&id=YOUR_LIST_ID"
+  list_id: "YOUR_LIST_ID"
+  user_id: "YOUR_USER_ID"
+
+# ConvertKit configuration
+# To get these values:
+# 1. Go to your ConvertKit account
+# 2. Create a new form
+# 3. Go to Settings > API
+# 4. Copy the form ID and API key
+convertkit:
+  form_id: "YOUR_FORM_ID"
+  api_key: "YOUR_API_KEY"
+
+# Custom newsletter settings
+# For custom endpoints or other services
+custom:
+  endpoint: "https://your-api.com/subscribe"
+  method: "POST" # HTTP method (POST, GET)
+  fields:
+    email: "email" # Field name for email
+    name: "name" # Field name for name (optional)
+
+# Newsletter display settings
+display:
+  show_on_home: true # Show newsletter on home page
+  show_on_sidebar: true # Show newsletter in sidebar
+  show_on_posts: false # Show newsletter on post pages
+  show_on_pages: false # Show newsletter on static pages
