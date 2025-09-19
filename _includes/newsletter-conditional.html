@@ -1,8 +1,0 @@
-<!-- Conditional Newsletter Display -->
-{% if site.data.newsletter.enabled %}
-  {% if page.layout == 'post' and site.data.newsletter.display.show_on_posts %}
-    {% include newsletter.html %}
-  {% elsif page.layout == 'page' and site.data.newsletter.display.show_on_pages %}
-    {% include newsletter.html %}
-  {% endif %}
-{% endif %}
