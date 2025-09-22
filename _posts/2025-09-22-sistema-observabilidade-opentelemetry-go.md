@@ -3,7 +3,7 @@ layout: post
 title: "Observabilidade Distribuída: Kafka + Jaeger + Go para Tracing Resiliente"
 subtitle: "Aprendendo a criar um sistema de tracing resiliente que nunca perde dados, mesmo quando o Jaeger está fora do ar."
 author: otavio_celestino
-date: 2025-09-22 08:00:00 -0300
+date: 2025-09-22 08:01:00 -0300
 categories: [Kafka, Jaeger, Observabilidade, DevOps, Go]
 tags: [kafka, jaeger, tracing, observabilidade, fault-tolerance, distributed-systems, go]
 comments: true
