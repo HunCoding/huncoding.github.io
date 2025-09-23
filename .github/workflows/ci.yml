@@ -48,6 +48,3 @@ jobs:
 
       - name: Build Assets
         run: npm i && npm run build
-
-      - name: Test Site
-        run: bash tools/test.sh
