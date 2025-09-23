@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Debug Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        button { padding: 10px 20px; font-size: 16px; margin: 10px; }
+        .content { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1 data-toc-skip>Exemplo de Post com Tradução</h1>
+    <div class="content">
+        <p>E aí, pessoal!</p>
+        <p>Hoje vou te mostrar como criar um <strong>blog multilíngue</strong> usando Jekyll e JavaScript.</p>
+    </div>
+    <button type="button" id="language-toggle" class="btn btn-link" aria-label="Toggle Language" title="Alternar idioma">
+        <i class="fas fa-globe fa-fw"></i>
+        <span id="current-lang">PT-BR</span>
+    </button>
+
+    <script>
+        // Mock the exact same data structure
+        window.pageData = {
+            translations: {
+                "title": {
+                    "pt-BR": "Exemplo de Post com Tradução",
+                    "en": "Example Post with Translation"
+                },
+                "content": {
+                    "pt-BR": "E aí, pessoal!\n\nHoje vou te mostrar como criar um **blog multilíngue** usando Jekyll e JavaScript.",
+                    "en": "Hey everyone!\n\nToday I'm going to show you how to create a **multilingual blog** using Jekyll and JavaScript."
+                }
+            }
+        };
+        
+        console.log('🚀 Debug test script loaded');
+        console.log('📚 Page data:', window.pageData);
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎯 DOM loaded, setting up debug test');
+            
+            const button = document.getElementById('language-toggle');
+            const langSpan = document.getElementById('current-lang');
+            const title = document.querySelector('h1[data-toc-skip]');
+            const content = document.querySelector('.content');
+            
+            console.log('🔍 Elements found:');
+            console.log('  Button:', button);
+            console.log('  Lang span:', langSpan);
+            console.log('  Title:', title);
+            console.log('  Content:', content);
+            
+            if (button) {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    console.log('🔄 Button clicked!');
+                    
+                    // Get current language
+                    let currentLang = langSpan.textContent.trim();
+                    let newLang = currentLang === 'PT-BR' ? 'EN' : 'PT-BR';
+                    
+                    console.log('🔄 Switching from', currentLang, 'to', newLang);
+                    
+                    // Update button display
+                    langSpan.textContent = newLang;
+                    
+                    // Translate title
+                    if (title && window.pageData.translations.title) {
+                        const langKey = newLang === 'EN' ? 'en' : 'pt-BR';
+                        if (window.pageData.translations.title[langKey]) {
+                            title.textContent = window.pageData.translations.title[langKey];
+                            console.log('✅ Title translated to:', window.pageData.translations.title[langKey]);
+                        }
+                    }
+                    
+                    // Translate content
+                    if (content && window.pageData.translations.content) {
+                        const langKey = newLang === 'EN' ? 'en' : 'pt-BR';
+                        if (window.pageData.translations.content[langKey]) {
+                            const translation = window.pageData.translations.content[langKey];
+                            let processed = translation.trim();
+                            
+                            // Simple markdown processing
+                            processed = processed.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                            processed = processed.replace(/\n\n/g, '</p><p>');
+                            processed = '<p>' + processed + '</p>';
+                            
+                            content.innerHTML = processed;
+                            console.log('✅ Content translated successfully');
+                        }
+                    }
+                    
+                    console.log('✅ Translation completed');
+                });
+                
+                console.log('✅ Event listener added to button');
+            } else {
+                console.error('❌ Button not found!');
+            }
+            
+            console.log('🎉 Debug test setup complete');
+        });
+    </script>
+</body>
+</html>
