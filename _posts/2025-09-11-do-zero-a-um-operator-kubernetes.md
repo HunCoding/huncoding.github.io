@@ -8,6 +8,7 @@ categories: [Kubernetes, Go, Devops]
 tags: [kubernetes, operator, golang, devops]
 comments: true
 image: "/assets/img/posts/kubernetes-operator-preview.png"
+lang: pt-BR
 ---
 E aí, pessoal!
 

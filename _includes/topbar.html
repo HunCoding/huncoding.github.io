@@ -55,6 +55,12 @@
       {% endif %}
     </div>
 
+    <!-- Language Toggle Button -->
+    <button type="button" id="language-toggle" class="btn btn-link" aria-label="Toggle Language" title="Alternar idioma">
+      <i class="fas fa-globe fa-fw"></i>
+      <span id="current-lang">{{ include.lang | upcase }}</span>
+    </button>
+
     <button type="button" id="search-trigger" class="btn btn-link" aria-label="Search">
       <i class="fas fa-search fa-fw"></i>
     </button>

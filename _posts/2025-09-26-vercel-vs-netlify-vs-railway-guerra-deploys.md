@@ -7,6 +7,7 @@ categories: [Deploy, DevOps, Desenvolvimento]
 tags: [vercel, netlify, railway, deploy, hosting, desenvolvimento]
 comments: true
 image: "/assets/img/posts/vercel-vs-netlify-vs-railway-guerra-deploys.png"
+lang: pt-BR
 ---
 
 E aí, pessoal!
