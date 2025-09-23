@@ -84,6 +84,9 @@ collections:
   tabs:
     output: true
     sort_by: order
+  en_posts:
+    output: true
+    permalink: /en/:title/
 
 defaults:
   - scope:
@@ -127,6 +130,10 @@ defaults:
 # Ensure .nojekyll is included in the build
 include:
   - .nojekyll
+
+# Exclude English posts from main processing
+exclude:
+  - _posts/en/
 
 social_preview_image: "https://huncoding.github.io/assets/img/og-image.png"
 

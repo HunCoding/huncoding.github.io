@@ -8,15 +8,16 @@ categories: [Kafka, Jaeger, Observabilidade, DevOps, Go]
 tags: [kafka, jaeger, tracing, observabilidade, fault-tolerance, distributed-systems, go]
 comments: true
 image: "/assets/img/posts/sistema-observabilidade-opentelemetry-go.png"
+lang: pt-BR
 ---
 
 E aí, pessoal!
 
 Hoje vou te mostrar como criar um **sistema de tracing distribuído resiliente** usando Apache Kafka e Jaeger. A ideia é simples: e se o Jaeger cair? Você perde todos os traces? Não! Vamos usar Kafka como buffer para garantir que nenhum trace seja perdido.
 
-Se você não conhece Jaeger ainda, dá uma olhada no [vídeo no YouTube](https://youtu.be/Zxr3Uffts9Y?si=HQez54Cm4U0VP9yO) que gravei sobre observabilidade!
+Se você não conhece Jaeger ainda, dá uma olhada no [vídeo no YouTube](https://youtu.be/Zxr3Uffts9Y) que gravei sobre observabilidade!
 
-{% include embed/youtube.html id="Zxr3Uffts9Y?si=HQez54Cm4U0VP9yO" %}
+{% include embed/youtube.html id="Zxr3Uffts9Y" %}
 
 E se você quer aprender mais sobre como trabalhar com Kafka em Go, confira este vídeo sobre [Worker em Kafka - Lendo mensagens de filas Kafka com GoLang](https://www.youtube.com/watch?v=v1J8sdc4PAs):
 

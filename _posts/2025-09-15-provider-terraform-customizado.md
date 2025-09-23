@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "Criando um Provider Terraform Customizado do Zero"
+subtitle: "Aprenda a criar um provider Terraform usando Go do zero."
 date: 2025-09-15 00:00:00 -0000
 categories: [Terraform, Go, DevOps]
 tags: [terraform, go, provider, sdk, api]
 comments: true
 image: "/assets/img/posts/provider-terraform-customizado.png"
+lang: pt-BR
 ---
 
 E aí, pessoal! Hoje vou te mostrar como criar um Provider Terraform customizado do zero usando Go. É um tema que muitos desenvolvedores têm medo de encarar, mas na verdade não é esse bicho de sete cabeças que parece.
