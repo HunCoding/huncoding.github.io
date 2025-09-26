@@ -178,14 +178,6 @@ Antes de comparar plataformas, vamos identificar o que você precisa:
 | **Pro** | $20/mês + uso | Pay-as-you-go | Priority |
 | **Enterprise** | Customizado | Ilimitado | Dedicated |
 
-**Custos por Uso:**
-| Serviço | Preço | Limite |
-|---------|-------|--------|
-| **Compute** | $0.000463/GB-hour | 8GB máximo |
-| **PostgreSQL** | $5/mês | 1GB |
-| **MySQL** | $5/mês | 1GB |
-| **Redis** | $3/mês | 100MB |
-
 ### **O que o Railway faz MUITO bem:**
 
 **Flexibilidade total:**
