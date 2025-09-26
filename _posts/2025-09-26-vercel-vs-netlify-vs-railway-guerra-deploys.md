@@ -355,3 +355,4 @@ Antes de comparar plataformas, vamos identificar o que você precisa:
 - [JAMstack Guide](https://jamstack.org/) - Guia oficial sobre JAMstack
 - [Next.js Documentation](https://nextjs.org/docs) - Documentação oficial do Next.js
 - [Deployment Best Practices](https://vercel.com/guides/deploying-nextjs-app) - Melhores práticas de deploy
+
