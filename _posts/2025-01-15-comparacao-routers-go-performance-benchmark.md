@@ -3,7 +3,7 @@ layout: post
 title: "Comparação de Performance: Os 5 Principais HTTP Routers do Go"
 subtitle: "Benchmarks detalhados, resultados reais e análise de produção dos routers mais populares do ecossistema Go."
 author: otavio_celestino
-date: 2025-01-15 08:01:00 -0300
+date: 2025-09-30 08:01:00 -0300
 categories: [Go, Performance, Web Development, Benchmarks]
 tags: [go, gin, echo, fiber, chi, httprouter, performance, benchmark, http-router]
 comments: true
