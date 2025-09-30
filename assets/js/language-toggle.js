@@ -102,7 +102,8 @@ class EnhancedLanguageToggle {
       '/do-zero-a-um-operator-kubernetes/': '/en/from-zero-to-kubernetes-operator/',
       '/provider-terraform-customizado/': '/en/creating-custom-terraform-provider/',
       '/sistema-observabilidade-opentelemetry-go/': '/en/distributed-observability-kafka-jaeger-go/',
-      '/vercel-vs-netlify-vs-railway-guerra-deploys/': '/en/vercel-vs-netlify-vs-railway-deploy-wars/'
+      '/vercel-vs-netlify-vs-railway-guerra-deploys/': '/en/vercel-vs-netlify-vs-railway-deploy-wars/',
+      '/comparacao-routers-go-performance-benchmark/': '/en/go-http-routers-performance-comparison-benchmark/'
     };
 
     // Check if we're on a specific post page
@@ -137,7 +138,8 @@ class EnhancedLanguageToggle {
       '/do-zero-a-um-operator-kubernetes/': '/en/from-zero-to-kubernetes-operator/',
       '/provider-terraform-customizado/': '/en/creating-custom-terraform-provider/',
       '/sistema-observabilidade-opentelemetry-go/': '/en/distributed-observability-kafka-jaeger-go/',
-      '/vercel-vs-netlify-vs-railway-guerra-deploys/': '/en/vercel-vs-netlify-vs-railway-deploy-wars/'
+      '/vercel-vs-netlify-vs-railway-guerra-deploys/': '/en/vercel-vs-netlify-vs-railway-deploy-wars/',
+      '/comparacao-routers-go-performance-benchmark/': '/en/go-http-routers-performance-comparison-benchmark/'
     };
 
     for (const ptPath in postMappings) {
@@ -348,7 +350,17 @@ class EnhancedLanguageToggle {
       'vercel': 'vercel',
       'netlify': 'netlify',
       'railway': 'railway',
-      'deploy': 'deploy'
+      'deploy': 'deploy',
+      'performance': 'performance',
+      'benchmark': 'benchmark',
+      'http-router': 'http-router',
+      'gin': 'gin',
+      'echo': 'echo',
+      'fiber': 'fiber',
+      'chi': 'chi',
+      'httprouter': 'httprouter',
+      'web-development': 'web-development',
+      'benchmarks': 'benchmarks'
     };
 
     console.log('🔄 Translating tags for:', this.currentLang);
@@ -403,7 +415,12 @@ class EnhancedLanguageToggle {
       'Do zero a um Operador Kubernetes que observa ConfigMaps': 'From Zero to Kubernetes Operator',
       'Criando um Provider Terraform Customizado do Zero': 'Creating Custom Terraform Provider',
       'Observabilidade Distribuída: Kafka + Jaeger + Go para Tracing Resiliente': 'Distributed Observability: Kafka + Jaeger + Go',
-      'Vercel vs Netlify vs Railway: Guerra dos Deploys': 'Vercel vs Netlify vs Railway: Deploy Wars'
+      'Vercel vs Netlify vs Railway: A Guerra dos Deploys': 'Vercel vs Netlify vs Railway: The Deploy Wars',
+      'Vercel vs Netlify vs Railway: Guerra dos Deploys': 'Vercel vs Netlify vs Railway: Deploy Wars',
+      'Vercel vs Netlify vs Railway: The Deploy Wars': 'Vercel vs Netlify vs Railway: A Guerra dos Deploys',
+      'Vercel vs Netlify vs Railway: Deploy Wars': 'Vercel vs Netlify vs Railway: Guerra dos Deploys',
+      'Comparação de Performance: Os 5 Principais HTTP Routers do Go': 'Performance Comparison: Top 5 HTTP Routers in Go',
+      'Performance Comparison: Top 5 HTTP Routers in Go': 'Comparação de Performance: Os 5 Principais HTTP Routers do Go'
     };
 
     // Translate titles in recently updated section
@@ -423,6 +440,10 @@ class EnhancedLanguageToggle {
         // Restore original title
         link.textContent = link.dataset.originalTitle;
         console.log(`✅ Post title restored: ${link.dataset.originalTitle}`);
+      } else {
+        console.log(`⚠️ No title translation found for: "${originalTitle}"`);
+        console.log(`📊 Available title translations:`, Object.keys(titleTranslations));
+        console.log(`📊 Current language:`, this.currentLang);
       }
     });
 
@@ -456,7 +477,12 @@ class EnhancedLanguageToggle {
       'Do zero a um Operador Kubernetes que observa ConfigMaps': 'From Zero to Kubernetes Operator',
       'Criando um Provider Terraform Customizado do Zero': 'Creating Custom Terraform Provider',
       'Observabilidade Distribuída: Kafka + Jaeger + Go para Tracing Resiliente': 'Distributed Observability: Kafka + Jaeger + Go',
-      'Vercel vs Netlify vs Railway: Guerra dos Deploys': 'Vercel vs Netlify vs Railway: Deploy Wars'
+      'Vercel vs Netlify vs Railway: A Guerra dos Deploys': 'Vercel vs Netlify vs Railway: The Deploy Wars',
+      'Vercel vs Netlify vs Railway: Guerra dos Deploys': 'Vercel vs Netlify vs Railway: Deploy Wars',
+      'Vercel vs Netlify vs Railway: The Deploy Wars': 'Vercel vs Netlify vs Railway: A Guerra dos Deploys',
+      'Vercel vs Netlify vs Railway: Deploy Wars': 'Vercel vs Netlify vs Railway: Guerra dos Deploys',
+      'Comparação de Performance: Os 5 Principais HTTP Routers do Go': 'Performance Comparison: Top 5 HTTP Routers in Go',
+      'Performance Comparison: Top 5 HTTP Routers in Go': 'Comparação de Performance: Os 5 Principais HTTP Routers do Go'
     };
 
     // Translate post titles on home page (main content area)
@@ -474,6 +500,10 @@ class EnhancedLanguageToggle {
       } else if (title.dataset.originalTitle && this.currentLang === 'pt-BR') {
         title.textContent = title.dataset.originalTitle;
         console.log(`✅ Home page post title restored: ${title.dataset.originalTitle}`);
+      } else {
+        console.log(`⚠️ No title translation found for: "${originalTitle}"`);
+        console.log(`📊 Available title translations:`, Object.keys(titleTranslations));
+        console.log(`📊 Current language:`, this.currentLang);
       }
     });
 
@@ -482,25 +512,92 @@ class EnhancedLanguageToggle {
     homePostDescriptions.forEach(description => {
       const originalText = description.textContent.trim();
       
-      // Simple description translations
-      const descriptionTranslations = {
-        'E aí, pessoal! Hoje vou te mostrar como criar um **blog multilíngue** usando Jekyll e JavaScript. É uma funcionalidade super útil para alcançar uma **audiência global** com seu conteúdo.': 'Hey everyone! Today I\'m going to show you how to create a **multilingual blog** using Jekyll and JavaScript. This is a super useful feature for reaching a **global audience** with your content.',
-        'E aí, pessoal! Hoje vou te mostrar como criar um sistema de tracing distribuído resiliente usando Apache Kafka e Jaeger. A ideia é simples: e se o Jaeger cair? Você perde todos os traces? Não! Vam...': 'Hey everyone! Today I\'m going to show you how to create a resilient distributed tracing system using Apache Kafka and Jaeger. The idea is simple: what if Jaeger goes down? Do you lose all traces? No! We\'ll...',
-        'E aí, pessoal! Hoje vou te mostrar como criar um Provider Terraform customizado do zero usando Go. É um tema que muitos desenvolvedores têm medo de encarar, mas na verdade não é esse bicho de sete ...': 'Hey everyone! Today I\'m going to show you how to create a custom Terraform Provider from scratch using Go. It\'s a topic that many developers are afraid to tackle, but it\'s actually not that difficult...',
-        'E aí, pessoal! Hoje vou te mostrar como criar um Operador Kubernetes do zero que monitora mudanças em ConfigMaps e envia eventos para um webhook. É uma funcionalidade super útil para fazer hot rel...': 'Hey everyone! Today I\'m going to show you how to create a Kubernetes Operator from scratch that monitors ConfigMap changes and sends events to a webhook. It\'s a super useful feature for hot reload...'
+      // Find the parent card to get the post title
+      const card = description.closest('.post-preview');
+      const titleElement = card ? card.querySelector('.card-title') : null;
+      const postTitle = titleElement ? titleElement.textContent.trim() : '';
+      
+      // Description translations based on post title
+      const titleBasedTranslations = {
+        'Comparação de Performance: Os 5 Principais HTTP Routers do Go': 'Hey everyone! Today I\'m going to do a **complete performance analysis** of the main HTTP routers in Go. Let\'s see who\'s really the fastest, who consumes less memory, and which is the best for each scenario!',
+        'Performance Comparison: Top 5 HTTP Routers in Go': 'Hey everyone! Today I\'m going to do a **complete performance analysis** of the main HTTP routers in Go. Let\'s see who\'s really the fastest, who consumes less memory, and which is the best for each scenario!',
+        'Vercel vs Netlify vs Railway: A Guerra dos Deploys': 'Hey everyone! You have a project ready, but now comes the question every developer faces: **where to deploy?** Vercel, Netlify, or Railway? The choice isn\'t obvious and can directly impact your project\'s success.',
+        'Vercel vs Netlify vs Railway: The Deploy Wars': 'Hey everyone! You have a project ready, but now comes the question every developer faces: **where to deploy?** Vercel, Netlify, or Railway? The choice isn\'t obvious and can directly impact your project\'s success.',
+        'Observabilidade Distribuída: Kafka + Jaeger + Go para Tracing Resiliente': 'Hey everyone! Today I\'m going to show you how to create a **resilient distributed tracing system** using Apache Kafka and Jaeger. The idea is simple: what if Jaeger goes down? Do you lose all traces? No! We\'ll...',
+        'Distributed Observability: Kafka + Jaeger + Go for Resilient Tracing': 'Hey everyone! Today I\'m going to show you how to create a **resilient distributed tracing system** using Apache Kafka and Jaeger. The idea is simple: what if Jaeger goes down? Do you lose all traces? No! We\'ll...',
+        'Criando um Provider Terraform Customizado do Zero': 'Hey everyone! Today I\'m going to show you how to create a **custom Terraform Provider** from scratch using Go. It\'s a topic that many developers are afraid to tackle, but it\'s actually not that difficult...',
+        'Creating Custom Terraform Provider from Scratch': 'Hey everyone! Today I\'m going to show you how to create a **custom Terraform Provider** from scratch using Go. It\'s a topic that many developers are afraid to tackle, but it\'s actually not that difficult...',
+        'Do zero a um Operador Kubernetes que observa ConfigMaps': 'Hey everyone! Today I\'m going to show you how to create a **Kubernetes Operator** from scratch that monitors ConfigMap changes and sends events to a webhook. It\'s a super useful feature for hot reload...',
+        'From Zero to Kubernetes Operator': 'Hey everyone! Today I\'m going to show you how to create a **Kubernetes Operator** from scratch that monitors ConfigMap changes and sends events to a webhook. It\'s a super useful feature for hot reload...'
       };
       
-      const translatedText = descriptionTranslations[originalText];
+      // Partial matching translations
+      const partialTranslations = {
+        'blog multilíngue': 'multilingual blog',
+        'tracing distribuído resiliente': 'resilient distributed tracing',
+        'Provider Terraform customizado': 'custom Terraform Provider',
+        'Operador Kubernetes': 'Kubernetes Operator',
+        'análise completa de performance': 'complete performance analysis',
+        'onde deployar': 'where to deploy',
+        'Guerra dos Deploys': 'Deploy Wars',
+        'E aí, pessoal!': 'Hey everyone!',
+        'Hoje vou': 'Today I\'m going to',
+        'Vamos ver': 'Let\'s see',
+        'Você tem': 'You have',
+        'mas agora vem': 'but now comes',
+        'todo desenvolvedor': 'every developer',
+        'A escolha não é óbvia': 'The choice isn\'t obvious',
+        'HTTP routers do Go': 'HTTP routers in Go',
+        'principais HTTP routers': 'main HTTP routers',
+        'quem realmente é o mais rápido': 'who\'s really the fastest',
+        'quem consome menos memória': 'who consumes less memory',
+        'qual é o melhor para cada cenário': 'which is the best for each scenario',
+        'análise completa': 'complete analysis',
+        'performance dos principais': 'performance of the main',
+        'fazer uma análise': 'do an analysis',
+        'benchmarks detalhados': 'detailed benchmarks',
+        'resultados reais': 'real results',
+        'análise de produção': 'production analysis',
+        'routers mais populares': 'most popular routers',
+        'ecossistema Go': 'Go ecosystem'
+      };
+      
+      let translatedText = null;
+      
+      // Try title-based translation first
+      if (titleBasedTranslations[postTitle]) {
+        translatedText = titleBasedTranslations[postTitle];
+      } else {
+        // Try partial matching with multiple replacements
+        translatedText = originalText;
+        let hasChanges = false;
+        
+        for (const [ptKey, enValue] of Object.entries(partialTranslations)) {
+          if (translatedText.includes(ptKey)) {
+            translatedText = translatedText.replace(ptKey, enValue);
+            hasChanges = true;
+          }
+        }
+        
+        // If no changes were made, set to null
+        if (!hasChanges) {
+          translatedText = null;
+        }
+      }
       
       if (translatedText && this.currentLang === 'en') {
         if (!description.dataset.originalText) {
           description.dataset.originalText = originalText;
         }
         description.textContent = translatedText;
-        console.log(`✅ Home page description translated`);
+        console.log(`✅ Home page description translated for "${postTitle}": ${originalText.substring(0, 50)}... → ${translatedText.substring(0, 50)}...`);
       } else if (description.dataset.originalText && this.currentLang === 'pt-BR') {
         description.textContent = description.dataset.originalText;
-        console.log(`✅ Home page description restored`);
+        console.log(`✅ Home page description restored for "${postTitle}"`);
+      } else {
+        console.log(`⚠️ No translation found for "${postTitle}": "${originalText.substring(0, 100)}..."`);
+        console.log(`📊 Available title translations:`, Object.keys(titleBasedTranslations));
+        console.log(`📊 Current language:`, this.currentLang);
       }
     });
 
@@ -516,7 +613,8 @@ class EnhancedLanguageToggle {
       '/do-zero-a-um-operator-kubernetes/': '/en/from-zero-to-kubernetes-operator/',
       '/provider-terraform-customizado/': '/en/creating-custom-terraform-provider/',
       '/sistema-observabilidade-opentelemetry-go/': '/en/distributed-observability-kafka-jaeger-go/',
-      '/vercel-vs-netlify-vs-railway-guerra-deploys/': '/en/vercel-vs-netlify-vs-railway-deploy-wars/'
+      '/vercel-vs-netlify-vs-railway-guerra-deploys/': '/en/vercel-vs-netlify-vs-railway-deploy-wars/',
+      '/comparacao-routers-go-performance-benchmark/': '/en/go-http-routers-performance-comparison-benchmark/'
     };
 
     // Translate post links on home page
