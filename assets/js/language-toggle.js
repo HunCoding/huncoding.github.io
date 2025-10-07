@@ -75,15 +75,15 @@ class EnhancedLanguageToggle {
     console.log('🔄 Toggling language from', this.currentLang, 'to', this.targetLang);
     
     // Update current language
-    this.currentLang = this.targetLang;
-    this.targetLang = this.currentLang === 'pt-BR' ? 'en' : 'pt-BR';
-    
-    // Save preference
-    localStorage.setItem('preferred-language', this.currentLang);
-    
-    // Update display
-    this.updateLanguageDisplay();
-    
+          this.currentLang = this.targetLang;
+          this.targetLang = this.currentLang === 'pt-BR' ? 'en' : 'pt-BR';
+          
+          // Save preference
+          localStorage.setItem('preferred-language', this.currentLang);
+          
+          // Update display
+          this.updateLanguageDisplay();
+          
     // Show feedback
     this.showFeedback();
     
@@ -129,7 +129,7 @@ class EnhancedLanguageToggle {
 
     // If no specific post mapping (home page, categories, etc.), apply dynamic translation
     console.log('🌐 No specific post mapping, applying dynamic translation');
-    this.applyTranslations();
+          this.applyTranslations();
   }
 
   getPortuguesePath(englishPath) {
@@ -420,7 +420,9 @@ class EnhancedLanguageToggle {
       'Vercel vs Netlify vs Railway: The Deploy Wars': 'Vercel vs Netlify vs Railway: A Guerra dos Deploys',
       'Vercel vs Netlify vs Railway: Deploy Wars': 'Vercel vs Netlify vs Railway: Guerra dos Deploys',
       'Comparação de Performance: Os 5 Principais HTTP Routers do Go': 'Performance Comparison: Top 5 HTTP Routers in Go',
-      'Performance Comparison: Top 5 HTTP Routers in Go': 'Comparação de Performance: Os 5 Principais HTTP Routers do Go'
+      'Performance Comparison: Top 5 HTTP Routers in Go': 'Comparação de Performance: Os 5 Principais HTTP Routers do Go',
+      'Por que Engenheiros Sênior Estão Abandonando MVC em Go': 'Why Senior Engineers Are Moving Away from MVC in Go',
+      'Why Senior Engineers Are Moving Away from MVC in Go': 'Por que Engenheiros Sênior Estão Abandonando MVC em Go'
     };
 
     // Translate titles in recently updated section
@@ -482,7 +484,9 @@ class EnhancedLanguageToggle {
       'Vercel vs Netlify vs Railway: The Deploy Wars': 'Vercel vs Netlify vs Railway: A Guerra dos Deploys',
       'Vercel vs Netlify vs Railway: Deploy Wars': 'Vercel vs Netlify vs Railway: Guerra dos Deploys',
       'Comparação de Performance: Os 5 Principais HTTP Routers do Go': 'Performance Comparison: Top 5 HTTP Routers in Go',
-      'Performance Comparison: Top 5 HTTP Routers in Go': 'Comparação de Performance: Os 5 Principais HTTP Routers do Go'
+      'Performance Comparison: Top 5 HTTP Routers in Go': 'Comparação de Performance: Os 5 Principais HTTP Routers do Go',
+      'Por que Engenheiros Sênior Estão Abandonando MVC em Go': 'Why Senior Engineers Are Moving Away from MVC in Go',
+      'Why Senior Engineers Are Moving Away from MVC in Go': 'Por que Engenheiros Sênior Estão Abandonando MVC em Go'
     };
 
     // Translate post titles on home page (main content area)
@@ -528,7 +532,9 @@ class EnhancedLanguageToggle {
         'Criando um Provider Terraform Customizado do Zero': 'Hey everyone! Today I\'m going to show you how to create a **custom Terraform Provider** from scratch using Go. It\'s a topic that many developers are afraid to tackle, but it\'s actually not that difficult...',
         'Creating Custom Terraform Provider from Scratch': 'Hey everyone! Today I\'m going to show you how to create a **custom Terraform Provider** from scratch using Go. It\'s a topic that many developers are afraid to tackle, but it\'s actually not that difficult...',
         'Do zero a um Operador Kubernetes que observa ConfigMaps': 'Hey everyone! Today I\'m going to show you how to create a **Kubernetes Operator** from scratch that monitors ConfigMap changes and sends events to a webhook. It\'s a super useful feature for hot reload...',
-        'From Zero to Kubernetes Operator': 'Hey everyone! Today I\'m going to show you how to create a **Kubernetes Operator** from scratch that monitors ConfigMap changes and sends events to a webhook. It\'s a super useful feature for hot reload...'
+        'From Zero to Kubernetes Operator': 'Hey everyone! Today I\'m going to show you how to create a **Kubernetes Operator** from scratch that monitors ConfigMap changes and sends events to a webhook. It\'s a super useful feature for hot reload...',
+        'Por que Engenheiros Sênior Estão Abandonando MVC em Go': 'Hey everyone! Today I\'m going to show you why **senior engineers are abandoning the MVC pattern** in Go and migrating to more modern architectures. If you\'re still forcing Go into a pattern that doesn\'t match the language, this post is for you!',
+        'Why Senior Engineers Are Moving Away from MVC in Go': 'Hey everyone! Today I\'m going to show you why **senior engineers are abandoning the MVC pattern** in Go and migrating to more modern architectures. If you\'re still forcing Go into a pattern that doesn\'t match the language, this post is for you!'
       };
       
       // Partial matching translations
@@ -811,62 +817,10 @@ class EnhancedLanguageToggle {
     }, 2500);
   }
 
-  applyTranslations() {
-    // Translate page title
-    this.translateElement('h1', 'title');
-    
-    // Translate subtitle/description
-    this.translateElement('.post-desc', 'subtitle');
-    
-    // Translate post content
-    this.translatePostContent();
-    
-    // Translate UI elements
-    this.translateUIElements();
-    
-    // Update page language attribute
-    document.documentElement.lang = this.currentLang;
-  }
-
   restoreOriginalContent() {
     const contentElement = document.querySelector('.content');
     if (contentElement && contentElement.dataset.originalContent) {
       contentElement.innerHTML = contentElement.dataset.originalContent;
-      this.reinitializeInteractiveElements();
-    }
-  }
-
-  translateElement(selector, key) {
-    const element = document.querySelector(selector);
-    if (element && this.translations[key]) {
-      const translation = this.translations[key][this.currentLang];
-      if (translation) {
-        // Store original content if not already stored
-        if (!element.dataset.originalText) {
-          element.dataset.originalText = element.textContent;
-        }
-        element.textContent = translation;
-      }
-    }
-  }
-
-  translatePostContent() {
-    const contentElement = document.querySelector('.content');
-    if (!contentElement || !this.translations.content) {
-      return;
-    }
-
-    const translation = this.translations.content[this.currentLang];
-    if (translation) {
-      // Store original content if not already stored
-      if (!contentElement.dataset.originalContent) {
-        contentElement.dataset.originalContent = contentElement.innerHTML;
-      }
-      
-      // Replace content with translated version
-      contentElement.innerHTML = this.processMarkdown(translation);
-      
-      // Re-initialize any interactive elements that might have been lost
       this.reinitializeInteractiveElements();
     }
   }
@@ -918,337 +872,6 @@ class EnhancedLanguageToggle {
     if (targetElement) {
       targetElement.scrollIntoView({ behavior: 'smooth' });
     }
-  }
-
-  translateUIElements() {
-    // Translate common UI elements
-    const translations = {
-      'pt-BR': {
-        'search-hint': 'Buscar',
-        'search-cancel': 'Cancelar',
-        'posted': 'Postado em',
-        'updated': 'Atualizado',
-        'read-time': 'de leitura',
-        'share': 'Compartilhar',
-        'next': 'Próximo',
-        'previous': 'Anterior',
-        'home': 'Home',
-        'categories': 'Categorias',
-        'tags': 'Tags',
-        'archives': 'Arquivos',
-        'about': 'Sobre',
-        'recently-updated': 'Atualizados recentemente',
-        'trending-tags': 'Trending Tags',
-        'contents': 'Conteúdo',
-        'written-by': 'Por',
-        'words': 'palavras',
-        'pageview-measure': 'visualizações',
-        'relate-posts': 'Leia também',
-        'copy-code-succeed': 'Copiado!',
-        'share-link-title': 'Copie o link',
-        'share-link-succeed': 'Link copiado com sucesso!',
-        'category-measure': 'categorias',
-        'post-measure': 'posts',
-        'license-template': 'Esta postagem está licenciada sob :LICENSE_NAME pelo autor.',
-        'license-name': 'CC BY 4.0',
-        'copyright-brief': 'Alguns direitos reservados.',
-        'not-found-statement': 'Desculpe, a página não foi encontrada.',
-        'update-found': 'Uma nova versão do conteúdo está disponível.',
-        'update': 'atualização',
-        'no-results': 'Oops! Nenhum resultado encontrado.'
-      },
-      'en': {
-        'search-hint': 'Search',
-        'search-cancel': 'Cancel',
-        'posted': 'Posted',
-        'updated': 'Updated',
-        'read-time': 'read',
-        'share': 'Share',
-        'next': 'Newer',
-        'previous': 'Older',
-        'home': 'Home',
-        'categories': 'Categories',
-        'tags': 'Tags',
-        'archives': 'Archives',
-        'about': 'About',
-        'recently-updated': 'Recently Updated',
-        'trending-tags': 'Trending Tags',
-        'contents': 'Contents',
-        'written-by': 'By',
-        'words': 'words',
-        'pageview-measure': 'views',
-        'relate-posts': 'Further Reading',
-        'copy-code-succeed': 'Copied!',
-        'share-link-title': 'Copy link',
-        'share-link-succeed': 'Link copied successfully!',
-        'category-measure': 'categories',
-        'post-measure': 'posts',
-        'license-template': 'This post is licensed under :LICENSE_NAME by the author.',
-        'license-name': 'CC BY 4.0',
-        'copyright-brief': 'Some rights reserved.',
-        'not-found-statement': 'Sorry, we\'ve misplaced that URL or it\'s pointing to something that doesn\'t exist.',
-        'update-found': 'A new version of content is available.',
-        'update': 'Update',
-        'no-results': 'Oops! No results found.'
-      }
-    };
-
-    const currentTranslations = translations[this.currentLang];
-    if (!currentTranslations) return;
-
-    // Update search placeholder
-    const searchInput = document.getElementById('search-input');
-    if (searchInput) {
-      searchInput.placeholder = currentTranslations['search-hint'] + '...';
-    }
-
-    // Update search cancel button
-    const searchCancel = document.getElementById('search-cancel');
-    if (searchCancel) {
-      searchCancel.textContent = currentTranslations['search-cancel'];
-    }
-
-    // Update search results
-    this.translateSearchElements(currentTranslations);
-
-    // Update breadcrumb elements
-    const breadcrumbSpans = document.querySelectorAll('#breadcrumb span');
-    breadcrumbSpans.forEach(span => {
-      const text = span.textContent.trim().toLowerCase();
-      if (currentTranslations[text]) {
-        span.textContent = currentTranslations[text];
-      }
-    });
-
-    // Update sidebar navigation
-    this.translateSidebarNavigation(currentTranslations);
-
-    // Update sidebar elements
-    this.translateSidebarElements(currentTranslations);
-    
-    // Update post meta elements
-    this.translatePostMeta(currentTranslations);
-    
-    // Update footer elements
-    this.translateFooterElements(currentTranslations);
-    
-    // Update notification elements
-    this.translateNotificationElements(currentTranslations);
-    
-    // Update navigation elements
-    this.translateNavigationElements(currentTranslations);
-
-    // Update other UI elements
-    Object.keys(currentTranslations).forEach(key => {
-      const elements = document.querySelectorAll(`[data-translate="${key}"]`);
-      elements.forEach(element => {
-        element.textContent = currentTranslations[key];
-      });
-    });
-  }
-
-  translatePostMeta(translations) {
-    // Translate "Posted" text
-    const postedElements = document.querySelectorAll('.post-meta span');
-    postedElements.forEach(element => {
-      if (element.textContent.includes('Postado em') || element.textContent.includes('Posted')) {
-        const dateElement = element.querySelector('time');
-        if (dateElement) {
-          const dateText = dateElement.textContent;
-          element.innerHTML = `${translations['posted']} <time>${dateText}</time>`;
-        }
-      }
-    });
-
-    // Translate "Updated" text
-    const updatedElements = document.querySelectorAll('.post-meta span');
-    updatedElements.forEach(element => {
-      if (element.textContent.includes('Atualizado') || element.textContent.includes('Updated')) {
-        const dateElement = element.querySelector('time');
-        if (dateElement) {
-          const dateText = dateElement.textContent;
-          element.innerHTML = `${translations['updated']} <time>${dateText}</time>`;
-        }
-      }
-    });
-
-    // Translate read time
-    const readTimeElements = document.querySelectorAll('[data-read-time]');
-    readTimeElements.forEach(element => {
-      const time = element.getAttribute('data-read-time');
-      element.textContent = `${time} ${translations['read-time']}`;
-    });
-
-    // Translate "Written by" text
-    const writtenByElements = document.querySelectorAll('.post-meta em');
-    writtenByElements.forEach(element => {
-      if (element.textContent.includes('Por') || element.textContent.includes('By')) {
-        const authorLink = element.querySelector('a');
-        if (authorLink) {
-          element.innerHTML = `${translations['written-by']} <em><a href="${authorLink.href}">${authorLink.textContent}</a></em>`;
-        }
-      }
-    });
-  }
-
-  translateSidebarNavigation(translations) {
-    // Translate sidebar navigation links
-    const navLinks = document.querySelectorAll('#sidebar .nav-link span');
-    navLinks.forEach(link => {
-      const text = link.textContent.trim();
-      if (text === 'HOME' || text === 'Home') {
-        link.textContent = translations['home'];
-      } else if (text === 'CATEGORIES' || text === 'Categories') {
-        link.textContent = translations['categories'];
-      } else if (text === 'TAGS' || text === 'Tags') {
-        link.textContent = translations['tags'];
-      } else if (text === 'ARCHIVES' || text === 'Archives') {
-        link.textContent = translations['archives'];
-      } else if (text === 'ABOUT' || text === 'About') {
-        link.textContent = translations['about'];
-      }
-    });
-  }
-
-  translateSidebarElements(translations) {
-    // Translate "Recently Updated" heading
-    const recentlyUpdatedHeading = document.querySelector('#access-lastmod h2');
-    if (recentlyUpdatedHeading) {
-      recentlyUpdatedHeading.textContent = translations['recently-updated'];
-    }
-
-    // Translate "Trending Tags" heading
-    const trendingTagsHeading = document.querySelector('section h2');
-    if (trendingTagsHeading && trendingTagsHeading.textContent.includes('Trending Tags')) {
-      trendingTagsHeading.textContent = translations['trending-tags'];
-    }
-
-    // Translate "Contents" heading
-    const contentsHeading = document.querySelector('.panel-heading');
-    if (contentsHeading && contentsHeading.textContent.includes('Conteúdo')) {
-      contentsHeading.textContent = translations['contents'];
-    }
-  }
-
-  translateFooterElements(translations) {
-    // Translate copyright text
-    const copyrightElements = document.querySelectorAll('footer span[data-bs-toggle="tooltip"]');
-    copyrightElements.forEach(element => {
-      if (element.textContent.includes('Alguns direitos reservados') || element.textContent.includes('Some rights reserved')) {
-        element.textContent = translations['copyright-brief'];
-      }
-    });
-
-    // Translate license text
-    const licenseElements = document.querySelectorAll('.license-wrapper');
-    licenseElements.forEach(element => {
-      if (element.textContent.includes('Esta postagem está licenciada') || element.textContent.includes('This post is licensed')) {
-        element.innerHTML = translations['license-template'].replace(':LICENSE_NAME', translations['license-name']);
-      }
-    });
-  }
-
-  translateNotificationElements(translations) {
-    // Translate notification text
-    const notificationText = document.querySelector('#notification .toast-body p');
-    if (notificationText) {
-      if (notificationText.textContent.includes('Uma nova versão') || notificationText.textContent.includes('A new version')) {
-        notificationText.textContent = translations['update-found'];
-      }
-    }
-
-    // Translate notification button
-    const notificationButton = document.querySelector('#notification .toast-body button');
-    if (notificationButton) {
-      if (notificationButton.textContent.includes('atualização') || notificationButton.textContent.includes('Update')) {
-        notificationButton.textContent = translations['update'];
-      }
-    }
-  }
-
-  translateSearchElements(translations) {
-    // Translate search no results text
-    const noResultsElements = document.querySelectorAll('#search-results p');
-    noResultsElements.forEach(element => {
-      if (element.textContent.includes('Nenhum resultado encontrado') || element.textContent.includes('No results found')) {
-        element.textContent = translations['no-results'] || 'Oops! Nenhum resultado encontrado.';
-      }
-    });
-  }
-
-  translateNavigationElements(translations) {
-    // Translate navigation buttons
-    const navButtons = document.querySelectorAll('.post-navigation .btn');
-    navButtons.forEach(button => {
-      const ariaLabel = button.getAttribute('aria-label');
-      if (ariaLabel === 'Anterior' || ariaLabel === 'Older') {
-        button.setAttribute('aria-label', translations['previous']);
-      } else if (ariaLabel === 'Próximo' || ariaLabel === 'Newer') {
-        button.setAttribute('aria-label', translations['next']);
-      }
-    });
-
-    // Translate share button
-    const shareButton = document.querySelector('.share-label');
-    if (shareButton) {
-      if (shareButton.textContent.includes('Compartilhar') || shareButton.textContent.includes('Share')) {
-        shareButton.textContent = translations['share'];
-      }
-    }
-
-    // Translate copy link button
-    const copyLinkButton = document.querySelector('#copy-link');
-    if (copyLinkButton) {
-      const title = copyLinkButton.getAttribute('title');
-      if (title && (title.includes('Copie o link') || title.includes('Copy link'))) {
-        copyLinkButton.setAttribute('title', translations['share-link-title']);
-      }
-    }
-  }
-
-  processMarkdown(content) {
-    if (!content) return '';
-    
-    // Clean up the content first
-    let processed = content.trim();
-    
-    // Process headers
-    processed = processed.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-    processed = processed.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-    processed = processed.replace(/^# (.*$)/gim, '<h1>$1</h1>');
-    
-    // Process lists
-    processed = processed.replace(/^[\s]*[-*+] (.*$)/gim, '<li>$1</li>');
-    processed = processed.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-    
-    // Process numbered lists
-    processed = processed.replace(/^[\s]*\d+\. (.*$)/gim, '<li>$1</li>');
-    processed = processed.replace(/(<li>.*<\/li>)/s, '<ol>$1</ol>');
-    
-    // Process bold and italic
-    processed = processed.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    processed = processed.replace(/\*(.*?)\*/g, '<em>$1</em>');
-    
-    // Process inline code
-    processed = processed.replace(/`(.*?)`/g, '<code>$1</code>');
-    
-    // Process links
-    processed = processed.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-    
-    // Process paragraphs
-    processed = processed.replace(/\n\n+/g, '</p><p>');
-    processed = processed.replace(/\n/g, '<br>');
-    
-    // Wrap in paragraphs if not already wrapped
-    if (!processed.startsWith('<')) {
-      processed = '<p>' + processed + '</p>';
-    }
-    
-    // Clean up empty paragraphs
-    processed = processed.replace(/<p><\/p>/g, '');
-    processed = processed.replace(/<p>\s*<\/p>/g, '');
-    
-    return processed;
   }
 
   updateURL() {
