@@ -34,8 +34,8 @@ module Jekyll
           'en' => translations['title_en'] || post.data['title']
         },
         'subtitle' => {
-          'pt-BR' => post.data['subtitle'],
-          'en' => translations['subtitle_en'] || post.data['subtitle']
+          'pt-BR' => post.data['subtitle'] || '',
+          'en' => translations['subtitle_en'] || post.data['subtitle'] || ''
         },
         'content' => {
           'pt-BR' => post.content,
@@ -59,6 +59,10 @@ module Jekyll
         'title' => {
           'pt-BR' => page.data['title'],
           'en' => translations['title_en'] || page.data['title']
+        },
+        'subtitle' => {
+          'pt-BR' => page.data['subtitle'] || '',
+          'en' => translations['subtitle_en'] || page.data['subtitle'] || ''
         },
         'content' => {
           'pt-BR' => page.content,
