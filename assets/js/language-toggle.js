@@ -634,6 +634,8 @@ class LanguageToggle {
         newPath = '/en/creating-custom-terraform-provider/';
       } else if (currentPath.includes('/sistema-observabilidade-opentelemetry-go/')) {
         newPath = '/en/distributed-observability-kafka-jaeger-go/';
+      } else if (currentPath.includes('/mvc-go-problemas-arquitetura-moderna/')) {
+        newPath = '/en/why-senior-engineers-moving-away-mvc-go/';
       } else if (currentPath.startsWith('/en/')) {
         // Already on English page, stay there
         newPath = currentPath;
@@ -653,6 +655,8 @@ class LanguageToggle {
         newPath = '/provider-terraform-customizado/';
       } else if (currentPath.includes('/distributed-observability-kafka-jaeger-go/')) {
         newPath = '/sistema-observabilidade-opentelemetry-go/';
+      } else if (currentPath.includes('/why-senior-engineers-moving-away-mvc-go/')) {
+        newPath = '/mvc-go-problemas-arquitetura-moderna/';
       } else if (currentPath.startsWith('/en/')) {
         // From English page to Portuguese
         newPath = currentPath.replace('/en/', '/');
