@@ -13,8 +13,6 @@ translations:
   title_en: "Concurrency vs Parallelism in Go: Debunking Performance Myths"
   subtitle_en: "Why concurrency isn't always faster and when to use each approach"
   content_en: |
-    # Concurrency vs Parallelism in Go: Debunking Performance Myths
-
     A misconception among many developers is believing that a concurrent solution is always faster than a sequential one. This couldn't be more wrong. The overall performance of a solution depends on many factors, such as the efficiency of our code structure (concurrency), which parts can be tackled in parallel, and the level of contention among the computation units. This post reminds us about some fundamental knowledge of concurrency in Go; then we will see a concrete example where a concurrent solution isn't necessarily faster.
 
     ## Go Scheduling
@@ -217,9 +215,6 @@ translations:
     - [Go Profiling Guide](https://go.dev/blog/pprof)
     - [Concurrent Programming Patterns](https://github.com/golang/go/wiki/LearnConcurrency)
 ---
-
-# Concorrência vs Paralelismo em Go: Desmistificando Mitos de Performance
-
 E aí, pessoal! Hoje vou esclarecer um dos conceitos mais mal compreendidos em Go: **concorrência vs paralelismo**. Muitos desenvolvedores acreditam que soluções concorrentes são sempre mais rápidas, mas essa é uma concepção perigosa que pode levar a pior performance.
 
 ## O Agendamento do Go
