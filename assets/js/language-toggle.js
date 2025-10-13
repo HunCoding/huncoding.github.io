@@ -103,7 +103,9 @@ class EnhancedLanguageToggle {
       '/provider-terraform-customizado/': '/en/creating-custom-terraform-provider/',
       '/sistema-observabilidade-opentelemetry-go/': '/en/distributed-observability-kafka-jaeger-go/',
       '/vercel-vs-netlify-vs-railway-guerra-deploys/': '/en/vercel-vs-netlify-vs-railway-deploy-wars/',
-      '/comparacao-routers-go-performance-benchmark/': '/en/go-http-routers-performance-comparison-benchmark/'
+      '/comparacao-routers-go-performance-benchmark/': '/en/go-http-routers-performance-comparison-benchmark/',
+      '/mvc-go-problemas-arquitetura-moderna/': '/en/why-senior-engineers-moving-away-mvc-go/',
+      '/concorrencia-vs-paralelismo-go-mitos-performance/': '/en/concurrency-vs-parallelism-go-performance-myths/'
     };
 
     // Check if we're on a specific post page
@@ -139,7 +141,9 @@ class EnhancedLanguageToggle {
       '/provider-terraform-customizado/': '/en/creating-custom-terraform-provider/',
       '/sistema-observabilidade-opentelemetry-go/': '/en/distributed-observability-kafka-jaeger-go/',
       '/vercel-vs-netlify-vs-railway-guerra-deploys/': '/en/vercel-vs-netlify-vs-railway-deploy-wars/',
-      '/comparacao-routers-go-performance-benchmark/': '/en/go-http-routers-performance-comparison-benchmark/'
+      '/comparacao-routers-go-performance-benchmark/': '/en/go-http-routers-performance-comparison-benchmark/',
+      '/mvc-go-problemas-arquitetura-moderna/': '/en/why-senior-engineers-moving-away-mvc-go/',
+      '/concorrencia-vs-paralelismo-go-mitos-performance/': '/en/concurrency-vs-parallelism-go-performance-myths/'
     };
 
     for (const ptPath in postMappings) {
@@ -422,7 +426,9 @@ class EnhancedLanguageToggle {
       'Comparação de Performance: Os 5 Principais HTTP Routers do Go': 'Performance Comparison: Top 5 HTTP Routers in Go',
       'Performance Comparison: Top 5 HTTP Routers in Go': 'Comparação de Performance: Os 5 Principais HTTP Routers do Go',
       'Por que Engenheiros Sênior Estão Abandonando MVC em Go': 'Why Senior Engineers Are Moving Away from MVC in Go',
-      'Why Senior Engineers Are Moving Away from MVC in Go': 'Por que Engenheiros Sênior Estão Abandonando MVC em Go'
+      'Why Senior Engineers Are Moving Away from MVC in Go': 'Por que Engenheiros Sênior Estão Abandonando MVC em Go',
+      'Concorrência vs Paralelismo em Go: Desmistificando Mitos de Performance': 'Concurrency vs Parallelism in Go: Debunking Performance Myths',
+      'Concurrency vs Parallelism in Go: Debunking Performance Myths': 'Concorrência vs Paralelismo em Go: Desmistificando Mitos de Performance'
     };
 
     // Translate titles in recently updated section
@@ -486,7 +492,9 @@ class EnhancedLanguageToggle {
       'Comparação de Performance: Os 5 Principais HTTP Routers do Go': 'Performance Comparison: Top 5 HTTP Routers in Go',
       'Performance Comparison: Top 5 HTTP Routers in Go': 'Comparação de Performance: Os 5 Principais HTTP Routers do Go',
       'Por que Engenheiros Sênior Estão Abandonando MVC em Go': 'Why Senior Engineers Are Moving Away from MVC in Go',
-      'Why Senior Engineers Are Moving Away from MVC in Go': 'Por que Engenheiros Sênior Estão Abandonando MVC em Go'
+      'Why Senior Engineers Are Moving Away from MVC in Go': 'Por que Engenheiros Sênior Estão Abandonando MVC em Go',
+      'Concorrência vs Paralelismo em Go: Desmistificando Mitos de Performance': 'Concurrency vs Parallelism in Go: Debunking Performance Myths',
+      'Concurrency vs Parallelism in Go: Debunking Performance Myths': 'Concorrência vs Paralelismo em Go: Desmistificando Mitos de Performance'
     };
 
     // Translate post titles on home page (main content area)
@@ -534,7 +542,9 @@ class EnhancedLanguageToggle {
         'Do zero a um Operador Kubernetes que observa ConfigMaps': 'Hey everyone! Today I\'m going to show you how to create a **Kubernetes Operator** from scratch that monitors ConfigMap changes and sends events to a webhook. It\'s a super useful feature for hot reload...',
         'From Zero to Kubernetes Operator': 'Hey everyone! Today I\'m going to show you how to create a **Kubernetes Operator** from scratch that monitors ConfigMap changes and sends events to a webhook. It\'s a super useful feature for hot reload...',
         'Por que Engenheiros Sênior Estão Abandonando MVC em Go': 'Hey everyone! Today I\'m going to show you why **senior engineers are abandoning the MVC pattern** in Go and migrating to more modern architectures. If you\'re still forcing Go into a pattern that doesn\'t match the language, this post is for you!',
-        'Why Senior Engineers Are Moving Away from MVC in Go': 'Hey everyone! Today I\'m going to show you why **senior engineers are abandoning the MVC pattern** in Go and migrating to more modern architectures. If you\'re still forcing Go into a pattern that doesn\'t match the language, this post is for you!'
+        'Why Senior Engineers Are Moving Away from MVC in Go': 'Hey everyone! Today I\'m going to show you why **senior engineers are abandoning the MVC pattern** in Go and migrating to more modern architectures. If you\'re still forcing Go into a pattern that doesn\'t match the language, this post is for you!',
+        'Concorrência vs Paralelismo em Go: Desmistificando Mitos de Performance': 'Hey everyone! Today I\'m going to clarify one of the most misunderstood concepts in Go: **concurrency vs parallelism**. Many developers believe that concurrent solutions are always faster, but this is a dangerous misconception that can lead to worse performance.',
+        'Concurrency vs Parallelism in Go: Debunking Performance Myths': 'Hey everyone! Today I\'m going to clarify one of the most misunderstood concepts in Go: **concurrency vs parallelism**. Many developers believe that concurrent solutions are always faster, but this is a dangerous misconception that can lead to worse performance.'
       };
       
       // Partial matching translations
@@ -620,7 +630,9 @@ class EnhancedLanguageToggle {
       '/provider-terraform-customizado/': '/en/creating-custom-terraform-provider/',
       '/sistema-observabilidade-opentelemetry-go/': '/en/distributed-observability-kafka-jaeger-go/',
       '/vercel-vs-netlify-vs-railway-guerra-deploys/': '/en/vercel-vs-netlify-vs-railway-deploy-wars/',
-      '/comparacao-routers-go-performance-benchmark/': '/en/go-http-routers-performance-comparison-benchmark/'
+      '/comparacao-routers-go-performance-benchmark/': '/en/go-http-routers-performance-comparison-benchmark/',
+      '/mvc-go-problemas-arquitetura-moderna/': '/en/why-senior-engineers-moving-away-mvc-go/',
+      '/concorrencia-vs-paralelismo-go-mitos-performance/': '/en/concurrency-vs-parallelism-go-performance-myths/'
     };
 
     // Translate post links on home page
@@ -892,6 +904,8 @@ class EnhancedLanguageToggle {
         newPath = '/en/distributed-observability-kafka-jaeger-go/';
       } else if (currentPath.includes('/mvc-go-problemas-arquitetura-moderna/')) {
         newPath = '/en/why-senior-engineers-moving-away-mvc-go/';
+      } else if (currentPath.includes('/concorrencia-vs-paralelismo-go-mitos-performance/')) {
+        newPath = '/en/concurrency-vs-parallelism-go-performance-myths/';
       } else if (currentPath.startsWith('/en/')) {
         // Already on English page, stay there
         newPath = currentPath;
@@ -913,6 +927,8 @@ class EnhancedLanguageToggle {
         newPath = '/sistema-observabilidade-opentelemetry-go/';
       } else if (currentPath.includes('/why-senior-engineers-moving-away-mvc-go/')) {
         newPath = '/mvc-go-problemas-arquitetura-moderna/';
+      } else if (currentPath.includes('/concurrency-vs-parallelism-go-performance-myths/')) {
+        newPath = '/concorrencia-vs-paralelismo-go-mitos-performance/';
       } else if (currentPath.startsWith('/en/')) {
         // From English page to Portuguese
         newPath = currentPath.replace('/en/', '/');
