@@ -26,13 +26,58 @@ class EnhancedLanguageToggle {
       return stored;
     }
     
+    // Auto-detect browser language for first-time visitors
+    const browserLang = this.detectBrowserLanguage();
+    if (browserLang) {
+      return browserLang;
+    }
+    
     return 'pt-BR';
+  }
+
+  detectBrowserLanguage() {
+    // Get browser language
+    const browserLang = navigator.language || navigator.userLanguage;
+    
+    // Check if it's a Portuguese variant
+    if (browserLang.startsWith('pt')) {
+      return 'pt-BR';
+    }
+    
+    // Check if it's English or any other language
+    if (browserLang.startsWith('en') || 
+        browserLang.startsWith('es') || 
+        browserLang.startsWith('fr') || 
+        browserLang.startsWith('de') || 
+        browserLang.startsWith('it') || 
+        browserLang.startsWith('ja') || 
+        browserLang.startsWith('ko') || 
+        browserLang.startsWith('zh') ||
+        browserLang.startsWith('ru') ||
+        browserLang.startsWith('ar') ||
+        browserLang.startsWith('hi')) {
+      return 'en';
+    }
+    
+    // Default to English for other languages
+    return 'en';
   }
 
   init() {
     console.log('🚀 Initializing Enhanced Language Toggle');
       this.setupEventListeners();
       this.updateLanguageDisplay();
+      
+    // Check if this is a first-time visitor with auto-detected language
+    const stored = localStorage.getItem('preferred-language');
+    const isFirstVisit = !stored;
+    const isAutoDetected = this.currentLang !== 'pt-BR' && isFirstVisit;
+    
+    // Save auto-detected language preference
+    if (isAutoDetected) {
+      localStorage.setItem('preferred-language', this.currentLang);
+      this.showLanguageDetectionNotification();
+    }
       
     // Apply translations on page load if not default language
       if (this.currentLang !== 'pt-BR') {
@@ -782,6 +827,61 @@ class EnhancedLanguageToggle {
     
     console.log('✅ Markdown processed successfully');
     return html;
+  }
+
+  showLanguageDetectionNotification() {
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.95), rgba(16, 185, 129, 0.95));
+      color: white;
+      padding: 1rem 1.25rem;
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      z-index: 9999;
+      opacity: 0;
+      transform: translateX(100%) scale(0.9);
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      max-width: 300px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    `;
+    
+    const langName = this.currentLang === 'pt-BR' ? 'Português' : 'English';
+    const flag = this.currentLang === 'pt-BR' ? '🇧🇷' : '🇺🇸';
+    const message = this.currentLang === 'pt-BR' 
+      ? 'Detectamos que você fala português!'
+      : 'We detected your language preference!';
+    
+    notification.innerHTML = `
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+        <span style="font-size: 1.2em;">🌍</span>
+        <span><strong>${message}</strong></span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; opacity: 0.9;">
+        <span style="font-size: 1.1em;">${flag}</span>
+        <span>Switched to ${langName}</span>
+      </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+      notification.style.opacity = '1';
+      notification.style.transform = 'translateX(0) scale(1)';
+    }, 10);
+    
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      notification.style.transform = 'translateX(100%) scale(0.9)';
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.parentNode.removeChild(notification);
+        }
+      }, 400);
+    }, 4000);
   }
 
   showFeedback() {
