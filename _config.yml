@@ -87,6 +87,8 @@ collections:
   en_posts:
     output: true
     permalink: /en/:title/
+    sort_by: date
+    sort_order: desc
 
 defaults:
   - scope:
@@ -97,6 +99,15 @@ defaults:
       comments: true
       permalink: /:title/
       toc: true
+  - scope:
+      path: ""
+      type: en_posts
+    values:
+      layout: post
+      comments: true
+      permalink: /en/:title/
+      toc: true
+      lang: en
       breadcrumb:
         - label: Posts
           url: /

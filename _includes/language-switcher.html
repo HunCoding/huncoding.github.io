@@ -1,0 +1,18 @@
+{% if page.bilingual.has_translation %}
+<div class="language-switcher mb-4 p-3 bg-light rounded border">
+  <div class="d-flex align-items-center gap-2">
+    <i class="fas fa-globe text-primary"></i>
+    <span class="text-muted small fw-medium">Available in:</span>
+    
+    {% if page.lang == 'en' %}
+      <a href="{{ page.bilingual.other_url }}" class="btn btn-sm btn-primary">
+        <i class="fas fa-flag me-1"></i> Português
+      </a>
+    {% else %}
+      <a href="{{ page.bilingual.other_url }}" class="btn btn-sm btn-primary">
+        <i class="fas fa-flag me-1"></i> English
+      </a>
+    {% endif %}
+  </div>
+</div>
+{% endif %}

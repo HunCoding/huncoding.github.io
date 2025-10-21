@@ -5,6 +5,7 @@ subtitle: "Detailed benchmarks, real results, and production analysis of the mos
 author: otavio_celestino
 date: 2025-09-30 08:01:00 -0300
 categories: [Go, Performance, Web Development, Benchmarks]
+lang: en
 tags: [go, gin, echo, fiber, chi, httprouter, performance, benchmark, http-router]
 comments: true
 image: "/assets/img/posts/comparing-performances-routers-go.gif"
