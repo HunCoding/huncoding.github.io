@@ -7,6 +7,7 @@ categories: [Go, Performance, Concurrency]
 tags: [go, concurrency, parallelism, performance, goroutines, scheduler]
 author: otavio_celestino
 lang: en
+comments: true
 image: "/assets/img/posts/2025-10-13-concorrencia-vs-paralelismo-go-mitos-performance.png"
 original_post: "/concorrencia-vs-paralelismo-go-mitos-performance/"
 ---
