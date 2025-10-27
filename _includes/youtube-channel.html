@@ -1,0 +1,43 @@
+<!-- YouTube Channel Section - Modern Design -->
+<div class="youtube-channel-modern">
+  <div class="youtube-header">
+    <div class="youtube-logo-container">
+      <img src="{{ '/assets/huncoding_logo.svg' | relative_url }}" alt="HunCoding Logo" class="huncoding-logo" onerror="this.style.display='none'">
+      <div class="youtube-icon-modern">
+        <i class="fab fa-youtube"></i>
+      </div>
+    </div>
+    
+    <div class="youtube-info">
+      <h6 class="youtube-title">
+        {% if include.lang == 'en' %}
+          HunCoding Channel
+        {% else %}
+          Canal HunCoding
+        {% endif %}
+      </h6>
+      
+      <p class="youtube-description">
+        {% if include.lang == 'en' %}
+          Go, DevOps & Cloud tutorials
+        {% else %}
+          Tutoriais de Go, DevOps & Cloud
+        {% endif %}
+      </p>
+    </div>
+  </div>
+  
+  <a href="https://youtube.com/@huncoding" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="youtube-subscribe-btn">
+    <i class="fab fa-youtube"></i>
+    <span>
+      {% if include.lang == 'en' %}
+        Subscribe
+      {% else %}
+        Inscrever-se
+      {% endif %}
+    </span>
+  </a>
+</div>

@@ -11,14 +11,20 @@
 
 {% assign SEPARATOR = ':' %}
 
+<!-- Filter posts by language -->
+{% assign current_lang = page.lang | default: 'pt' %}
+{% assign all_posts = site.posts | where: 'lang', current_lang %}
+
 {% assign match_posts = '' | split: '' %}
 
 {% for category in page.categories %}
-  {% assign match_posts = match_posts | push: site.categories[category] | uniq %}
+  {% assign category_posts = all_posts | where_exp: 'post', 'post.categories contains category' %}
+  {% assign match_posts = match_posts | concat: category_posts | uniq %}
 {% endfor %}
 
 {% for tag in page.tags %}
-  {% assign match_posts = match_posts | push: site.tags[tag] | uniq %}
+  {% assign tag_posts = all_posts | where_exp: 'post', 'post.tags contains tag' %}
+  {% assign match_posts = match_posts | concat: tag_posts | uniq %}
 {% endfor %}
 
 {% assign match_posts = match_posts | reverse %}

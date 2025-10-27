@@ -34,6 +34,9 @@ layout: compress
 
           <!-- panel -->
           <aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 text-muted">
+            <!-- YouTube Channel Section -->
+            {% include youtube-channel.html lang=lang %}
+            
             <div class="access">
               {% include_cached update-list.html lang=lang %}
               {% include_cached trending-tags.html lang=lang %}
@@ -84,10 +87,13 @@ layout: compress
 
     {% include_cached search-loader.html lang=lang %}
     
-    <!-- Language Toggle Styles -->
-    <link rel="stylesheet" href="{{ '/assets/css/language-toggle.css' | relative_url }}">
-    
-    <!-- Language Detection Script -->
-    <script src="{{ '/assets/js/language-detection.js' | relative_url }}"></script>
+          <!-- Language Toggle Styles -->
+          <link rel="stylesheet" href="{{ '/assets/css/language-toggle.css' | relative_url }}">
+          
+          <!-- YouTube Channel Styles -->
+          <link rel="stylesheet" href="{{ '/assets/css/youtube-channel.css' | relative_url }}">
+          
+          <!-- Language Detection Script -->
+          <script src="{{ '/assets/js/language-detection.js' | relative_url }}"></script>
   </body>
 </html>
