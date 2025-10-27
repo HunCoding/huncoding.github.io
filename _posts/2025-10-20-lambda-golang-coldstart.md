@@ -6,6 +6,7 @@ date: 2025-10-20 20:00:00 -0300
 categories: [Go, Serverless, Performance, DevOps, AWS]
 tags: [go, aws, lambda, cold-start, performance, observability, graviton, provisioned-concurrency, benchmarking]
 author: otavio_celestino
+comments: true
 lang: pt
 image: "/assets/img/posts/2025-10-20-lambda-golang-coldstart.png"
 original_post: "/por-que-o-cold-start-do-go-no-aws-lambda-ainda-e-subestimado/"
