@@ -16,16 +16,6 @@ Hey everyone!
 
 Today we’re diving into **rate limiters**, one of the most critical topics for **high-performance APIs**, **public services**, **distributed systems**, and **platforms that must limit abuse**.
 
-You’ll learn:
-
-- How **Fixed Window**, **Sliding Window**, **Leaky Bucket**, and **Token Bucket** work
-- Which algorithm fits each use case
-- Real implementations in **Go**
-- Benchmarks comparing accuracy vs performance
-- How to use these algorithms as **HTTP middleware** in Go projects
-
-This is **senior-level** content — exactly what companies in **the Netherlands, Germany, and Spain** love to see in interviews.
-
 ---
 
 # Why rate limiting is critical
