@@ -12,7 +12,7 @@ lang: pt-BR
 original_post: "/go-rate-limiting-algorithms/"
 ---
 
-Fala, pessoal!
+E aí, pessoal!
 
 Hoje vamos entrar no mundo dos **Rate Limiters**, um dos assuntos mais importantes em **APIs de alta performance**, **serviços públicos**, **sistemas distribuídos** e **plataformas que precisam limitar abuso**.
 
