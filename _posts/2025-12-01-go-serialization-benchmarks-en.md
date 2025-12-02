@@ -7,7 +7,7 @@ date: 2025-12-01 08:00:00 -0300
 categories: [Go, Performance, Back-end, Benchmarks]
 tags: [go, json, protobuf, msgpack, cbor, serialization, performance, benchmarks]
 comments: true
-image: "/assets/img/posts/2025-12-10-go-serialization-benchmarks.png"
+image: "/assets/img/posts/2025-12-01-go-serialization-benchmarks.png"
 lang: en
 original_post: "/go-serialization-benchmarks/"
 ---
