@@ -3,7 +3,7 @@ layout: post
 title: "Rate Limiting in Go: Fixed Window, Sliding Window, Leaky Bucket and Token Bucket"
 subtitle: "Practical comparison, benchmarks, and production-ready implementations."
 author: otavio_celestino
-date: 2025-12-01 08:00:00 -0300
+date: 2025-11-25 08:00:00 -0300
 categories: [Go, Performance, Back-end, Algorithms]
 tags: [go, ratelimiter, token-bucket, leaky-bucket, fixed-window, sliding-window, middleware]
 comments: true
