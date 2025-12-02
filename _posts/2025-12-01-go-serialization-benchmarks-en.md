@@ -204,7 +204,7 @@ All benchmarks were executed on:
 
 - **Go 1.21**
 - **Linux x86_64**
-- **CPU**: Intel i7-10700K (8 cores)
+- **CPU**: Ryzen 7 5800x
 - **RAM**: 32GB DDR4
 - **Warm-up**: 10 iterations before measuring
 - **Average**: 100 runs per test
