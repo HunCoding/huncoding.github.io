@@ -14,7 +14,7 @@ original_post: "/go-idiomatic-code/"
 
 E aí, pessoal!
 
-Escrever código Go que funciona é uma coisa. Escrever código Go **idiomático** — que segue os princípios e convenções da linguagem — é outra completamente diferente.
+Escrever código Go que funciona é uma coisa. Escrever código Go **idiomático**, que segue os princípios e convenções da linguagem, é outra completamente diferente.
 
 Código idiomático é mais legível, mais fácil de manter, mais eficiente e mais fácil de revisar. É o tipo de código que outros desenvolvedores Go reconhecem imediatamente como "bom código Go".
 

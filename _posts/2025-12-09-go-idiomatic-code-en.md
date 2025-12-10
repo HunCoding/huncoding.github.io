@@ -15,7 +15,7 @@ original_post: "/go-idiomatic-code/"
 
 Hey everyone!
 
-Writing Go code that works is one thing. Writing **idiomatic** Go code — that follows the language's principles and conventions — is completely different.
+Writing Go code that works is one thing. Writing **idiomatic** Go code, that follows the language's principles and conventions, is completely different.
 
 Idiomatic code is more readable, easier to maintain, more efficient, and easier to review. It's the kind of code that other Go developers immediately recognize as "good Go code."
 
