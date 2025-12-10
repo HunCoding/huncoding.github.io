@@ -12,6 +12,7 @@ lang: en
 original_post: "/go-idiomatic-code/"
 ---
 
+
 Hey everyone!
 
 Writing Go code that works is one thing. Writing **idiomatic** Go code — that follows the language's principles and conventions — is completely different.
