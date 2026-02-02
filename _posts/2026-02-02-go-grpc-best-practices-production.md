@@ -19,6 +19,10 @@ But where to start? How to create a gRPC API from scratch in Go?
 
 This post is a practical guide to get you started with gRPC. From Protocol Buffers to working APIs in production.
 
+**Want to learn even more?** On my YouTube channel there's a complete playlist teaching everything about gRPC:
+
+{% include embed/youtube.html id="p3rdu5HBxxE" %}
+
 ## What you'll find here
 
 This guide covers everything you need to get started with gRPC in Go:

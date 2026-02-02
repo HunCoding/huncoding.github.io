@@ -18,6 +18,10 @@ Mas por onde começar? Como criar uma API gRPC do zero em Go?
 
 Este post é um guia prático para você começar com gRPC. Do Protocol Buffers até APIs funcionando em produção.
 
+**Quer aprender ainda mais?** No meu canal do YouTube tem uma playlist completa ensinando tudo sobre gRPC:
+
+{% include embed/youtube.html id="p3rdu5HBxxE" %}
+
 ## O que você vai encontrar aqui
 
 Este guia cobre tudo que você precisa para começar com gRPC em Go:
