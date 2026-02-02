@@ -69,13 +69,13 @@ gRPC (gRPC Remote Procedure Calls) é um framework para comunicação entre serv
 
 ### Quando usar gRPC
 
-✅ **Use quando:**
+**Use quando:**
 - Comunicação entre microserviços internos
 - Performance é crítica
 - Precisa de streaming
 - Controle ambos os lados (cliente e servidor)
 
-❌ **Não use quando:**
+**Não use quando:**
 - APIs públicas para browsers (não suportam gRPC nativamente)
 - Integração com sistemas legados
 - APIs simples que REST resolve
