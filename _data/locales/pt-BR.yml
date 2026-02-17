@@ -59,6 +59,7 @@ post:
     unit: min
     prompt: " de leitura"
   relate_posts: Leia também
+  available_in: "Disponível em:"
   share: Compartilhar
   button:
     next: Próximo

@@ -1,16 +1,46 @@
-{% if page.bilingual.has_translation %}
-<div class="language-switcher mb-4 p-3 bg-light rounded border">
-  <div class="d-flex align-items-center gap-2">
-    <i class="fas fa-globe text-primary"></i>
-    <span class="text-muted small fw-medium">Available in:</span>
-    
+{% comment %}
+  Show "Read in English" / "Leia em português" when post has translation via original_post.
+  - EN posts: original_post points to the PT version.
+  - PT posts: find EN post whose original_post matches this page's url.
+{% endcomment %}
+{% assign show_switcher = false %}
+{% assign other_url = nil %}
+
+{% if page.lang == 'en' and page.original_post %}
+  {% assign show_switcher = true %}
+  {% assign other_url = page.original_post | relative_url %}
+{% elsif page.original_post or page.layout == 'post' %}
+  {% assign current_path = page.url %}
+  {% for post in site.posts %}
+    {% if post.lang == 'en' and post.original_post %}
+      {% assign orig_normalized = post.original_post | replace: '//', '/' %}
+      {% if orig_normalized == current_path or post.original_post == current_path %}
+        {% assign show_switcher = true %}
+        {% assign other_url = post.url | relative_url %}
+        {% break %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if show_switcher and other_url %}
+<div class="language-switcher-custom mb-4">
+  <div class="language-switcher-custom-inner">
+    <i class="fas fa-globe language-switcher-custom-icon"></i>
+    <span class="language-switcher-custom-label">
+      {% if page.lang == 'en' %}
+        {{ site.data.locales[include.lang].post.available_in | default: "Available in:" }}
+      {% else %}
+        {{ site.data.locales[include.lang].post.available_in | default: "Disponível em:" }}
+      {% endif %}
+    </span>
     {% if page.lang == 'en' %}
-      <a href="{{ page.bilingual.other_url }}" class="btn btn-sm btn-primary">
-        <i class="fas fa-flag me-1"></i> Português
+      <a href="{{ other_url }}" class="language-switcher-custom-btn">
+        <i class="fas fa-flag me-2"></i>Português
       </a>
     {% else %}
-      <a href="{{ page.bilingual.other_url }}" class="btn btn-sm btn-primary">
-        <i class="fas fa-flag me-1"></i> English
+      <a href="{{ other_url }}" class="language-switcher-custom-btn">
+        <i class="fas fa-flag me-2"></i>English
       </a>
     {% endif %}
   </div>

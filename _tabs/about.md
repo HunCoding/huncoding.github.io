@@ -14,7 +14,7 @@ Este blog é uma extensão desse trabalho. Aqui, aprofundo em tópicos de tecnol
 
 Você pode me encontrar e acompanhar meus projetos nos seguintes links:
 
-* **GitHub:** [github.com/HunnTeRUS](https://github.com/HunnTeRUS)
+* **GitHub:** [github.com/HunCoding](https://github.com/HunCoding)
 * **LinkedIn:** [linkedin.com/in/otaviocelestino/](https://www.linkedin.com/in/otaviocelestino/)
 * **YouTube:** [youtube.com/@huncoding](http://youtube.com/@huncoding)
 

@@ -34,6 +34,9 @@
 #   icon: 'fa-brands fa-threads'
 #   url: ''                   # Fill with your Threads profile link
 
+- type: rss
+  icon: "fas fa-rss"
+
 - type: ko-fi
   icon: 'fas fa-coffee'
   url: 'https://ko-fi.com/huncoding'

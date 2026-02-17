@@ -8,14 +8,18 @@ tail_includes:
   - post-nav
 script_includes:
   - comment
+  - reading-progress
 ---
 
 {% include lang.html %}
 
 {% include toc-status.html %}
 
+<div id="reading-progress-bar" role="presentation" aria-hidden="true" class="reading-progress-bar"></div>
+
 <article class="px-1" data-toc="{{ enable_toc }}">
   <header>
+    {% include language-switcher.html lang=lang %}
     <h1 data-toc-skip>{{ page.title }}</h1>
     {% if page.description %}
       <p class="post-desc fw-light mb-4">{{ page.description }}</p>

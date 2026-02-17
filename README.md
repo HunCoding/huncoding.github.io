@@ -16,30 +16,30 @@
 
 </div>
 
-## 👋 Sobre o Projeto
+## Sobre o Projeto
 
 Bem-vindo ao blog oficial do canal **HunCoding**! Este é um espaço onde compartilho conhecimento sobre programação, tecnologia e projetos práticos. Sou **Otavio Celestino dos Santos**, desenvolvedor de software apaixonado por tecnologia e educação.
 
-### 🎯 Missão
+### Missão
 Tornar o aprendizado de programação acessível e divertido, sempre com o foco em **criar, codar e compartilhar** conhecimento com a comunidade.
 
-## 🚀 Conteúdo
+## Conteúdo
 
-### 📝 Artigos Técnicos
+### Artigos Técnicos
 - **Kubernetes**: Operadores, ConfigMaps, e automação de clusters
 - **Terraform**: Providers customizados e Infrastructure as Code
 - **DevOps**: Melhores práticas e ferramentas essenciais
 - **Go**: Desenvolvimento backend e automação
 - **Desenvolvimento Web**: Frontend e backend modernos
 
-### 🎥 Canal YouTube
+### Canal YouTube
 Acompanhe o canal [**@huncoding**][youtube] para:
 - Tutoriais práticos de programação
 - Projetos do zero
 - Dicas de carreira em tecnologia
 - Reviews de ferramentas e tecnologias
 
-## 🏆 Certificações
+## Certificações
 
 <div align="center">
 
@@ -62,25 +62,15 @@ Este blog é construído com:
 - **Giscus** - Sistema de comentários
 - **Google Analytics** - Métricas e insights
 
-### ✨ Recursos
-- 🌙 **Tema Dark/Light** automático
-- 📱 **Design Responsivo** para todos os dispositivos
-- 🔍 **Busca Integrada** nos posts
-- 📊 **Analytics** e métricas de performance
-- 🏷️ **Categorias e Tags** organizadas
-- 💬 **Sistema de Comentários** com Giscus
-- 📈 **SEO Otimizado** para melhor ranking
-- ⚡ **PWA** - Funciona como app nativo
+## Conecte-se Comigo
 
-## 📞 Conecte-se Comigo
+- **Website**: [huncoding.github.io][website]
+- **YouTube**: [youtube.com/@huncoding][youtube]
+- **LinkedIn**: [linkedin.com/in/otaviocelestino/][linkedin]
+- **GitHub**: [github.com/HunCoding][github]
+- **Email**: huntercoding0@gmail.com
 
-- **🌐 Website**: [huncoding.github.io][website]
-- **📺 YouTube**: [youtube.com/@huncoding][youtube]
-- **💼 LinkedIn**: [linkedin.com/in/otaviocelestino/][linkedin]
-- **💻 GitHub**: [github.com/HunCoding][github]
-- **📧 Email**: huntercoding0@gmail.com
-
-## 🤝 Contribuições
+## Contribuições
 
 Contribuições são sempre bem-vindas! Se você tem:
 - Sugestões de melhorias

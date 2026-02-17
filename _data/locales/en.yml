@@ -61,6 +61,7 @@ post:
     unit: min
     prompt: read
   relate_posts: Further Reading
+  available_in: "Available in:"
   share: Share
   button:
     next: Newer

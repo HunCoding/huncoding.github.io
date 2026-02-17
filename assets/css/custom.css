@@ -7,3 +7,66 @@
 #avatar img {
   border-radius: 0 !important;
 }
+
+/* Reading progress bar (posts) - roxo do canal HunCoding */
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  width: 0%;
+  z-index: 9999;
+  background: #4b33bb;
+  transition: width 0.12s ease-out;
+}
+
+/* Language switcher (Disponível em / Available in) - roxo do canal */
+.language-switcher-custom {
+  --huncoding-purple: #4b33bb;
+  --huncoding-purple-hover: #5c42d4;
+  --huncoding-purple-soft: rgba(75, 51, 187, 0.15);
+}
+
+.language-switcher-custom-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: var(--huncoding-purple-soft);
+  border: 1px solid rgba(75, 51, 187, 0.35);
+  border-radius: 10px;
+}
+
+.language-switcher-custom-icon {
+  color: var(--huncoding-purple);
+  font-size: 1rem;
+}
+
+.language-switcher-custom-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--main-color);
+  opacity: 0.9;
+}
+
+.language-switcher-custom-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #fff !important;
+  background: var(--huncoding-purple);
+  border: none;
+  border-radius: 8px;
+  text-decoration: none !important;
+  transition: background 0.2s ease, transform 0.15s ease;
+  box-shadow: 0 2px 8px rgba(75, 51, 187, 0.35);
+}
+
+.language-switcher-custom-btn:hover {
+  background: var(--huncoding-purple-hover);
+  color: #fff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(75, 51, 187, 0.45);
+}
