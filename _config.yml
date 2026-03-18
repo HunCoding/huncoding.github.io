@@ -125,6 +125,8 @@ defaults:
           url: /
       sidebar:
         nav: posts
+      social_preview_image: "https://huncoding.github.io/assets/img/og-image.png"
+      twitter_image: "https://huncoding.github.io/assets/img/og-image.png"
 
   - scope:
       path: ""
@@ -152,15 +154,6 @@ social_preview_image: "https://huncoding.github.io/assets/img/og-image.png"
 twitter:
   username: huncoding
   card: summary_large_image
-
-# Open Graph defaults
-defaults:
-  - scope:
-      path: ""
-      type: pages
-    values:
-      social_preview_image: "https://huncoding.github.io/assets/img/og-image.png"
-      twitter_image: "https://huncoding.github.io/assets/img/og-image.png"
 
 # Sitemap configuration for better SEO
 sitemap:
