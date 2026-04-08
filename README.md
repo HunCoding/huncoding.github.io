@@ -68,7 +68,7 @@ Este blog é construído com:
 - **YouTube**: [youtube.com/@huncoding][youtube]
 - **LinkedIn**: [linkedin.com/in/otaviocelestino/][linkedin]
 - **GitHub**: [github.com/HunCoding][github]
-- **Email**: huntercoding0@gmail.com
+- **Email**: otavio@huncoding.com
 
 ## Contribuições
 
