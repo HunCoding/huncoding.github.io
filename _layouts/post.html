@@ -2,8 +2,11 @@
 layout: default
 refactor: true
 panel_includes:
+  - post-series
+  - post-videos
   - toc
 tail_includes:
+  - post-series-next
   - related-posts
   - post-nav
 script_includes:
@@ -174,3 +177,28 @@ script_includes:
 <!-- Advanced SEO includes -->
 {% include focus-keywords.html %}
 {% include rich-snippets.html %}
+
+{% if page.series %}
+  {% assign _jsonld_desc = page.description | default: page.excerpt | strip_html | truncatewords: 30 | strip_newlines %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": ["Article", "LearningResource"],
+  "headline": {{ page.title | jsonify }},
+  "description": {{ _jsonld_desc | jsonify }},
+  "url": "{{ page.url | absolute_url }}",
+  "datePublished": "{{ page.date | date: '%Y-%m-%dT%H:%M:%S%z' }}",
+  "inLanguage": "{{ page.lang | default: 'pt-BR' }}",
+  "author": {
+    "@type": "Person",
+    "name": {{ site.social.name | default: site.title | jsonify }}
+  },
+  "isPartOf": {
+    "@type": "Course",
+    "name": {{ page.series | jsonify }},
+    "url": "{{ '/playlists' | absolute_url }}"
+  },
+  "position": {{ page.series_order }}
+}
+</script>
+{% endif %}

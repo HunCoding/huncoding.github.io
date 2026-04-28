@@ -1,0 +1,127 @@
+---
+layout: default
+---
+
+{% include lang.html %}
+
+{% assign tab_label = site.data.locales[lang].tabs.playlists | default: 'Playlists' %}
+
+{% comment %} Gather all series from posts in the current lang {% endcomment %}
+{% assign lang_posts = site.posts | where: 'lang', lang %}
+{% assign series_posts_all = lang_posts | where_exp: 'p', 'p.series' %}
+{% assign series_names = series_posts_all | map: 'series' | uniq | sort %}
+
+<div id="playlists-page" class="flex-grow-1 px-xl-1">
+  <h1 class="dynamic-title mb-4">{{ tab_label }}</h1>
+
+  {% if series_names.size == 0 %}
+    <p class="text-muted">{{ site.data.locales[lang].playlists.empty | default: 'Nenhuma playlist encontrada.' }}</p>
+  {% else %}
+    {% for series_name in series_names %}
+      {% assign sp_raw = series_posts_all | where: 'series', series_name %}
+
+      {% comment %} Zero-padded sort by series_order {% endcomment %}
+      {% assign sort_keys = '' | split: '' %}
+      {% assign last_idx = sp_raw.size | minus: 1 %}
+      {% for i in (0..last_idx) %}
+        {% assign sp = sp_raw[i] %}
+        {% assign ord = sp.series_order | default: 99 %}
+        {% if ord < 10 %}
+          {% assign padded = '0' | append: ord %}
+        {% else %}
+          {% assign padded = '' | append: ord %}
+        {% endif %}
+        {% capture key %}{{ padded }}::{{ i }}{% endcapture %}
+        {% assign sort_keys = sort_keys | push: key %}
+      {% endfor %}
+      {% assign sort_keys = sort_keys | sort %}
+      {% assign sp_sorted = '' | split: '' %}
+      {% for key in sort_keys %}
+        {% assign idx = key | split: '::' | last | plus: 0 %}
+        {% assign sp_sorted = sp_sorted | push: sp_raw[idx] %}
+      {% endfor %}
+
+      {% assign first_post = sp_sorted | first %}
+
+      {% comment %} Count published posts {% endcomment %}
+      {% assign published_count = 0 %}
+      {% for sp in sp_sorted %}
+        {% unless sp.date > site.time %}
+          {% assign published_count = published_count | plus: 1 %}
+        {% endunless %}
+      {% endfor %}
+
+      {% comment %} Fetch series metadata {% endcomment %}
+      {% assign meta = nil %}
+      {% for m in site.data.series_meta %}
+        {% if m.name == series_name and m.lang == lang %}
+          {% assign meta = m %}
+        {% endif %}
+      {% endfor %}
+
+      {% assign part_label = site.data.locales[lang].post.series_part | default: 'Aula' %}
+      {% assign total = sp_sorted.size %}
+
+      {% assign cover_id = first_post.youtube_videos[0].id %}
+
+      <div class="playlist-card">
+        {% if cover_id and cover_id != '' %}
+          <div class="playlist-card-banner" style="background-image: linear-gradient(135deg, rgba(75,51,187,0.88) 0%, rgba(30,15,75,0.80) 100%), url('https://img.youtube.com/vi/{{ cover_id }}/mqdefault.jpg'); background-size: cover; background-position: center;">
+            <div class="playlist-card-icon-wrap">
+              <i class="{{ meta.icon | default: 'fas fa-layer-group' }}" aria-hidden="true"></i>
+            </div>
+            <div class="playlist-card-info">
+              <h2 class="playlist-card-title playlist-card-title-light">{{ series_name }}</h2>
+              <span class="playlist-card-count playlist-card-count-light">
+                {{ total }} {{ part_label | downcase }}s
+              </span>
+            </div>
+          </div>
+        {% else %}
+          <div class="playlist-card-header">
+            <div class="playlist-card-icon-wrap">
+              <i class="{{ meta.icon | default: 'fas fa-layer-group' }}" aria-hidden="true"></i>
+            </div>
+            <div class="playlist-card-info">
+              <h2 class="playlist-card-title">{{ series_name }}</h2>
+              <span class="playlist-card-count">
+                {{ total }} {{ part_label | downcase }}s
+              </span>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if meta.description %}
+          <p class="playlist-card-desc">{{ meta.description }}</p>
+        {% endif %}
+
+        <ol class="playlist-card-lessons">
+          {% for sp in sp_sorted %}
+            {% assign is_future = false %}
+            {% if sp.date > site.time %}{% assign is_future = true %}{% endif %}
+            <li class="playlist-lesson-item{% if is_future %} playlist-lesson-future{% endif %}">
+              <span class="playlist-lesson-num">{{ sp.series_order }}</span>
+              {% if is_future %}
+                <span class="playlist-lesson-title-plain">{{ sp.title }}</span>
+                <span class="playlist-lesson-coming">{{ site.data.locales[lang].playlists.coming_soon | default: 'Em breve' }}</span>
+              {% else %}
+                <a href="{{ sp.url | relative_url }}" class="playlist-lesson-link">{{ sp.title }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ol>
+
+        <div class="playlist-card-footer">
+          <a href="{{ first_post.url | relative_url }}" class="playlist-start-btn">
+            <i class="fas fa-play me-1" aria-hidden="true"></i>
+            {{ site.data.locales[lang].playlists.start | default: 'Começar série' }}
+          </a>
+          <span class="playlist-progress-text">
+            {{ published_count }}/{{ total }} {{ site.data.locales[lang].playlists.progress_text | default: 'publicados' }}
+          </span>
+        </div>
+      </div>
+
+    {% endfor %}
+  {% endif %}
+</div>

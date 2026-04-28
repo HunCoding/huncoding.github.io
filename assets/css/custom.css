@@ -70,3 +70,681 @@
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(75, 51, 187, 0.45);
 }
+
+/* =========================================================
+   Post Series Navigation Panel
+   ========================================================= */
+
+#post-series-wrapper {
+  margin-top: 2rem;
+}
+
+.series-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #4b33bb;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+.series-list {
+  /* list-unstyled from Bootstrap removes bullets/padding */
+}
+
+.series-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  font-size: 0.84rem;
+  line-height: 1.35;
+}
+
+.series-order-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: rgba(75, 51, 187, 0.12);
+  color: #4b33bb;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-top: 0.05rem;
+}
+
+.series-item.series-current .series-order-badge {
+  background: #4b33bb;
+  color: #fff;
+}
+
+.series-title-link {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.series-title-link:hover {
+  color: #4b33bb;
+  text-decoration: underline;
+}
+
+.series-title-current {
+  font-weight: 700;
+  color: var(--heading-color);
+}
+
+.series-arrow {
+  color: #4b33bb;
+  margin-right: 0.2rem;
+  font-size: 0.72rem;
+}
+
+.series-item.series-future {
+  opacity: 0.5;
+}
+
+/* Dark mode */
+[data-mode="dark"] .series-name {
+  color: #9b7ff0;
+}
+
+[data-mode="dark"] .series-order-badge {
+  background: rgba(123, 95, 232, 0.2);
+  color: #9b7ff0;
+}
+
+[data-mode="dark"] .series-item.series-current .series-order-badge {
+  background: #4b33bb;
+  color: #fff;
+}
+
+[data-mode="dark"] .series-arrow {
+  color: #9b7ff0;
+}
+
+[data-mode="dark"] .series-title-link:hover {
+  color: #9b7ff0;
+}
+
+/* Light mode explicit */
+[data-mode="light"] .series-name {
+  color: #4b33bb;
+}
+
+[data-mode="light"] .series-title-link:hover {
+  color: #4b33bb;
+}
+
+/* =========================================================
+   Post Videos Panel
+   ========================================================= */
+
+#post-videos-wrapper {
+  margin-top: 2rem;
+}
+
+.post-videos-list {
+  /* list-unstyled via Bootstrap class */
+}
+
+.post-video-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: opacity 0.2s ease;
+}
+
+.post-video-link:hover {
+  opacity: 0.88;
+}
+
+.post-video-link:hover .post-video-title {
+  color: #4b33bb;
+}
+
+.post-video-thumb-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #111;
+}
+
+.post-video-thumb {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.post-video-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.38);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  border-radius: 6px;
+}
+
+.post-video-link:hover .post-video-play-overlay {
+  opacity: 1;
+}
+
+.post-video-play-overlay i {
+  color: #ff0000;
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
+}
+
+.post-video-title {
+  margin: 0.4rem 0 0 0;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  color: var(--text-color);
+  transition: color 0.2s ease;
+}
+
+/* Dark mode */
+[data-mode="dark"] .post-video-link:hover .post-video-title {
+  color: #9b7ff0;
+}
+
+/* Light mode */
+[data-mode="light"] .post-video-link:hover .post-video-title {
+  color: #4b33bb;
+}
+
+/* =========================================================
+   Post Card — Series Badge (home page listing)
+   ========================================================= */
+
+.post-series-badge {
+  line-height: 1;
+}
+
+.post-series-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #4b33bb;
+  background: rgba(75, 51, 187, 0.09);
+  border-radius: 20px;
+  padding: 0.22rem 0.6rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+[data-mode="dark"] .post-series-badge-pill {
+  color: #9b7ff0;
+  background: rgba(155, 127, 240, 0.14);
+}
+
+[data-mode="light"] .post-series-badge-pill {
+  color: #4b33bb;
+  background: rgba(75, 51, 187, 0.09);
+}
+
+/* =========================================================
+   Playlists Page
+   ========================================================= */
+
+#playlists-page {
+  max-width: 800px;
+}
+
+.playlist-card {
+  border: 1px solid rgba(75, 51, 187, 0.15);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  background: var(--card-bg, #fff);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.playlist-card:hover {
+  box-shadow: 0 8px 36px rgba(75, 51, 187, 0.13);
+  transform: translateY(-2px);
+}
+
+/* Header */
+.playlist-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.4rem 1.5rem 1.2rem;
+  background: linear-gradient(135deg, rgba(75, 51, 187, 0.07) 0%, rgba(75, 51, 187, 0.01) 100%);
+  border-bottom: 1px solid rgba(75, 51, 187, 0.1);
+}
+
+.playlist-card-icon-wrap {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #4b33bb;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 14px rgba(75, 51, 187, 0.35);
+}
+
+.playlist-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.playlist-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 0.3rem;
+  color: var(--heading-color);
+  line-height: 1.2;
+}
+
+.playlist-card-count {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #4b33bb;
+  background: rgba(75, 51, 187, 0.1);
+  border-radius: 20px;
+  padding: 0.15rem 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Description */
+.playlist-card-desc {
+  padding: 1rem 1.5rem 0;
+  font-size: 0.88rem;
+  color: var(--text-color);
+  opacity: 0.8;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Lesson list */
+.playlist-card-lessons {
+  list-style: none;
+  padding: 0.75rem 1.5rem 0.5rem;
+  margin: 0;
+}
+
+.playlist-lesson-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0;
+  font-size: 0.875rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.playlist-lesson-item:last-child {
+  border-bottom: none;
+}
+
+.playlist-lesson-num {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgba(75, 51, 187, 0.1);
+  color: #4b33bb;
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.playlist-lesson-link {
+  flex: 1;
+  color: var(--text-color);
+  text-decoration: none;
+  line-height: 1.35;
+  transition: color 0.15s ease;
+}
+
+.playlist-lesson-link:hover {
+  color: #4b33bb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.playlist-lesson-title-plain {
+  flex: 1;
+  color: var(--text-color);
+  opacity: 0.65;
+  line-height: 1.35;
+}
+
+.playlist-lesson-future {
+  opacity: 0.55;
+}
+
+.playlist-lesson-coming {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(75, 51, 187, 0.45);
+  border-radius: 20px;
+  padding: 0.1rem 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Footer */
+.playlist-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: rgba(75, 51, 187, 0.03);
+  border-top: 1px solid rgba(75, 51, 187, 0.08);
+}
+
+.playlist-start-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.3rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #fff !important;
+  background: #4b33bb;
+  border-radius: 10px;
+  text-decoration: none !important;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 3px 10px rgba(75, 51, 187, 0.35);
+}
+
+.playlist-start-btn:hover {
+  background: #5c42d4;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(75, 51, 187, 0.45);
+  color: #fff !important;
+}
+
+.playlist-progress-text {
+  font-size: 0.78rem;
+  color: var(--text-color);
+  opacity: 0.55;
+}
+
+/* Dark mode — Playlists */
+[data-mode="dark"] .playlist-card {
+  border-color: rgba(155, 127, 240, 0.18);
+}
+
+[data-mode="dark"] .playlist-card:hover {
+  box-shadow: 0 8px 36px rgba(155, 127, 240, 0.15);
+}
+
+[data-mode="dark"] .playlist-card-header {
+  background: linear-gradient(135deg, rgba(155, 127, 240, 0.1) 0%, rgba(75, 51, 187, 0.02) 100%);
+  border-bottom-color: rgba(155, 127, 240, 0.15);
+}
+
+[data-mode="dark"] .playlist-card-count {
+  color: #9b7ff0;
+  background: rgba(155, 127, 240, 0.15);
+}
+
+[data-mode="dark"] .playlist-lesson-num {
+  background: rgba(155, 127, 240, 0.15);
+  color: #9b7ff0;
+}
+
+[data-mode="dark"] .playlist-lesson-link:hover {
+  color: #9b7ff0;
+}
+
+[data-mode="dark"] .playlist-lesson-coming {
+  background: rgba(155, 127, 240, 0.4);
+}
+
+[data-mode="dark"] .playlist-card-footer {
+  background: rgba(155, 127, 240, 0.04);
+  border-top-color: rgba(155, 127, 240, 0.12);
+}
+
+[data-mode="dark"] .playlist-lesson-item {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-mode="light"] .playlist-lesson-link:hover {
+  color: #4b33bb;
+}
+
+/* =========================================================
+   Playlists — Thumbnail Banner (Feature 3)
+   ========================================================= */
+
+.playlist-card-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.4rem 1.5rem 1.2rem;
+  border-radius: 0; /* card clips corners */
+  min-height: 110px;
+}
+
+.playlist-card-title-light {
+  color: #fff !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+}
+
+.playlist-card-count-light {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* =========================================================
+   Series Panel — Read Checkmarks (Feature 2)
+   ========================================================= */
+
+.series-item.series-read .series-order-badge {
+  background: rgba(34, 197, 94, 0.12);
+  color: transparent;
+  position: relative;
+}
+
+.series-item.series-read .series-order-badge::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #16a34a;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+[data-mode="dark"] .series-item.series-read .series-order-badge {
+  background: rgba(34, 197, 94, 0.15);
+}
+
+[data-mode="dark"] .series-item.series-read .series-order-badge::after {
+  color: #4ade80;
+}
+
+/* =========================================================
+   Series Panel — Future post estimated date (Feature 5)
+   ========================================================= */
+
+.series-future-date {
+  flex-shrink: 0;
+  font-size: 0.62rem;
+  font-weight: 600;
+  color: #888;
+  margin-left: 0.25rem;
+  white-space: nowrap;
+  opacity: 0.8;
+}
+
+[data-mode="dark"] .series-future-date {
+  color: #aaa;
+}
+
+/* =========================================================
+   "Próxima aula" block (Feature 1)
+   ========================================================= */
+
+.series-next-wrapper {
+  margin: 2.5rem 0 1.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(75, 51, 187, 0.15);
+}
+
+.series-next-eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #4b33bb;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.6rem;
+}
+
+.series-next-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.2rem 1.4rem;
+  background: rgba(75, 51, 187, 0.05);
+  border: 1px solid rgba(75, 51, 187, 0.2);
+  border-radius: 14px;
+  text-decoration: none !important;
+  color: inherit;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.series-next-card:hover {
+  background: rgba(75, 51, 187, 0.09);
+  border-color: rgba(75, 51, 187, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(75, 51, 187, 0.12);
+  color: inherit;
+  text-decoration: none !important;
+}
+
+.series-next-card-future {
+  cursor: default;
+  opacity: 0.7;
+  justify-content: space-between;
+}
+
+.series-next-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.series-next-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #4b33bb;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.3rem;
+}
+
+.series-next-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--heading-color);
+  margin: 0 0 0.3rem;
+  line-height: 1.3;
+}
+
+.series-next-desc {
+  font-size: 0.82rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.series-next-arrow {
+  flex-shrink: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #4b33bb;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.series-next-card:hover .series-next-arrow {
+  background: #5c42d4;
+  transform: translateX(3px);
+}
+
+.series-next-coming-badge {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(75, 51, 187, 0.5);
+  border-radius: 20px;
+  padding: 0.2rem 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Dark mode — Próxima aula */
+[data-mode="dark"] .series-next-wrapper {
+  border-top-color: rgba(155, 127, 240, 0.18);
+}
+
+[data-mode="dark"] .series-next-eyebrow {
+  color: #9b7ff0;
+}
+
+[data-mode="dark"] .series-next-card {
+  background: rgba(155, 127, 240, 0.07);
+  border-color: rgba(155, 127, 240, 0.22);
+}
+
+[data-mode="dark"] .series-next-card:hover {
+  background: rgba(155, 127, 240, 0.13);
+  border-color: rgba(155, 127, 240, 0.45);
+  box-shadow: 0 6px 24px rgba(155, 127, 240, 0.15);
+}
+
+[data-mode="dark"] .series-next-label {
+  color: #9b7ff0;
+}
+
+[data-mode="dark"] .series-next-arrow {
+  background: #5c42d4;
+}
+
+[data-mode="dark"] .series-next-card:hover .series-next-arrow {
+  background: #6d50e8;
+}

@@ -1,0 +1,9 @@
+- name: "LLM do Zero em Go"
+  lang: "pt-BR"
+  description: "Construindo um Large Language Model do zero em Go — da leitura de texto e tokenização até um Transformer com atenção multi-cabeça. Acompanhe os vídeos do canal e os posts para entender cada peça que compõe um LLM moderno."
+  icon: "fas fa-brain"
+
+- name: "LLM from Scratch in Go"
+  lang: "en"
+  description: "Building a Large Language Model from scratch in Go — from text reading and tokenization to a Transformer with multi-head attention. Follow the videos and posts to understand each piece that makes up a modern LLM."
+  icon: "fas fa-brain"

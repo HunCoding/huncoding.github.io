@@ -12,7 +12,7 @@ tabs:
   # format: <filename_without_extension>: <value>
   home: Home
   categories: Categorias
-  tags: Tags
+  playlists: Playlists
   archives: Arquivos
   about: Sobre
 
@@ -26,6 +26,8 @@ panel:
   lastmod: Atualizados recentemente
   trending_tags: Trending Tags
   toc: Conteúdo
+  series: "Esta série"
+  post_videos: "Vídeos desta série"
 
 copyright:
   # Shown at the bottom of the post
@@ -49,11 +51,19 @@ notification:
 
 # ----- Posts related labels -----
 
+playlists:
+  coming_soon: "Em breve"
+  start: "Começar série"
+  progress_text: "publicados"
+  empty: "Nenhuma playlist encontrada."
+
 post:
   written_by: Por
   posted: Postado em
   updated: Atualizado
   words: palavras
+  series_part: "Aula"
+  series_next: "Próxima aula"
   pageview_measure: visualizações
   read_time:
     unit: min

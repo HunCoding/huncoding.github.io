@@ -1,0 +1,77 @@
+{% comment %}
+  "Próxima aula" block — rendered at the end of each post in a series.
+  Finds the next post by series_order + 1 and shows a CTA card.
+  If the next post is scheduled in the future, shows an "Em breve" state.
+{% endcomment %}
+
+{% if page.series %}
+  {% assign current_lang = page.lang | default: 'pt-BR' %}
+  {% assign snext_raw = site.posts | where: 'lang', current_lang | where: 'series', page.series %}
+
+  {% assign sort_keys = '' | split: '' %}
+  {% assign last_index = snext_raw.size | minus: 1 %}
+  {% for i in (0..last_index) %}
+    {% assign sp = snext_raw[i] %}
+    {% assign order = sp.series_order | default: 99 %}
+    {% if order < 10 %}
+      {% assign padded = '0' | append: order %}
+    {% else %}
+      {% assign padded = '' | append: order %}
+    {% endif %}
+    {% capture key %}{{ padded }}::{{ i }}{% endcapture %}
+    {% assign sort_keys = sort_keys | push: key %}
+  {% endfor %}
+  {% assign sort_keys = sort_keys | sort %}
+  {% assign snext_sorted = '' | split: '' %}
+  {% for key in sort_keys %}
+    {% assign idx = key | split: '::' | last | plus: 0 %}
+    {% assign snext_sorted = snext_sorted | push: snext_raw[idx] %}
+  {% endfor %}
+
+  {% assign next_order = page.series_order | plus: 1 %}
+  {% assign next_post = nil %}
+  {% for sp in snext_sorted %}
+    {% if sp.series_order == next_order %}
+      {% unless next_post %}
+        {% assign next_post = sp %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+
+  {% if next_post %}
+    {% assign is_future = false %}
+    {% if next_post.date > site.time %}{% assign is_future = true %}{% endif %}
+    {% assign part_label   = site.data.locales[current_lang].post.series_part | default: 'Aula' %}
+    {% assign next_label   = site.data.locales[current_lang].post.series_next | default: 'Próxima aula' %}
+    {% assign coming_label = site.data.locales[current_lang].playlists.coming_soon | default: 'Em breve' %}
+
+    <div class="series-next-wrapper">
+      <p class="series-next-eyebrow">
+        <i class="fas fa-layer-group me-1" aria-hidden="true"></i>{{ page.series }}
+      </p>
+
+      {% if is_future %}
+        <div class="series-next-card series-next-card-future">
+          <div class="series-next-card-body">
+            <span class="series-next-label">{{ next_label }}</span>
+            <p class="series-next-title">{{ next_post.title }}</p>
+          </div>
+          <span class="series-next-coming-badge">{{ coming_label }}</span>
+        </div>
+      {% else %}
+        <a href="{{ next_post.url | relative_url }}" class="series-next-card">
+          <div class="series-next-card-body">
+            <span class="series-next-label">{{ next_label }}</span>
+            <p class="series-next-title">{{ next_post.title }}</p>
+            {% if next_post.description %}
+              <p class="series-next-desc">{{ next_post.description | truncatewords: 18 }}</p>
+            {% endif %}
+          </div>
+          <div class="series-next-arrow" aria-hidden="true">
+            <i class="fas fa-arrow-right"></i>
+          </div>
+        </a>
+      {% endif %}
+    </div>
+  {% endif %}
+{% endif %}

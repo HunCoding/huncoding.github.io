@@ -1,0 +1,45 @@
+{% comment %}
+  YouTube Video Reference List Panel
+  Renders only when page.youtube_videos is set and non-empty.
+  Each entry needs: id (YouTube video ID) and title.
+  Thumbnails are loaded from img.youtube.com — no API key required.
+{% endcomment %}
+
+{% if page.youtube_videos and page.youtube_videos.size > 0 %}
+  {% assign current_lang = page.lang | default: 'pt-BR' %}
+  {% assign videos_heading = site.data.locales[current_lang].panel.post_videos | default: 'Videos in this series' %}
+
+  <section id="post-videos-wrapper" class="ps-0 pe-4 pb-4">
+    <h2 class="panel-heading ps-3 pb-2 mb-3">{{ videos_heading }}</h2>
+    <ul class="post-videos-list list-unstyled ps-3 mb-0">
+      {% for video in page.youtube_videos %}
+        {% if video.id and video.id != '' %}
+          <li class="post-video-item mb-3">
+            <a
+              href="https://www.youtube.com/watch?v={{ video.id }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="post-video-link"
+              aria-label="{{ video.title | xml_escape }}"
+            >
+              <div class="post-video-thumb-wrapper">
+                <img
+                  src="https://img.youtube.com/vi/{{ video.id }}/mqdefault.jpg"
+                  alt="{{ video.title | xml_escape }}"
+                  loading="lazy"
+                  class="post-video-thumb"
+                  width="320"
+                  height="180"
+                >
+                <div class="post-video-play-overlay" aria-hidden="true">
+                  <i class="fab fa-youtube"></i>
+                </div>
+              </div>
+              <p class="post-video-title">{{ video.title }}</p>
+            </a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}

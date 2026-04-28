@@ -1,0 +1,84 @@
+{% comment %}
+  Series Navigation Panel
+  Renders only when page.series is set.
+  Scans site.posts filtered by lang + series, sorts by series_order,
+  and renders an ordered list in the right sidebar panel.
+  Uses localStorage to persist and display read checkmarks per post.
+{% endcomment %}
+
+{% if page.series %}
+  {% assign current_lang = page.lang | default: 'pt-BR' %}
+  {% assign series_posts_raw = site.posts | where: 'lang', current_lang | where: 'series', page.series %}
+
+  {% assign sort_keys = '' | split: '' %}
+  {% assign last_index = series_posts_raw.size | minus: 1 %}
+
+  {% for i in (0..last_index) %}
+    {% assign sp = series_posts_raw[i] %}
+    {% assign order = sp.series_order | default: 99 %}
+    {% if order < 10 %}
+      {% assign padded = '0' | append: order %}
+    {% else %}
+      {% assign padded = '' | append: order %}
+    {% endif %}
+    {% capture key %}{{ padded }}::{{ i }}{% endcapture %}
+    {% assign sort_keys = sort_keys | push: key %}
+  {% endfor %}
+
+  {% assign sort_keys = sort_keys | sort %}
+  {% assign series_posts = '' | split: '' %}
+  {% for key in sort_keys %}
+    {% assign idx = key | split: '::' | last | plus: 0 %}
+    {% assign series_posts = series_posts | push: series_posts_raw[idx] %}
+  {% endfor %}
+
+  {% assign heading_label = site.data.locales[current_lang].panel.series | default: 'This series' %}
+
+  <section id="post-series-wrapper" class="ps-0 pe-4 pb-4">
+    <h2 class="panel-heading ps-3 pb-2 mb-1">{{ heading_label }}</h2>
+    <p class="series-name ps-3 mb-3">{{ page.series }}</p>
+    <ol class="series-list list-unstyled ps-3 mb-0">
+      {% for sp in series_posts %}
+        {% assign is_current = false %}
+        {% if sp.url == page.url %}{% assign is_current = true %}{% endif %}
+
+        {% assign is_future = false %}
+        {% if sp.date > site.time %}{% assign is_future = true %}{% endif %}
+
+        <li class="series-item{% if is_current %} series-current{% endif %}{% if is_future %} series-future{% endif %}" data-url="{{ sp.url }}">
+          <span class="series-order-badge">{{ sp.series_order }}</span>
+          {% if is_current %}
+            <span class="series-title series-title-current">
+              <i class="fa-solid fa-caret-right series-arrow" aria-hidden="true"></i>{{ sp.title }}
+            </span>
+          {% else %}
+            <a href="{{ sp.url | relative_url }}" class="series-title-link">{{ sp.title }}</a>
+            {% if is_future %}
+              <span class="series-future-date">~{{ sp.date | date: "%b" }}</span>
+            {% endif %}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  <script>
+  (function () {
+    var KEY = 'hc_read_posts';
+    var cur = '{{ page.url }}';
+    var read;
+    try { read = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { read = []; }
+    if (read.indexOf(cur) === -1) {
+      read.push(cur);
+      try { localStorage.setItem(KEY, JSON.stringify(read)); } catch (e) {}
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.series-item[data-url]').forEach(function (li) {
+        if (read.indexOf(li.dataset.url) !== -1 && !li.classList.contains('series-current')) {
+          li.classList.add('series-read');
+        }
+      });
+    });
+  })();
+  </script>
+{% endif %}
