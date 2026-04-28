@@ -3,13 +3,14 @@ layout: post
 title: "Vetores, distância e busca semântica em Go"
 subtitle: "Como transformar palavras em números, medir similaridade com cosseno e construir um motor de busca semântica do zero"
 author: otavio_celestino
-# date: 2026-05-28 08:00:00 -0300
-date: 2026-04-27 08:00:00 -0300
+date: 2026-05-28 08:00:00 -0300
 categories: [Go, IA, LLM]
 tags: [go, golang, llm, word2vec, embeddings, cosine-similarity, semantic-search, nlp]
 comments: true
 image: "/assets/img/posts/2026-05-28-llm-do-zero-vetores-busca-semantica.png"
 lang: pt-BR
+series: "LLM do Zero em Go"
+series_order: 2
 ---
 
 E aí, pessoal!

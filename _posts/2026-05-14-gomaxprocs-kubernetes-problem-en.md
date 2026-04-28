@@ -3,8 +3,7 @@ layout: post
 title: "GOMAXPROCS and Kubernetes: The Problem Everyone Had and Nobody Knew About"
 subtitle: "How the Go runtime created dozens of unnecessary threads in CPU-limited pods, what it caused in practice, and what changed in Go 1.25"
 author: otavio_celestino
-# date: 2026-05-14 08:00:00 -0300
-date: 2026-04-27 08:00:00 -0300
+date: 2026-05-14 08:00:00 -0300
 categories: [Go, Kubernetes, Performance]
 tags: [go, golang, kubernetes, gomaxprocs, cgroups, performance, cpu-throttling, k8s]
 comments: true

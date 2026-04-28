@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Go Survey 2025: Gin ainda domina, mas o que os devs realmente usam no dia a dia"
+title: "Go Survey 2025: Gin ainda domina e mais dados sobre o uso da linguagem"
 subtitle: "O que os dados oficiais do Go Developer Survey e a análise do JetBrains revelam sobre frameworks, logs, erros e o estado real do ecossistema em 2026"
 author: otavio_celestino
-date: 2026-04-30 08:00:00 -0300
+date: 2026-04-28 08:00:00 -0300
 categories: [Go, Comunidade, Ecossistema]
 tags: [go, golang, survey, gin, slog, zap, generics, ecosystem, frameworks]
 comments: true
-image: "/assets/img/posts/2026-04-30-go-survey-2025-gin-domina.png"
+image: "/assets/img/posts/2026-04-28-go-survey-2025-gin-dominates.png"
 lang: pt-BR
 ---
 
@@ -15,15 +15,15 @@ E aí, pessoal!
 
 Em janeiro de 2026, o Go Developer Survey 2025 foi publicado oficialmente no blog do Go. Em novembro de 2025, o JetBrains publicou sua análise anual do ecossistema Go com base nos dados de uso do GoLand. Os dois chegaram num intervalo de meses e, juntos, formam a foto mais completa que já tivemos do que os desenvolvedores Go estão de fato usando no dia a dia.
 
-A resposta curta: Gin ainda lidera com folga, slog virou o padrão de logging, generics explodiram em adoção, e tratamento de erros continua sendo a principal reclamação da comunidade. Mas tem muito detalhe relevante por trás de cada um desses pontos.
+Gin ainda lidera com folga, slog virou o padrão de logging, generics explodiram em adoção, e tratamento de erros continua sendo a principal reclamação da comunidade.
 
 Vou passar pelo que os dados mostram, seção por seção.
 
 ---
 
-## Frameworks web: Gin com 48%, mas o cenário mudou
+## Frameworks web: Gin com 48%
 
-O Gin mantém a liderança com 48% de adoção entre os respondentes do survey, subindo de 41% em 2020. Isso é crescimento consistente ao longo de cinco anos, não estagnação.
+O Gin mantém a liderança com 48% de adoção entre os respondentes do survey, subindo de 41% em 2020.
 
 | Framework | Adoção 2025 | Tendência |
 |---|---|---|
@@ -34,7 +34,7 @@ O Gin mantém a liderança com 48% de adoção entre os respondentes do survey, 
 | Chi | ~8% | Estavel |
 | Gorilla Mux | ~5% | Caindo |
 
-O que mudou desde 2020 não é a posição do Gin, mas o que está crescendo atrás dele. Fiber ganhou tração considerável entre desenvolvedores que vêm do Node.js e querem algo com a API do Express, mas compilado e rápido. Echo continua sendo a escolha de times que querem middleware robusto sem a pegada do Gin.
+O que mudou desde 2020 não é a posição do Gin, mas o que está crescendo atrás dele. Fiber ganhou tração  entre desenvolvedores que vêm do Node.js e querem algo com a API do Express, mas compilado e rápido. Echo continua sendo a escolha de times que querem middleware robusto sem o estilo do Gin.
 
 O dado mais relevante aqui é o crescimento do `net/http` puro com o novo `ServeMux` do Go 1.22. A partir do Go 1.22, o `ServeMux` passou a aceitar métodos HTTP diretamente na rota (`GET /users/{id}`) e parâmetros de path nomeados. Isso eliminou o principal argumento para usar um framework leve como o Chi. Parte da comunidade que antes pegava Chi por essa razão voltou para a stdlib.
 
@@ -71,7 +71,7 @@ O slog também tem uma vantagem estrutural: por ser stdlib, outras bibliotecas c
 
 O Go Developer Survey 2025 confirma o que os surveys anteriores já apontavam: tratamento de erros continua sendo a principal reclamação dos desenvolvedores Go, mesmo após a adição de generics em Go 1.18.
 
-O padrão `if err != nil` não some. A discussão na comunidade evoluiu de "quando vamos ter try/catch" para "como organizar melhor o código que já temos". Mas a insatisfação persiste.
+O padrão `if err != nil` não some. A discussão na comunidade evoluiu de "quando vamos ter try/catch" para "como organizar melhor o código que já temos".
 
 O que os dados mostram em detalhe:
 
@@ -83,13 +83,13 @@ A ironia é que generics, que era a feature mais pedida antes de chegar, não re
 
 Tem propostas em andamento na comunidade para endereçar isso de forma mais fundamental, mas o Go team tem sido conservador em mudar algo tão central à ergonomia da linguagem. A expectativa da comunidade é de que Go 1.26 ou 1.27 traga alguma melhoria concreta, mas nada está confirmado.
 
-Por enquanto, a prática mais adotada em times maduros é criar tipos de erro domínio-específicos com `errors.As`, wrapping consistente com `fmt.Errorf("%w", err)` e verificação centralizada no handler mais externo possível.
+Por enquanto, a prática mais adotada é criar tipos de erro específicos com `errors.As`, wrapping consistente com `fmt.Errorf("%w", err)` e verificação no handler mais externo possível.
 
 ---
 
 ## Generics: de 12% para 73% em três anos
 
-O salto mais impressionante dos dados de 2025: 73% dos projetos Go novos usam generics, comparado a 12% em 2022, logo após o lançamento em Go 1.18.
+O salto dos dados de 2025: 73% dos projetos Go novos usam generics, comparado a 12% em 2022, logo após o lançamento em Go 1.18.
 
 | Ano | Projetos novos com generics |
 |---|---|
@@ -97,8 +97,6 @@ O salto mais impressionante dos dados de 2025: 73% dos projetos Go novos usam ge
 | 2023 | 31% |
 | 2024 | 58% |
 | 2025 | 73% |
-
-O crescimento seguiu o padrão clássico de adoção de feature: hesitação inicial enquanto a comunidade aprende os limites, crescimento acelerado quando o ecossistema de bibliotecas começa a usar, e consolidação quando se torna o padrão para novos projetos.
 
 Os casos de uso onde generics mais apareceram nos projetos analisados pelo JetBrains:
 
@@ -109,7 +107,7 @@ Os casos de uso onde generics mais apareceram nos projetos analisados pelo JetBr
 
 O que os dados também mostram é que generics com constraints complexos ainda causam confusão. A maioria dos usos produtivos são relativamente simples: `[T any]` ou `[T comparable]`. Quando o código começa a ter constraints aninhadas e type parameters em tipo parameters, a legibilidade cai e alguns times estão recuando para código mais explícito.
 
-O consenso emergente: generics valem muito para bibliotecas e utilitários compartilhados. Para código de negócio específico, a explicitidade de Go sem generics muitas vezes fica mais legível.
+O consenso: generics valem muito para bibliotecas e utils compartilhados. Para código de negócio específico, a explicitidade de Go sem generics muitas vezes fica mais legível.
 
 ---
 
@@ -128,7 +126,7 @@ O survey 2025 confirma o que as edições anteriores já sugeriam: Go é uma lin
 
 Quase metade dos respondentes trabalha diretamente com infraestrutura. Go se tornou a linguagem de fato para escrever controllers Kubernetes, operadores, agentes de monitoramento, daemons de sistema e ferramentas de plataforma.
 
-Isso tem implicações para como os dados de popularidade geral devem ser lidos. Go não compete com Python no espaço de scripts e automação, nem com JavaScript no frontend. Compete com Rust e C++ em sistemas, e com Java/Kotlin em backend de serviços. Nesses espaços específicos, o Go está muito bem posicionado.
+Isso tem implicações para como os dados de popularidade geral devem ser lidos. Go não compete com Python no espaço de scripts e automação, nem com JavaScript no frontend. Compete com Rust e C++ em sistemas, e com Java/Kotlin em backend de serviços.
 
 O dado de banco de dados também é relevante:
 
@@ -146,7 +144,7 @@ O `database/sql` ainda é maioria, mas o `sqlc` está crescendo consistentemente
 
 ## O que tirar de tudo isso
 
-Os dois surveys juntos pintam um retrato consistente: Go cresceu, se especializou e está estável em seu nicho de infraestrutura e backend de alta performance.
+Os dois surveys juntos pintam um retrato consistente: Go cresceu e está estável em seu nicho de infraestrutura e backend de alta performance.
 
 Gin domina porque funciona bem e tem o ecossistema mais maduro para APIs. Isso vai continuar enquanto a stdlib não fechar completamente a lacuna de ergonomia, o que o Go 1.22 começou mas não terminou.
 
@@ -160,8 +158,8 @@ Tratamento de erros vai continuar sendo atrito. Não existe solução elegante a
 
 ## Referências
 
-- [Go Developer Survey 2025 Results](https://go.dev/blog/survey2025-h2-results) - go.dev/blog, publicado em 21 de janeiro de 2026
-- [JetBrains Go Ecosystem Analysis 2025](https://blog.jetbrains.com/go/2025/11/10/go-ecosystem-analysis-2025/) - blog.jetbrains.com, publicado em 10 de novembro de 2025
+- [Go Developer Survey 2025 Results](https://go.dev/blog/survey2025) - go.dev/blog, publicado em 21 de janeiro de 2026
+- [JetBrains Go Ecosystem Analysis 2025](https://blog.jetbrains.com/go/2025/11/10/go-language-trends-ecosystem-2025/) - blog.jetbrains.com, publicado em 10 de novembro de 2025
 - [Go 1.25 Release Notes](https://go.dev/doc/go1.25) - go.dev
 - [Go 1.22 Release Notes - ServeMux enhancements](https://go.dev/doc/go1.22) - go.dev
 - [slog package documentation](https://pkg.go.dev/log/slog) - pkg.go.dev

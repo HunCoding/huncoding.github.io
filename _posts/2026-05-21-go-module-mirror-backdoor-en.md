@@ -3,8 +3,7 @@ layout: post
 title: "The Backdoor Hidden in the Go Module Mirror for 3 Years"
 subtitle: "How a malicious package impersonated BoltDB on the official Go proxy for three years, what this exposes about module ecosystem security, and how to protect yourself"
 author: otavio_celestino
-# date: 2026-05-21 08:00:00 -0300
-date: 2026-04-27 08:00:00 -0300
+date: 2026-05-21 08:00:00 -0300
 categories: [Go, Security, Supply Chain]
 tags: [go, golang, security, modules, supply-chain, govulncheck, boltdb, proxy]
 comments: true

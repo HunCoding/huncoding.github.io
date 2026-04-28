@@ -3,13 +3,14 @@ layout: post
 title: "Atenção e o mini LLM gerando texto"
 subtitle: "Implementando multi-head causal self-attention, o transformer completo e treinando nosso mini GPT em Go"
 author: otavio_celestino
-# date: 2026-07-16 08:00:00 -0300
-date: 2026-04-27 08:00:00 -0300
+date: 2026-07-16 08:00:00 -0300
 categories: [Go, IA, LLM]
 tags: [go, golang, llm, attention, transformer, gpt, text-generation, self-attention]
 comments: true
 image: "/assets/img/posts/2026-07-16-llm-do-zero-atencao-mini-llm.png"
 lang: pt-BR
+series: "LLM do Zero em Go"
+series_order: 5
 ---
 
 E aí, pessoal!

@@ -3,13 +3,14 @@ layout: post
 title: "Construindo um neurônio e nossa primeira rede neural em Go"
 subtitle: "De uma função linear com peso e bias até uma rede multicamada com GELU e backpropagation"
 author: otavio_celestino
-# date: 2026-06-25 08:00:00 -0300
-date: 2026-04-27 08:00:00 -0300
+date: 2026-06-25 08:00:00 -0300
 categories: [Go, IA, LLM]
 tags: [go, golang, llm, neural-network, backpropagation, gelu, feedforward, gradiente]
 comments: true
 image: "/assets/img/posts/2026-06-25-llm-do-zero-construindo-rede-neural.png"
 lang: pt-BR
+series: "LLM do Zero em Go"
+series_order: 4
 ---
 
 E aí, pessoal!

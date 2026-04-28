@@ -49,6 +49,14 @@ paginate: false
 
         <div class="col-md-{{ card_body_col }}">
           <div class="card-body d-flex flex-column">
+            {% if post.series %}
+              {% assign part_label = site.data.locales[lang].post.series_part | default: 'Aula' %}
+              <div class="post-series-badge mt-2 mb-1">
+                <span class="post-series-badge-pill">
+                  <i class="fas fa-graduation-cap me-1" aria-hidden="true"></i>{{ part_label }} {{ post.series_order }} &middot; {{ post.series }}
+                </span>
+              </div>
+            {% endif %}
             <h1 class="card-title my-2 mt-md-0">{{ post.title }}</h1>
 
             <div class="card-text content mt-0 mb-3">

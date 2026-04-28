@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Go Survey 2025: Gin Still Leads, but What Are Devs Really Using Day to Day"
+title: "Go Survey 2025: Gin Still Leads and more data about the language use"
 subtitle: "What the official Go Developer Survey and JetBrains analysis reveal about frameworks, logging, errors and the real state of the ecosystem in 2026"
 author: otavio_celestino
-date: 2026-04-30 08:00:00 -0300
+date: 2026-04-28 08:00:00 -0300
 categories: [Go, Community, Ecosystem]
 tags: [go, golang, survey, gin, slog, zap, generics, ecosystem, frameworks]
 comments: true
-image: "/assets/img/posts/2026-04-30-go-survey-2025-gin-dominates-en.png"
+image: "/assets/img/posts/2026-04-28-go-survey-2025-gin-dominates.png"
 lang: en
 original_post: "/go-survey-2025-gin-domina/"
 ---
@@ -167,8 +167,8 @@ Multi-module repos also showed up as a growing trend in the survey: larger teams
 
 ## References
 
-- [Go Developer Survey 2025 Results](https://go.dev/blog/survey2025-h2-results) - go.dev/blog, published January 21, 2026
-- [JetBrains Go Ecosystem Analysis 2025](https://blog.jetbrains.com/go/2025/11/10/go-ecosystem-analysis-2025/) - blog.jetbrains.com, published November 10, 2025
+- [Go Developer Survey 2025 Results](https://go.dev/blog/survey2025) - go.dev/blog, published January 21, 2026
+- [JetBrains Go Ecosystem Analysis 2025](https://blog.jetbrains.com/go/2025/11/10/go-language-trends-ecosystem-2025/) - blog.jetbrains.com, published November 10, 2025
 - [Go 1.25 Release Notes](https://go.dev/doc/go1.25) - go.dev
 - [Go 1.22 Release Notes - ServeMux enhancements](https://go.dev/doc/go1.22) - go.dev
 - [slog package documentation](https://pkg.go.dev/log/slog) - pkg.go.dev

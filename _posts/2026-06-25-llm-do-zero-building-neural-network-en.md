@@ -3,14 +3,15 @@ layout: post
 title: "Building a neuron and our first neural network in Go"
 subtitle: "From a linear function with weight and bias to a multi-layer network with GELU and backpropagation"
 author: otavio_celestino
-# date: 2026-06-25 08:00:00 -0300
-date: 2026-04-27 08:00:00 -0300
+date: 2026-06-25 08:00:00 -0300
 categories: [Go, AI, LLM]
 tags: [go, golang, llm, neural-network, backpropagation, gelu, feedforward, gradient]
 comments: true
 image: "/assets/img/posts/2026-06-25-llm-do-zero-construindo-rede-neural.png"
 lang: en
 original_post: "/llm-do-zero-construindo-rede-neural/"
+series: "LLM from Scratch in Go"
+series_order: 4
 ---
 
 Hey everyone!
