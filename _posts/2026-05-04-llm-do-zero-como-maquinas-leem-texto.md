@@ -7,7 +7,7 @@ date: 2026-05-04 08:00:00 -0300
 categories: [Go, IA, LLM, Machine Learning]
 tags: [go, golang, llm, tokenizer, bpe, encoding, utf-8, ia, machine-learning]
 comments: true
-image: "/assets/img/posts/2026-05-07-llm-do-zero-como-maquinas-leem-texto.png"
+image: "/assets/img/posts/2026-05-04-llm-from-scratch-how-machines-read-text.png"
 lang: pt-BR
 series: "LLM do Zero em Go"
 series_order: 1
