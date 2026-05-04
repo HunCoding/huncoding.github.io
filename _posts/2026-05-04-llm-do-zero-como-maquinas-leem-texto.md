@@ -3,7 +3,7 @@ layout: post
 title: "LLM do Zero em Go: como máquinas leem texto"
 subtitle: "Da representação de bytes ao BPE: construindo um tokenizador do zero em Go sem nenhuma biblioteca externa de ML"
 author: otavio_celestino
-date: 2026-05-07 08:00:00 -0300
+date: 2026-05-04 08:00:00 -0300
 categories: [Go, IA, LLM, Machine Learning]
 tags: [go, golang, llm, tokenizer, bpe, encoding, utf-8, ia, machine-learning]
 comments: true
@@ -16,6 +16,8 @@ youtube_videos:
     title: "Vídeo 01 - O que é um LLM"
   - id: "XzYV67ozBWg"
     title: "Vídeo 02 - Como o computador lê texto"
+  - id: "HMwEnFpHqV0"
+    title: "Vídeo 03 - Implementing a simple tokenizer"
 ---
 
 E aí, pessoal!
