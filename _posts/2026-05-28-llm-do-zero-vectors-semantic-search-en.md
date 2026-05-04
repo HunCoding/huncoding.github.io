@@ -7,7 +7,7 @@ date: 2026-05-28 08:00:00 -0300
 categories: [Go, AI, LLM]
 tags: [go, golang, llm, word2vec, embeddings, cosine-similarity, semantic-search, nlp]
 comments: true
-image: "/assets/img/posts/2026-05-28-llm-do-zero-vetores-busca-semantica.png"
+image: "/assets/img/posts/2026-05-28-llm-do-zero-vectors-semantic-search.png"
 lang: en
 original_post: "/llm-do-zero-vetores-busca-semantica/"
 series: "LLM from Scratch in Go"

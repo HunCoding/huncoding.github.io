@@ -7,7 +7,7 @@ date: 2026-06-11 08:00:00 -0300
 categories: [Go, IA, LLM]
 tags: [go, golang, llm, markov, nlp, text-generation, probabilidade]
 comments: true
-image: "/assets/img/posts/2026-06-11-llm-do-zero-cadeia-de-markov.png"
+image: "/assets/img/posts/2026-06-11-llm-do-zero-markov-chain.png"
 lang: pt-BR
 series: "LLM do Zero em Go"
 series_order: 3

@@ -7,7 +7,7 @@ date: 2026-06-25 08:00:00 -0300
 categories: [Go, IA, LLM]
 tags: [go, golang, llm, neural-network, backpropagation, gelu, feedforward, gradiente]
 comments: true
-image: "/assets/img/posts/2026-06-25-llm-do-zero-construindo-rede-neural.png"
+image: "/assets/img/posts/2026-06-25-llm-do-zero-building-neural-network.png"
 lang: pt-BR
 series: "LLM do Zero em Go"
 series_order: 4
