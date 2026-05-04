@@ -22,29 +22,29 @@ youtube_videos:
 
 E aí, pessoal!
 
-Esta e a primeira parte de uma serie chamada **LLM do Zero em Go**. A proposta e simples: construir um modelo de linguagem do zero, em Go, sem nenhuma biblioteca externa de machine learning. Nada de PyTorch, nada de HuggingFace, nada de wrappers prontos. So Go puro.
+Esta é a primeira parte de uma série chamada **LLM do Zero em Go**. A proposta é simples: construir um modelo de linguagem do zero, em Go, sem nenhuma biblioteca externa de machine learning. Nada de PyTorch, nada de HuggingFace, nada de wrappers prontos. Só Go puro.
 
-A serie acompanha os videos do canal que cobrem: o que e um LLM, como o computador representa texto, como implementar um tokenizador simples, e como implementar o BPE (Byte Pair Encoding). Este post cobre os videos 01 ao 04.
+A série acompanha os vídeos do canal que cobrem: o que é um LLM, como o computador representa texto, como implementar um tokenizador simples, e como implementar o BPE (Byte Pair Encoding). Este post cobre os vídeos 01 ao 04.
 
-Hoje o foco e o problema que ninguem explica direito antes de jogar voce no meio das redes neurais: como um computador le texto, e por que isso importa tanto pra construir um LLM.
+Hoje o foco é o problema que ninguém explica direito antes de jogar você no meio das redes neurais: como um computador lê texto, e por que isso importa tanto pra construir um LLM.
 
 ---
 
-## O que e um LLM de verdade
+## O que é um LLM de verdade
 
-Antes de qualquer codigo, vale ter um modelo mental claro do que e um Large Language Model.
+Antes de qualquer código, vale ter um modelo mental claro do que é um Large Language Model.
 
-Um LLM nao e um banco de dados de respostas. Nao e uma busca. E um modelo matematico que, dado um contexto de tokens anteriores, calcula a probabilidade de cada token possivel ser o proximo.
+Um LLM não é um banco de dados de respostas. Não é uma busca. É um modelo matemático que, dado um contexto de tokens anteriores, calcula a probabilidade de cada token possível ser o próximo.
 
-Isso e tudo. A operacao central e:
+Isso é tudo. A operação central é:
 
 ```
-P(proximo_token | tokens_anteriores)
+P(próximo_token | tokens_anteriores)
 ```
 
-Internamente, essa operacao acontece atraves de matrizes de numeros de ponto flutuante. O texto de entrada e convertido em vetores numericos, esses vetores passam por camadas de transformacoes (multiplicacoes de matrizes, funcoes de ativacao, atencao), e na saida temos uma distribuicao de probabilidade sobre o vocabulario.
+Internamente, essa operação acontece através de matrizes de números de ponto flutuante. O texto de entrada é convertido em vetores numéricos, esses vetores passam por camadas de transformações (multiplicações de matrizes, funções de ativação, atenção), e na saída temos uma distribuição de probabilidade sobre o vocabulário.
 
-A geracao de texto e **autoregressiva**: o modelo gera um token, esse token entra de volta como contexto, o modelo gera o proximo, e assim por diante.
+A geração de texto é **autoregressiva**: o modelo gera um token, esse token entra de volta como contexto, o modelo gera o próximo, e assim por diante.
 
 ```
 Entrada: "O gato"
@@ -52,33 +52,33 @@ Modelo calcula: P("subiu" | "O gato") = 0.31
                 P("dormiu" | "O gato") = 0.28
                 P("comeu"  | "O gato") = 0.19
                 ...
-Saida escolhida: "subiu"
+Saída escolhida: "subiu"
 
 Nova entrada: "O gato subiu"
 Modelo calcula: P("no" | "O gato subiu") = 0.45
 ...
 ```
 
-Para que tudo isso funcione, o texto precisa virar numeros. E e ai que entra a tokenizacao.
+Para que tudo isso funcione, o texto precisa virar números. É aí que entra a tokenização.
 
 ---
 
-## Como o computador ve texto
+## Como o computador vê texto
 
-Antes de falar em tokens, precisa entender como o computador representa texto no nivel mais baixo.
+Antes de falar em tokens, precisa entender como o computador representa texto no nível mais baixo.
 
 ### Bits e bytes
 
-Um computador so entende bits: 0 ou 1. Agrupamos 8 bits em um byte. Um byte pode representar 256 valores distintos (0 a 255).
+Um computador só entende bits: 0 ou 1. Agrupamos 8 bits em um byte. Um byte pode representar 256 valores distintos (0 a 255).
 
-Um caractere, portanto, precisa ser mapeado para um ou mais bytes. Como fazemos esse mapeamento e o problema do **encoding**.
+Um caractere, portanto, precisa ser mapeado para um ou mais bytes. Como fazemos esse mapeamento é o problema do **encoding**.
 
-### ASCII: o comeco
+### ASCII: o começo
 
-O ASCII (American Standard Code for Information Interchange) foi criado nos anos 60. Ele define 128 caracteres usando 7 bits. Os primeiros 32 sao caracteres de controle (newline, tab, etc). Os demais sao letras do alfabeto ingles, digitos e pontuacao.
+O ASCII (American Standard Code for Information Interchange) foi criado nos anos 60. Ele define 128 caracteres usando 7 bits. Os primeiros 32 são caracteres de controle (newline, tab, etc). Os demais são letras do alfabeto inglês, dígitos e pontuação.
 
 ```
-Caractere | Decimal | Binario
+Caractere | Decimal | Binário
 ----------+---------+---------
 'A'       |   65    | 01000001
 'B'       |   66    | 01000010
@@ -87,22 +87,22 @@ Caractere | Decimal | Binario
 ' '       |   32    | 00100000
 ```
 
-Isso funciona bem para ingles. Mas e o 'a' com acento? O 'c' cedilha? O ASCII nao tem esses caracteres.
+Isso funciona bem para inglês. Mas e o 'ã' com acento? O 'ç' cedilha? O ASCII não tem esses caracteres.
 
 ### Latin-1 e o caos de encodings
 
 Surgiram dezenas de encodings diferentes para cobrir outros idiomas. Latin-1 (ISO-8859-1) usa o byte completo (256 valores) e adiciona caracteres europeus ocidentais nos valores de 128 a 255. Windows criou o CP-1252. Outros sistemas criaram outros esquemas.
 
-O resultado: o mesmo byte podia significar caracteres diferentes dependendo do encoding que voce assumia. Abrir um arquivo de texto com o encoding errado gerava aquelas sequencias de caracteres ilegíveis que todo desenvolvedor ja viu.
+O resultado: o mesmo byte podia significar caracteres diferentes dependendo do encoding que você assumia. Abrir um arquivo de texto com o encoding errado gerava aquelas sequências de caracteres ilegíveis que todo desenvolvedor já viu.
 
 ### UTF-8: o encoding que ganhou
 
-O UTF-8 resolveu o problema de forma elegante. Ele pode representar qualquer caractere Unicode (mais de 1,1 milhao de caracteres), e faz isso com tamanho variavel: de 1 a 4 bytes por caractere.
+O UTF-8 resolveu o problema de forma elegante. Ele pode representar qualquer caractere Unicode (mais de 1,1 milhão de caracteres), e faz isso com tamanho variável: de 1 a 4 bytes por caractere.
 
-A regra de codificacao:
+A regra de codificação:
 
 ```
-Unicode range       | Bytes | Formato binario
+Unicode range       | Bytes | Formato binário
 --------------------+-------+------------------------------------------
 U+0000 - U+007F    |   1   | 0xxxxxxx
 U+0080 - U+07FF    |   2   | 110xxxxx 10xxxxxx
@@ -110,16 +110,16 @@ U+0800 - U+FFFF    |   3   | 1110xxxx 10xxxxxx 10xxxxxx
 U+10000 - U+10FFFF |   4   | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
 ```
 
-Os caracteres ASCII (0-127) sao representados com exatamente 1 byte, e esse byte e identico ao ASCII original. Isso garante compatibilidade retroativa.
+Os caracteres ASCII (0-127) são representados com exatamente 1 byte, e esse byte é idêntico ao ASCII original. Isso garante compatibilidade retroativa.
 
-Um exemplo pratico com a letra 'a' e o 'a' com acento:
+Um exemplo prático com a letra 'a' e o 'ã' com acento:
 
 ```
 'a'  -> U+0061 -> 1 byte:  0x61         (97 em decimal)
-'a'  -> U+00E3 -> 2 bytes: 0xC3 0xA3    (195, 163 em decimal)
+'ã'  -> U+00E3 -> 2 bytes: 0xC3 0xA3    (195, 163 em decimal)
 ```
 
-Ja a letra chinesa '中':
+Já a letra chinesa '中':
 
 ```
 '中' -> U+4E2D -> 3 bytes: 0xE4 0xB8 0xAD
@@ -127,13 +127,13 @@ Ja a letra chinesa '中':
 
 ---
 
-## Go e strings: o que voce precisa saber
+## Go e strings: o que você precisa saber
 
-Go tem uma relacao especifica com texto que pega muita gente de surpresa.
+Go tem uma relação específica com texto que pega muita gente de surpresa.
 
-**Em Go, uma string e uma sequencia de bytes imutavel.** Nao e uma sequencia de caracteres. Bytes.
+**Em Go, uma string é uma sequência de bytes imutável.** Não é uma sequência de caracteres. Bytes.
 
-Isso tem consequencias diretas:
+Isso tem consequências diretas:
 
 ```go
 package main
@@ -141,40 +141,40 @@ package main
 import "fmt"
 
 func main() {
-    s := "Ola"
+    s := "Olá"
 
-    // len() conta bytes, nao caracteres
+    // len() conta bytes, não caracteres
     fmt.Println(len("hello"))  // 5
-    fmt.Println(len("Ola"))    // 5 (o 'a' com acento usa 2 bytes)
+    fmt.Println(len("Olá"))    // 5 (o 'á' com acento usa 2 bytes)
 
-    // indexacao acessa bytes
+    // indexação acessa bytes
     fmt.Printf("%x\n", s[0])  // 4f ('O')
-    fmt.Printf("%x\n", s[2])  // c3 (primeiro byte do 'a')
-    fmt.Printf("%x\n", s[3])  // a3 (segundo byte do 'a'))
+    fmt.Printf("%x\n", s[2])  // c3 (primeiro byte do 'á')
+    fmt.Printf("%x\n", s[3])  // a1 (segundo byte do 'á'))
 
     // range itera sobre runes (codepoints Unicode)
     for i, r := range s {
-        fmt.Printf("indice %d: %c (U+%04X)\n", i, r, r)
+        fmt.Printf("índice %d: %c (U+%04X)\n", i, r, r)
     }
 }
 ```
 
-Saida:
+Saída:
 
 ```
 5
 5
 4f
 c3
-a3
-indice 0: O (U+004F)
-indice 2: l (U+006C)
-indice 3: a (U+00E3)
+a1
+índice 0: O (U+004F)
+índice 2: l (U+006C)
+índice 3: á (U+00E1)
 ```
 
-Repare: o range pula do indice 2 para o 3. O indice 2 e 'l', que ocupa 1 byte. O indice 3 e 'a', que ocupa 2 bytes. Por isso o proximo seria indice 5.
+Repare: o range pula do índice 2 para o 3. O índice 2 é 'l', que ocupa 1 byte. O índice 3 é 'á', que ocupa 2 bytes. Por isso o próximo seria índice 5.
 
-O tipo `rune` em Go e um alias para `int32`, e representa um codepoint Unicode. Quando voce precisa trabalhar com caracteres (nao bytes), voce usa rune.
+O tipo `rune` em Go é um alias para `int32`, e representa um codepoint Unicode. Quando você precisa trabalhar com caracteres (não bytes), você usa rune.
 
 ```go
 package main
@@ -185,7 +185,7 @@ import (
 )
 
 func main() {
-    s := "Ola, 世界"
+    s := "Olá, 世界"
 
     fmt.Println("Bytes:", len(s))
     fmt.Println("Runes:", utf8.RuneCountInString(s))
@@ -196,29 +196,29 @@ func main() {
 }
 ```
 
-Saida:
+Saída:
 
 ```
 Bytes: 13
 Runes: 8
-Terceiro caractere: a
+Terceiro caractere: á
 ```
 
-Essa diferenca entre bytes e runes e fundamental quando construimos um tokenizador. Dependendo de como voce itera a string, voce obtem resultados completamente diferentes.
+Essa diferença entre bytes e runes é fundamental quando construímos um tokenizador. Dependendo de como você itera a string, você obtém resultados completamente diferentes.
 
 ---
 
 ## Por que precisamos de tokens
 
-Um LLM opera sobre numeros. Matrizes de floats, multiplicacoes lineares, funcoes de ativacao. Texto puro nao entra diretamente nesses calculos.
+Um LLM opera sobre números. Matrizes de floats, multiplicações lineares, funções de ativação. Texto puro não entra diretamente nesses cálculos.
 
-Precisamos de uma funcao que converta texto em sequencias de inteiros, e outra que converta de volta. Esse processo e a tokenizacao.
+Precisamos de uma função que converta texto em sequências de inteiros, e outra que converta de volta. Esse processo é a tokenização.
 
-O conceito central e o **vocabulario**: um conjunto fixo de tokens, cada um com um ID numerico unico. Durante o treinamento, o modelo aprende um vetor de representacao (embedding) para cada ID no vocabulario. Durante a inferencia, o texto de entrada e convertido em IDs, os IDs viram vetores, e os calculos acontecem nesses vetores.
+O conceito central é o **vocabulário**: um conjunto fixo de tokens, cada um com um ID numérico único. Durante o treinamento, o modelo aprende um vetor de representação (embedding) para cada ID no vocabulário. Durante a inferência, o texto de entrada é convertido em IDs, os IDs viram vetores, e os cálculos acontecem nesses vetores.
 
-A escolha de como definir o vocabulario e o que diferencia as estrategias de tokenizacao. E esse choice tem impacto direto no tamanho do modelo, na qualidade do treinamento e na capacidade de lidar com palavras novas.
+A escolha de como definir o vocabulário é o que diferencia as estratégias de tokenização. E essa escolha tem impacto direto no tamanho do modelo, na qualidade do treinamento e na capacidade de lidar com palavras novas.
 
-Vamos implementar a interface que todos os nossos tokenizadores vao seguir:
+Vamos implementar a interface que todos os nossos tokenizadores vão seguir:
 
 ```go
 type Tokenizer interface {
@@ -229,13 +229,13 @@ type Tokenizer interface {
 }
 ```
 
-`Train` constroi o vocabulario a partir de um corpus. `Encode` converte texto em IDs. `Decode` converte IDs de volta em texto. `VocabSize` retorna quantos tokens existem no vocabulario.
+`Train` constrói o vocabulário a partir de um corpus. `Encode` converte texto em IDs. `Decode` converte IDs de volta em texto. `VocabSize` retorna quantos tokens existem no vocabulário.
 
 ---
 
 ## Tokenizador simples por palavras
 
-A abordagem mais intuitiva: cada palavra e um token.
+A abordagem mais intuitiva: cada palavra é um token.
 
 ```go
 package tokenizer
@@ -322,7 +322,7 @@ import (
 
 func main() {
     corpus := `o gato subiu no telhado o gato desceu o cachorro latiu
-               o gato correu o cachorro tambem correu o gato ganhou`
+               o gato correu o cachorro também correu o gato ganhou`
 
     tok := &tokenizer.WordTokenizer{}
     tok.Train(corpus, 10)
@@ -337,7 +337,7 @@ func main() {
 }
 ```
 
-Saida:
+Saída:
 
 ```
 IDs: [0 1 5]
@@ -348,26 +348,26 @@ Decode: o <unk> <unk>
 
 ### O problema do OOV
 
-"pato" e "voou" nao estavam no corpus de treinamento. Eles sao tokens **OOV** (Out Of Vocabulary). O tokenizador por palavras nao sabe o que fazer com eles, entao retorna -1.
+"pato" e "voou" não estavam no corpus de treinamento. Eles são tokens **OOV** (Out Of Vocabulary). O tokenizador por palavras não sabe o que fazer com eles, então retorna -1.
 
-Isso e um problema serio. Nomes proprios, termos tecnicos, palavras em outros idiomas, erros de digitacao: tudo isso vai virar `<unk>`. O modelo perde informacao sobre o que estava no texto.
+Isso é um problema sério. Nomes próprios, termos técnicos, palavras em outros idiomas, erros de digitação: tudo isso vai virar `<unk>`. O modelo perde informação sobre o que estava no texto.
 
-Alem disso, o vocabulario de palavras cresce muito rapido. O portugues tem centenas de milhares de palavras. Um vocabulario grande significa uma camada de embedding enorme, o que aumenta o custo computacional e dificulta o treinamento.
+Além disso, o vocabulário de palavras cresce muito rápido. O português tem centenas de milhares de palavras. Um vocabulário grande significa uma camada de embedding enorme, o que aumenta o custo computacional e dificulta o treinamento.
 
 ---
 
 ## BPE: Byte Pair Encoding
 
-O BPE resolve o problema do OOV de forma esperta. Em vez de trabalhar no nivel de palavras, ele começa no nivel de bytes (ou caracteres) e aprende progressivamente quais sequencias merecem virar tokens proprios.
+O BPE resolve o problema do OOV de forma esperta. Em vez de trabalhar no nível de palavras, ele começa no nível de bytes (ou caracteres) e aprende progressivamente quais sequências merecem virar tokens próprios.
 
 ### A ideia central
 
 1. Comece com cada byte como um token individual. Isso garante que qualquer texto pode ser representado.
 2. Conte os pares de tokens adjacentes mais frequentes no corpus.
 3. Mescle o par mais frequente em um novo token.
-4. Repita ate atingir o tamanho de vocabulario desejado.
+4. Repita até atingir o tamanho de vocabulário desejado.
 
-### Implementacao do nucleo do BPE
+### Implementação do núcleo do BPE
 
 ```go
 package tokenizer
@@ -381,12 +381,12 @@ func (b *BPE) Train(corpus string, vocabSize int) {
     b.vocab = make(map[string]int)
     b.merges = nil
 
-    // Vocabulario base: todos os bytes unicos
+    // Vocabulário base: todos os bytes únicos
     for i := 0; i < 256; i++ {
         b.vocab[string([]byte{byte(i)})] = i
     }
 
-    // Representar o corpus como sequencia de simbolos (um byte cada)
+    // Representar o corpus como sequência de símbolos (um byte cada)
     symbols := make([][]byte, 0, len(corpus))
     for _, r := range []byte(corpus) {
         symbols = append(symbols, []byte{r})
@@ -425,7 +425,7 @@ func (b *BPE) Train(corpus string, vocabSize int) {
                 string(symbols[i]) == best[0] &&
                 string(symbols[i+1]) == best[1] {
                 newSymbols = append(newSymbols, []byte(merged))
-                i++ // pula o proximo, ja foi incorporado
+                i++ // pula o próximo, já foi incorporado
             } else {
                 newSymbols = append(newSymbols, symbols[i])
             }
@@ -435,7 +435,7 @@ func (b *BPE) Train(corpus string, vocabSize int) {
 }
 
 func (b *BPE) Encode(text string) []int {
-    // Comecar com bytes individuais
+    // Começar com bytes individuais
     symbols := make([]string, 0, len(text))
     for _, bt := range []byte(text) {
         symbols = append(symbols, string([]byte{bt}))
@@ -499,19 +499,19 @@ import (
 func main() {
     corpus := `o gato subiu no telhado o gato desceu
                o cachorro latiu o gato correu o cachorro
-               tambem correu o gato ganhou o cachorro perdeu`
+               também correu o gato ganhou o cachorro perdeu`
 
     bpe := &tokenizer.BPE{}
     bpe.Train(corpus, 300)
 
-    fmt.Println("Vocabulario:", bpe.VocabSize(), "tokens")
+    fmt.Println("Vocabulário:", bpe.VocabSize(), "tokens")
 
     text := "o gato"
     ids := bpe.Encode(text)
     fmt.Printf("Encode(%q): %v\n", text, ids)
     fmt.Printf("Decode: %q\n", bpe.Decode(ids))
 
-    // Palavra que nao estava no corpus
+    // Palavra que não estava no corpus
     text2 := "pato"
     ids2 := bpe.Encode(text2)
     fmt.Printf("Encode(%q): %v\n", text2, ids2)
@@ -519,53 +519,53 @@ func main() {
 }
 ```
 
-Saida aproximada:
+Saída aproximada:
 
 ```
-Vocabulario: 300 tokens
+Vocabulário: 300 tokens
 Encode("o gato"): [111 32 103 257 111]
 Decode: "o gato"
 Encode("pato"): [112 257 111]
 Decode: "pato"
 ```
 
-Repare: "pato" nao estava no corpus, mas o BPE consegue codifica-la usando porcoes menores que ele conhece. Nao ha OOV. No pior caso, cada byte vira um token separado, mas a decodificacao continua funcionando e o texto original e recuperado perfeitamente.
+Repare: "pato" não estava no corpus, mas o BPE consegue codificá-la usando porções menores que ele conhece. Não há OOV. No pior caso, cada byte vira um token separado, mas a decodificação continua funcionando e o texto original é recuperado perfeitamente.
 
 ---
 
 ## Comparando as abordagens
 
-| Criterio                   | Tokenizador por palavras | BPE                      |
+| Critério                   | Tokenizador por palavras | BPE                      |
 |----------------------------|--------------------------|--------------------------|
-| Tamanho do vocabulario     | Muito grande             | Controlado (configuravel)|
+| Tamanho do vocabulário     | Muito grande             | Controlado (configurável)|
 | Palavras fora do vocab     | Vira `<unk>`             | Decomposta em subunidades|
-| Palavras compostas         | Um token                 | Pode ser varios tokens   |
-| Idiomas misturados         | Problematico             | Funciona bem             |
+| Palavras compostas         | Um token                 | Pode ser vários tokens   |
+| Idiomas misturados         | Problemático             | Funciona bem             |
 | Palavras raras             | Raramente treinadas      | Partes reutilizadas       |
-| Implementacao              | Simples                  | Mais complexo            |
-| Compressao do texto        | Alta (1 token/palavra)   | Media                    |
+| Implementação              | Simples                  | Mais complexo            |
+| Compressão do texto        | Alta (1 token/palavra)   | Média                    |
 
-O BPE e o algoritmo base do GPT-2 e GPT-3. O tokenizador do GPT-4 (chamado cl100k_base) usa uma variante chamada BBPE (Byte-level BPE) com algumas regras adicionais de pre-tokenizacao. O SentencePiece, usado pelo LLaMA e T5, implementa tanto BPE quanto unigram language model.
+O BPE é o algoritmo base do GPT-2 e GPT-3. O tokenizador do GPT-4 (chamado cl100k_base) usa uma variante chamada BBPE (Byte-level BPE) com algumas regras adicionais de pré-tokenização. O SentencePiece, usado pelo LLaMA e T5, implementa tanto BPE quanto unigram language model.
 
-Para a nossa serie, o BPE e a escolha certa. Vocabulario controlado, sem OOV, implementacao compreensivel, e compativel com o que os modelos modernos usam.
+Para a nossa série, o BPE é a escolha certa. Vocabulário controlado, sem OOV, implementação compreensível, e compatível com o que os modelos modernos usam.
 
 ---
 
-## O que construimos
+## O que construímos
 
-Neste post, partimos do nivel mais baixo possivel: bits, bytes, e como o UTF-8 organiza caracteres em bytes de tamanho variavel. Passamos pelas peculiaridades de strings em Go (len vs range, byte vs rune), entendemos por que tokenizacao e necessaria, implementamos um tokenizador por palavras e vimos seu problema fundamental, e implementamos o BPE do zero em Go.
+Neste post, partimos do nível mais baixo possível: bits, bytes, e como o UTF-8 organiza caracteres em bytes de tamanho variável. Passamos pelas peculiaridades de strings em Go (len vs range, byte vs rune), entendemos por que tokenização é necessária, implementamos um tokenizador por palavras e vimos seu problema fundamental, e implementamos o BPE do zero em Go.
 
-O codigo e direto. Sem abstraccoes desnecessarias, sem dependencias externas. Tudo em Go puro.
+O código é direto. Sem abstrações desnecessárias, sem dependências externas. Tudo em Go puro.
 
-No proximo post da serie, vamos transformar os IDs que o BPE gera em vetores de representacao densos: os **embeddings**. E ai que o modelo comeca a aprender o que os tokens significam em relacao uns aos outros.
+No próximo post da série, vamos transformar os IDs que o BPE gera em vetores de representação densos: os **embeddings**. É aí que o modelo começa a aprender o que os tokens significam em relação uns aos outros.
 
 ---
 
 ## Referências
 
-- [Unicode e UTF-8: especificacao oficial](https://www.unicode.org/faq/utf_bmp.html)
+- [Unicode e UTF-8: especificação oficial](https://www.unicode.org/faq/utf_bmp.html)
 - [BPE original: Sennrich et al. 2016](https://arxiv.org/abs/1508.07909)
-- [Documentacao de strings em Go](https://go.dev/blog/strings)
+- [Documentação de strings em Go](https://go.dev/blog/strings)
 - [unicode/utf8 package em Go](https://pkg.go.dev/unicode/utf8)
 - [GPT-2 tokenizer (tiktoken)](https://github.com/openai/tiktoken)
 - [SentencePiece: tokenizador do LLaMA](https://github.com/google/sentencepiece)
