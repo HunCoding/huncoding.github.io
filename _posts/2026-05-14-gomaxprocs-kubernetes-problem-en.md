@@ -70,7 +70,7 @@ resources:
 
 When your Go application starts in this pod, the runtime sees 64 CPUs available (the node's) and sets `GOMAXPROCS = 64`. Result: 64 OS threads trying to execute goroutines in parallel.
 
-Linux uses the CFS (Completely Fair Scheduler) to control CPU usage per container. When a container exceeds its CPU quota, CFS throttles it: it freezes the processes for a period of time so the quota is respected.
+Linux uses the [CFS (Completely Fair Scheduler)](https://en.wikipedia.org/wiki/Completely_Fair_Scheduler) to control CPU usage per container. When a container exceeds its CPU quota, CFS throttles it: it freezes the processes for a period of time so the quota is respected.
 
 With 64 threads trying to run simultaneously and only 2 cores of quota, the container gets throttled very frequently, even when average CPU usage is low.
 
