@@ -69,7 +69,7 @@ resources:
 
 Quando sua aplicação Go sobe nesse pod, o runtime vê 64 CPUs disponíveis (os do nó) e define `GOMAXPROCS = 64`. Resultado: 64 threads OS tentando executar goroutines em paralelo.
 
-O Linux usa o CFS (Completely Fair Scheduler) para controlar o uso de CPU por container. Quando um container excede sua cota de CPU, o CFS o throttlea: congela os processos por um periodo de tempo para que a cota seja respeitada.
+O Linux usa o CFS (Completely Fair Scheduler) para controlar o uso de CPU por container. Quando um container excede sua cota de CPU, o CFS pode ter throttle: congela os processos por um periodo de tempo para que a cota seja respeitada.
 
 Com 64 threads tentando rodar ao mesmo tempo e apenas 2 cores de quota, o container é throttled com muita frequencia, mesmo que o uso medio de CPU seja baixo.
 
@@ -336,7 +336,7 @@ resources:
 
 **CPU request**: usado pelo scheduler do Kubernetes para decidir em qual no alocar o pod. Nao limita o uso real de CPU. Um pod com request de 500m pode usar mais se o no tiver recursos disponiveis.
 
-**CPU limit**: esse e o valor que o CFS usa para throttling. Se o container tentar usar mais do que esse limite, o kernel o throttlea. E esse e o valor que o automaxprocs e o Go 1.25 usam para calcular o GOMAXPROCS correto.
+**CPU limit**: esse e o valor que o CFS usa para throttling. Se o container tentar usar mais do que esse limite, o kernel pode ter problema de throttle. E esse e o valor que o automaxprocs e o Go 1.25 usam para calcular o GOMAXPROCS correto.
 
 Aplicacoes sem CPU limit configurado nao tem a protecao do automaxprocs nem do Go 1.25, porque nao ha limite para respeitar. Nesse caso, o GOMAXPROCS continua sendo o numero de CPUs do host.
 
