@@ -10,15 +10,18 @@ comments: true
 image: "/assets/img/posts/2026-05-14-gomaxprocs-kubernetes-problem-en.png"
 lang: en
 original_post: "/gomaxprocs-kubernetes-problema/"
+youtube_videos:
+  - id: "06gLQ4C6OIo"
+    title: "Golang 1.25"
 ---
 
 Hey everyone!
 
-You've looked at a Kubernetes dashboard, seen CPU usage looking fine, watched latency climb, p99 spiking, and had no idea why. I've been there. The answer was in GOMAXPROCS.
+You've looked at a Kubernetes dashboard, seen CPU usage looking fine, watched latency climb, p99 spiking, and had no idea why. 
 
 This is one of those problems that exists in almost every Go application running on Kubernetes but rarely shows up in runbooks. The pod is not using too much CPU. It's not running out of memory. It's being throttled by the kernel, and the reason is that the Go runtime created far more threads than the container was supposed to have.
 
-Before Go 1.25, released in August 2025, this was the default behavior. And it silently affected countless production deployments.
+Before Go 1.25, released in August 2025, this was the default behavior. 
 
 ---
 
@@ -66,25 +69,6 @@ resources:
 ```
 
 When your Go application starts in this pod, the runtime sees 64 CPUs available (the node's) and sets `GOMAXPROCS = 64`. Result: 64 OS threads trying to execute goroutines in parallel.
-
-What happens next:
-
-```
-Host: 64 cores
-Pod CPU limit: 2 cores
-Go runtime GOMAXPROCS: 64 (reads the host, not the container)
-
-  Thread 1  ─────────────────────────────┐
-  Thread 2  ────────────────────────┐    │
-  ...                               │    │
-  Thread 64 ──────────────┐         │    │
-                          │         │    │
-                  ┌───────▼─────────▼────▼──┐
-                  │   CFS Scheduler (kernel) │
-                  │   CPU quota: 2 cores     │
-                  │   Throttles when exceeded│
-                  └──────────────────────────┘
-```
 
 Linux uses the CFS (Completely Fair Scheduler) to control CPU usage per container. When a container exceeds its CPU quota, CFS throttles it: it freezes the processes for a period of time so the quota is respected.
 

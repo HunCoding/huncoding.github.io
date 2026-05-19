@@ -9,15 +9,18 @@ tags: [go, golang, kubernetes, gomaxprocs, cgroups, performance, cpu-throttling,
 comments: true
 image: "/assets/img/posts/2026-05-14-gomaxprocs-kubernetes-problem-en.png"
 lang: pt-BR
+youtube_videos:
+  - id: "06gLQ4C6OIo"
+    title: "Golang 1.25"
 ---
 
 E aí, pessoal!
 
-Você já olhou para um dashboard de Kubernetes, viu CPU usage tranquila, latência subindo, p99 explodindo, e não entendeu nada? Eu já. E a resposta estava no GOMAXPROCS.
+Você já olhou para um dashboard de Kubernetes, viu CPU usage tranquila, latência subindo, p99 explodindo, e não entendeu nada?
 
-Esse é um daqueles problemas que existe em quase toda aplicação Go rodando em Kubernetes, mas que raramente aparece nos runbooks. O pod não está consumindo CPU demais. Não está sem memória. Está sendo throttled pelo kernel, e o motivo é que o runtime do Go criou muito mais threads do que o container deveria ter.
+Esse é um daqueles problemas que existe em quase toda aplicação Go rodando em Kubernetes, mas que raramente aparece nos runbooks. O pod não está consumindo CPU demais. Não está sem memória. Está sendo "throttled" pelo kernel, e o motivo é que o runtime do Go criou muito mais threads do que o container deveria ter.
 
-Antes do Go 1.25, lançado em agosto de 2025, esse era o comportamento padrão. E ele afetou silenciosamente incontáveis deploys em produção.
+Antes do Go 1.25, lançado em agosto de 2025, esse era o comportamento padrão. 
 
 ---
 
@@ -65,25 +68,6 @@ resources:
 ```
 
 Quando sua aplicação Go sobe nesse pod, o runtime vê 64 CPUs disponíveis (os do nó) e define `GOMAXPROCS = 64`. Resultado: 64 threads OS tentando executar goroutines em paralelo.
-
-O que acontece em seguida:
-
-```
-Host: 64 cores
-Pod CPU limit: 2 cores
-Go runtime GOMAXPROCS: 64 (lê o host, não o container)
-
-  Thread 1  ─────────────────────────────┐
-  Thread 2  ────────────────────────┐    │
-  ...                               │    │
-  Thread 64 ──────────────┐         │    │
-                          │         │    │
-                  ┌───────▼─────────▼────▼──┐
-                  │   CFS Scheduler (kernel) │
-                  │   CPU quota: 2 cores     │
-                  │   Throttle quando excede │
-                  └──────────────────────────┘
-```
 
 O Linux usa o CFS (Completely Fair Scheduler) para controlar o uso de CPU por container. Quando um container excede sua cota de CPU, o CFS o throttlea: congela os processos por um periodo de tempo para que a cota seja respeitada.
 
