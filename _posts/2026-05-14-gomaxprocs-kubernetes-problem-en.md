@@ -311,27 +311,6 @@ In practice, the `GOMAXPROCS` environment variable continues to be respected and
 
 ---
 
-## What to do today
-
-### Checklist
-
-**If you're on Go 1.25 or later:**
-- [ ] Confirm that Go 1.25+ is being used: `go version` inside the container
-- [ ] Add the startup log to confirm GOMAXPROCS is correct
-- [ ] Verify that the CPU limit is configured in the pod (without a limit, detection doesn't help)
-- [ ] Monitor `container_cpu_cfs_throttled_periods_total` in Prometheus
-
-**If you're on a version before Go 1.25:**
-- [ ] Add `go.uber.org/automaxprocs` as a dependency
-- [ ] Import with a blank identifier in the main file
-- [ ] Deploy and confirm GOMAXPROCS in the startup log
-- [ ] Compare p99 latency before and after
-
-**For any version:**
-- [ ] Make sure all pods have CPU limit configured
-- [ ] Set up Prometheus alerts for throttling above 25%
-- [ ] Document the expected GOMAXPROCS per service
-
 ### Complete example with automaxprocs and logging
 
 ```go

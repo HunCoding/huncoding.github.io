@@ -3,7 +3,7 @@ layout: post
 title: "Markov Chain: the first predictive model and its limits"
 subtitle: "Generating text with transition probabilities in Go, and understanding why this is not enough for real language"
 author: otavio_celestino
-date: 2026-06-11 08:00:00 -0300
+# date: 2026-06-11 08:00:00 -0300
 categories: [Go, AI, LLM]
 tags: [go, golang, llm, markov, nlp, text-generation, probability]
 comments: true

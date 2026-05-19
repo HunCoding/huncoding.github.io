@@ -7,7 +7,7 @@ date: 2026-05-14 08:00:00 -0300
 categories: [Go, Kubernetes, Performance]
 tags: [go, golang, kubernetes, gomaxprocs, cgroups, performance, cpu-throttling, k8s]
 comments: true
-image: "/assets/img/posts/2026-05-14-gomaxprocs-kubernetes-problema.png"
+image: "/assets/img/posts/2026-05-14-gomaxprocs-kubernetes-problem-en.png"
 lang: pt-BR
 ---
 
@@ -307,29 +307,6 @@ func main() {
 ```
 
 Na pratica, a variavel de ambiente `GOMAXPROCS` continua sendo respeitada e tem precedencia sobre a deteccao automatica.
-
----
-
-## O que fazer hoje
-
-### Checklist
-
-**Se voce esta no Go 1.25 ou superior:**
-- [ ] Confirme que o Go 1.25+ esta sendo usado: `go version` no container
-- [ ] Adicione o log de startup para confirmar que GOMAXPROCS esta correto
-- [ ] Verifique que o CPU limit esta configurado no pod (sem limit, a deteccao nao ajuda)
-- [ ] Monitore `container_cpu_cfs_throttled_periods_total` no Prometheus
-
-**Se voce esta em uma versao anterior ao Go 1.25:**
-- [ ] Adicione `go.uber.org/automaxprocs` como dependencia
-- [ ] Importe com blank identifier no arquivo principal
-- [ ] Faca o deploy e confirme o GOMAXPROCS no log de startup
-- [ ] Compare o p99 de latencia antes e depois
-
-**Para qualquer versao:**
-- [ ] Certifique-se de que todos os pods tem CPU limit configurado
-- [ ] Configure alertas no Prometheus para throttling acima de 25%
-- [ ] Documente o GOMAXPROCS esperado por servico
 
 ### Exemplo completo com automaxprocs e log
 

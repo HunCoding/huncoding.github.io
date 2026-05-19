@@ -3,7 +3,7 @@ layout: post
 title: "Vectors, distance and semantic search in Go"
 subtitle: "How to turn words into numbers, measure similarity with cosine distance, and build a semantic search engine from scratch"
 author: otavio_celestino
-date: 2026-05-28 08:00:00 -0300
+# date: 2026-05-28 08:00:00 -0300
 categories: [Go, AI, LLM]
 tags: [go, golang, llm, word2vec, embeddings, cosine-similarity, semantic-search, nlp]
 comments: true
