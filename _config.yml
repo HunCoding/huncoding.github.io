@@ -28,6 +28,10 @@ comments:
     category_id: DIC_kwDOPuClbc4CvT4C
 highlighter_theme: github-dark-high-contrast
 
+convertkit:
+  form_id: "9535199"
+  enabled: true
+
 pwa:
   enabled: true
   manifest:
