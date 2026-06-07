@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-RBENV_INIT := export PATH="$$HOME/.rbenv/shims:$$HOME/.rbenv/bin:$$PATH" && eval "$$(rbenv init -)" &&
+RBENV_INIT := export PATH="/opt/homebrew/bin:$$HOME/.rbenv/shims:$$HOME/.rbenv/bin:$$PATH" && eval "$$(rbenv init -)" &&
 
 .PHONY: help serve build clean install test
 
@@ -13,6 +13,7 @@ help:
 	@echo "  make help      - Mostra esta ajuda"
 
 serve:
+	@lsof -ti :4000 | xargs kill -9 2>/dev/null; true
 	@echo "Iniciando servidor de desenvolvimento..."
 	@echo "Acesse: http://localhost:4000"
 	@echo "Para parar: Ctrl+C"
