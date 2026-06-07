@@ -1,7 +1,31 @@
 {% if site.convertkit.enabled and page.lang == 'pt-BR' %}
-<div class="newsletter-wrapper border rounded p-4 mt-5 mb-2">
-  <h3 class="mb-1">📬 Receba os próximos posts no email</h3>
-  <p class="text-muted mb-3">Conteúdo sobre Go, backend e engenharia de software — direto na sua caixa de entrada. Sem spam.</p>
+<div class="newsletter-wrapper mt-5 mb-2">
   <script async data-uid="{{ site.convertkit.form_id }}" src="https://huncoding.kit.com/{{ site.convertkit.form_id }}/index.js"></script>
 </div>
+
+<style>
+  .formkit-form {
+    background: transparent !important;
+    border: 1px solid var(--border-color, #444) !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .formkit-form * {
+    color: var(--text-color, #ccc) !important;
+  }
+  .formkit-submit {
+    background: #4b33bb !important;
+    color: #fff !important;
+  }
+  .formkit-input {
+    background: var(--card-bg, #1e1e2e) !important;
+    border: 1px solid #555 !important;
+    color: var(--text-color, #ccc) !important;
+  }
+  .formkit-powered-by-convertkit-container {
+    display: none !important;
+  }
+</style>
 {% endif %}
