@@ -16,7 +16,7 @@ layout: null
         <link>{{ post.url | absolute_url }}</link>
         <guid isPermaLink="true">{{ post.url | absolute_url }}</guid>
         <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        <description>{{ post.excerpt | strip_html | truncatewords: 60 | xml_escape }}</description>
+        <description>{{ post.content | strip_html | truncatewords: 80 | xml_escape }}</description>
       </item>
       {% endif %}
     {% endfor %}
