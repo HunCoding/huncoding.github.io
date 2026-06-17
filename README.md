@@ -66,7 +66,7 @@ Este blog é construído com:
 
 - **Website**: [huncoding.github.io][website]
 - **YouTube**: [youtube.com/@huncoding][youtube]
-- **LinkedIn**: [linkedin.com/in/otaviocelestino/][linkedin]
+- **LinkedIn**: [linkedin.com/in/celestinotavio/][linkedin]
 - **GitHub**: [github.com/HunCoding][github]
 - **Email**: otavio@huncoding.com
 
@@ -97,7 +97,7 @@ Este projeto está sob a licença [MIT](LICENSE).
 <!-- Links -->
 [website]: https://huncoding.github.io
 [youtube]: https://youtube.com/@huncoding
-[linkedin]: https://linkedin.com/in/otaviocelestino/
+[linkedin]: https://linkedin.com/in/celestinotavioo/
 [github]: https://github.com/HunCoding
 [kofi]: https://ko-fi.com/huncoding
 [CKAD]: https://www.credly.com/badges/b453a4d1-3136-4a67-88c7-46db58baa97c
