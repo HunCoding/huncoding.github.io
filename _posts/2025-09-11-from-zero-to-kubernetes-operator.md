@@ -52,7 +52,7 @@ First, let's create the project structure using Kubebuilder:
 
 ```bash
 # Create the project
-kubebuilder init --domain exemplo.com --repo github.com/HunnTeRUS/meu-operator
+kubebuilder init --domain exemplo.com --repo github.com/celestinotavioo/meu-operator
 
 # Create the API and Controller
 kubebuilder create api --group apps --version v1alpha1 --kind ConfigMapWatcher --resource --controller
@@ -164,7 +164,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	appsv1alpha1 "github.com/HunnTeRUS/meu-operator/api/v1alpha1"
+	appsv1alpha1 "github.com/celestinotavioo/meu-operator/api/v1alpha1"
 )
 ```
 
