@@ -12,6 +12,11 @@ updates:
         dependency-type: production
       dev-deps:
         dependency-type: development
+    ignore:
+      - dependency-name: "@babel/core"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@babel/*"
+        update-types: ["version-update:semver-major"]
     schedule:
       interval: "weekly"
   - package-ecosystem: "github-actions"
