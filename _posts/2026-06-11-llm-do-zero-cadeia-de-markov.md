@@ -3,7 +3,7 @@ layout: post
 title: "Cadeia de Markov: o primeiro modelo preditivo e seus limites"
 subtitle: "Gerando texto com probabilidades de transição em Go, e entendendo por que isso não é suficiente para uma linguagem real"
 author: otavio_celestino
-# date: 2026-06-11 08:00:00 -0300
+date: 2027-06-11 08:00:00 -0300
 categories: [Go, IA, LLM]
 tags: [go, golang, llm, markov, nlp, text-generation, probabilidade]
 comments: true
