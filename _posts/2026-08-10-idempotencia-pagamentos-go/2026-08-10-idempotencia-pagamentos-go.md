@@ -10,15 +10,15 @@ comments: true
 lang: pt-BR
 ---
 
-E aí, pessoal!
+Salve, pessoal!
 
 Um cliente envia uma ordem de PIX e recebe `timeout`. Nos logs, porém, o commit da transação aparece como concluído. A API falhou ou funcionou?
 
-As duas respostas podem ser verdade. `timeout` só diz que o cliente parou de esperar; o resultado do servidor continua desconhecido para ele. Se repetir a chamada, pode pagar duas vezes. Se não repetir, pode abandonar o pagamento.
+As duas respostas podem ser verdade. `timeout` só diz que o cliente parou de esperar. Para ele, o resultado do servidor continua desconhecido. Se repetir a chamada, pode pagar duas vezes. Se não repetir, pode abandonar o pagamento.
 
 É esse resultado desconhecido que a idempotência precisa resolver. Ela não impede o segundo request. Ela impede que o segundo request se transforme em um segundo efeito financeiro.
 
-Uma tabela de idempotência — ou `SETNX` no Redis — cobre apenas parte do problema. Vamos implementar o núcleo do contrato em Go com PostgreSQL. Redis entra depois, para performance; a fonte de verdade continua durável.
+Uma tabela de idempotência ou um `SETNX` no Redis cobre apenas parte do problema. Vamos implementar o núcleo do contrato em Go com PostgreSQL. Redis entra depois para melhorar a performance. A fonte de verdade continua em um armazenamento durável.
 
 ---
 
@@ -58,7 +58,7 @@ Qual deveria ser o comportamento de `B` e `C`?
 
 A terceira opção impede o retry. A primeira só funciona com namespaces independentes e documentados.
 
-Aqui, escolho a segunda: para o mesmo cliente, a chave identifica uma intenção financeira. `B` recebe conflito; `C`, novamente `UUID-A`. Outro cliente ainda pode usar `key=1`, pois o escopo inclui o `tenant_id`.
+Aqui, escolho a segunda. Para o mesmo cliente, a chave identifica uma intenção financeira. `B` recebe conflito. `C` recebe `UUID-A` novamente. Outro cliente ainda pode usar `key=1`, pois o escopo inclui o `tenant_id`.
 
 Essa escolha vem antes do banco, do middleware e do código Go. Sem definir o significado da chave, a implementação apenas automatiza uma ambiguidade.
 
@@ -75,9 +75,9 @@ Precisamos, então, de dois identificadores:
 1. **Idempotency key:** gerada pelo cliente para declarar que tentativas diferentes pertencem à mesma intenção.
 2. **Fingerprint semântico:** gerado pelo servidor para confirmar que a chave não foi reutilizada com outro comando.
 
-O fingerprint não substitui a key. Duas transferências de R$ 100,00 para o mesmo destino podem ser pagamentos legítimos e independentes. A key diz **qual é a intenção**; o fingerprint confirma **se ela continua igual**.
+O fingerprint não substitui a key. Duas transferências de R$ 100,00 para o mesmo destino podem ser pagamentos legítimos e independentes. A key diz **qual é a intenção**. O fingerprint confirma **se ela continua igual**.
 
-No HTTP, métodos como `GET`, `PUT` e `DELETE` são idempotentes; `POST` não. O header `Idempotency-Key` sinaliza a intenção, mas o contrato do servidor torna o retry seguro.
+No HTTP, métodos como `GET`, `PUT` e `DELETE` são idempotentes. `POST` não. O header `Idempotency-Key` sinaliza a intenção, mas o contrato do servidor torna o retry seguro.
 
 O Internet-Draft do IETF para esse header expirou em abril de 2026 e não é um RFC, mas organiza bem três situações:
 
@@ -87,7 +87,7 @@ O Internet-Draft do IETF para esse header expirou em abril de 2026 e não é um 
 | A mesma chave foi usada com outro payload | `422 Unprocessable Content` |
 | O retry chegou enquanto a primeira tentativa ainda está em andamento | `409 Conflict` |
 
-Neste artigo, `422` pede que o integrador corrija a requisição; `409` pede que aguarde antes de tentar novamente.
+Neste artigo, `422` pede que o integrador corrija a requisição. `409` pede que aguarde antes de tentar novamente.
 
 ---
 
@@ -143,13 +143,13 @@ func fingerprint(cmd CreateTransactionCommand, secret []byte) ([]byte, error) {
 }
 ```
 
-O valor monetário usa unidade mínima (`int64`). Operação e versão entram no fingerprint; campos de transporte ficam de fora. HMAC-SHA-256 também dificulta testar valores de baixa entropia — como CPF — contra fingerprints vazados.
+O valor monetário usa unidade mínima (`int64`). Operação e versão entram no fingerprint. Campos de transporte ficam de fora. HMAC-SHA-256 também dificulta testar valores de baixa entropia, como CPF, contra fingerprints vazados.
 
 Se `brl` e `BRL` são equivalentes no contrato, normalize antes do fingerprint. Canonicalização não deve inventar equivalências.
 
-Versione e proteja o segredo do HMAC; mantenha versões antigas até as chaves expirarem. Entre linguagens, adote uma regra formal como a JSON Canonicalization Scheme (RFC 8785), não a serialização de uma biblioteca.
+Versione e proteja o segredo do HMAC. Mantenha versões antigas até as chaves expirarem. Entre linguagens, adote uma regra formal como a JSON Canonicalization Scheme (RFC 8785), não a serialização de uma biblioteca.
 
-Valide tamanho, formato e entropia da key; UUID v4 é uma escolha comum. Evite dados pessoais. O escopo vem da autenticação e acompanha a fronteira de autorização, que pode ser menor que o `tenant_id`.
+Valide tamanho, formato e entropia da key. UUID v4 é uma escolha comum. Evite dados pessoais. O escopo vem da autenticação e acompanha a fronteira de autorização, que pode ser menor que o `tenant_id`.
 
 ---
 
@@ -302,9 +302,9 @@ func (s *Service) Execute(
 }
 ```
 
-O exemplo mostra o sucesso. Um request inválido pode ser corrigido com a mesma chave antes da reserva. Depois dela, persista falhas terminais com `Finish` e commit; somente falhas transitórias sem efeito durável fazem rollback.
+O exemplo mostra o sucesso. Um request inválido pode ser corrigido com a mesma chave antes da reserva. Depois dela, persista falhas terminais com `Finish` e commit. Somente falhas transitórias sem efeito durável fazem rollback.
 
-O detalhe decisivo está no `Commit`: erro ao confirmar não prova rollback. A conexão pode cair depois que o PostgreSQL tornou os dados duráveis. A recuperação abre outra conexão e consulta a key; debitar novamente “por garantia” recria o problema.
+O detalhe decisivo está no `Commit`: erro ao confirmar não prova rollback. A conexão pode cair depois que o PostgreSQL tornou os dados duráveis. A recuperação abre outra conexão e consulta a key. Debitar novamente “por garantia” recria o problema.
 
 ---
 
@@ -312,7 +312,7 @@ O detalhe decisivo está no `Commit`: erro ao confirmar não prova rollback. A c
 
 O exemplo funciona quando o efeito cabe no mesmo banco. Uma chamada a PSP, banco ou iniciador PIX não participa da transação do PostgreSQL. Mantê-la aberta durante a chamada remota aumenta locks, mas não cria atomicidade entre os sistemas.
 
-Se o provedor executa, a resposta se perde e a transação local volta, o banco fez rollback — o dinheiro não.
+Se o provedor executa, a resposta se perde e a transação local volta, o banco fez rollback. O dinheiro não.
 
 Para fluxos externos, prefira uma operação durável e assíncrona:
 
@@ -330,9 +330,9 @@ Se a experiência exigir resposta síncrona, confirme a operação interna antes
 
 ## Qual resposta deve voltar no retry?
 
-As políticas variam. A Stripe repete o status code e o body iniciais, inclusive `500`; o PayPal devolve o estado atual; a AWS pede uma resposta semanticamente equivalente. Documente a sua escolha.
+As políticas variam. A Stripe repete o status code e o body iniciais, inclusive `500`. O PayPal devolve o estado atual. A AWS pede uma resposta semanticamente equivalente. Documente a sua escolha.
 
-Para transações, prefiro separar comando e consulta. O `POST` sempre aponta ao mesmo `transaction_id`; o `GET /transactions/{id}` mostra o estado atual. Persista apenas headers estáveis, como `Location`, e gere um novo `request_id` para cada tentativa.
+Para transações, prefiro separar comando e consulta. O `POST` sempre aponta ao mesmo `transaction_id`. O `GET /transactions/{id}` mostra o estado atual. Persista apenas headers estáveis, como `Location`, e gere um novo `request_id` para cada tentativa.
 
 Uma matriz de respostas pode ficar assim:
 
@@ -372,9 +372,9 @@ Publique se, depois do TTL, a chave será tratada como nova. Indexe `expires_at`
 
 A rede, a fila e o webhook podem entregar mais de uma vez ou fora de ordem. A garantia precisa ser mais precisa que “exactly once”: **um efeito financeiro para a mesma intenção, dentro de escopo e janela documentados**.
 
-As defesas vivem em camadas. Na API, key e fingerprint. No banco, restrição única, transação e lançamentos balanceados. No fluxo assíncrono, outbox no produtor e inbox — IDs de eventos persistidos — nos consumidores. Por fim, webhooks com transições válidas e reconciliação com o provedor.
+As defesas vivem em camadas. Na API, key e fingerprint. No banco, restrição única, transação e lançamentos balanceados. No fluxo assíncrono, outbox no produtor e inbox nos consumidores. A inbox guarda os IDs dos eventos já processados. Por fim, webhooks com transições válidas e reconciliação com o provedor.
 
-A outbox resolve o dual write entre banco e broker, mas o publicador ainda pode enviar mais de uma vez; o consumidor continua idempotente.
+A outbox resolve o dual write entre banco e broker, mas o publicador ainda pode enviar mais de uma vez. O consumidor continua idempotente.
 
 Ignorar webhook duplicado também não basta: eventos diferentes podem falar do mesmo objeto e chegar fora de ordem. A máquina de estados deve impedir regressões, como transformar um pagamento liquidado em `pending` por uma notificação atrasada.
 
@@ -382,7 +382,7 @@ Ignorar webhook duplicado também não basta: eventos diferentes podem falar do 
 
 ---
 
-## Onde Redis entra — e onde não entra
+## Onde Redis entra e onde não entra
 
 A versão somente com PostgreSQL é uma base de produção. Antes de adicionar infraestrutura, meça contenção, latência e volume.
 
@@ -403,7 +403,7 @@ request normalizado + fingerprint
   -> atualiza o Redis como best effort
 ```
 
-Cache hit divergente retorna `422`; cache miss nunca autoriza a movimentação. Sem Redis, o sistema volta ao PostgreSQL e à sua restrição única. O TTL do cache não ultrapassa a retenção durável.
+Cache hit divergente retorna `422`. Cache miss nunca autoriza a movimentação. Sem Redis, o sistema volta ao PostgreSQL e à sua restrição única. O TTL do cache não ultrapassa a retenção durável.
 
 Expiração, eviction, failover e replicação assíncrona podem fazer um lock desaparecer. A documentação do Redis descreve o caso em que uma réplica é promovida antes de receber o lock, permitindo outra aquisição.
 
@@ -427,7 +427,7 @@ Um teste que chama o handler duas vezes em sequência cobre o caso mais fácil. 
 
 Nos testes concorrentes, não confira apenas o status HTTP. Conte as linhas de transação, some os lançamentos do ledger e verifique a referência enviada ao provedor. O bug importante costuma estar no efeito, não na resposta.
 
-Instrumente `new`, `replay`, `conflict`, `in_progress` e registros presos. Nos logs, use `tenant_id`, decisão e `transaction_id`; não grave bodies sensíveis e prefira um hash da key.
+Instrumente `new`, `replay`, `conflict`, `in_progress` e registros presos. Nos logs, use `tenant_id`, decisão e `transaction_id`. Não grave bodies sensíveis. Prefira um hash da key.
 
 ---
 
@@ -453,16 +453,16 @@ A idempotency key não é trava de duplo clique. Em pagamentos, é parte do prot
 
 ## Referências
 
-- [RFC 9110 — HTTP Semantics: Idempotent Methods](https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods)
-- [IETF Internet-Draft — The Idempotency-Key HTTP Header Field (versão 07, expirada)](https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header-07)
-- [Stripe — Idempotent requests](https://docs.stripe.com/api/idempotent_requests)
-- [Adyen — API idempotency](https://docs.adyen.com/development-resources/api-idempotency)
-- [PayPal — Idempotency](https://developer.paypal.com/api/rest/reference/idempotency/)
-- [AWS Builders' Library — Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-- [PostgreSQL — INSERT e ON CONFLICT](https://www.postgresql.org/docs/current/sql-insert.html)
-- [Go — Executing transactions](https://go.dev/doc/database/execute-transactions)
-- [RFC 8785 — JSON Canonicalization Scheme](https://www.rfc-editor.org/rfc/rfc8785.html)
-- [AWS Prescriptive Guidance — Transactional outbox pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html)
-- [Stripe — Boas práticas para webhooks e eventos duplicados](https://docs.stripe.com/webhooks)
-- [Redis — Distributed Locks](https://redis.io/docs/latest/develop/clients/patterns/distributed-locks/)
-- [Modern Treasury — Ledgers Guarantees](https://docs.moderntreasury.com/ledgers/docs/ledgers-guarantees)
+- [RFC 9110: HTTP Semantics, Idempotent Methods](https://www.rfc-editor.org/rfc/rfc9110.html#name-idempotent-methods)
+- [IETF Internet-Draft: The Idempotency-Key HTTP Header Field (versão 07, expirada)](https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-idempotency-key-header-07)
+- [Stripe: Idempotent requests](https://docs.stripe.com/api/idempotent_requests)
+- [Adyen: API idempotency](https://docs.adyen.com/development-resources/api-idempotency)
+- [PayPal: Idempotency](https://developer.paypal.com/api/rest/reference/idempotency/)
+- [AWS Builders' Library: Making retries safe with idempotent APIs](https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
+- [PostgreSQL: INSERT e ON CONFLICT](https://www.postgresql.org/docs/current/sql-insert.html)
+- [Go: Executing transactions](https://go.dev/doc/database/execute-transactions)
+- [RFC 8785: JSON Canonicalization Scheme](https://www.rfc-editor.org/rfc/rfc8785.html)
+- [AWS Prescriptive Guidance: Transactional outbox pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/transactional-outbox.html)
+- [Stripe: Boas práticas para webhooks e eventos duplicados](https://docs.stripe.com/webhooks)
+- [Redis: Distributed Locks](https://redis.io/docs/latest/develop/clients/patterns/distributed-locks/)
+- [Modern Treasury: Ledgers Guarantees](https://docs.moderntreasury.com/ledgers/docs/ledgers-guarantees)
