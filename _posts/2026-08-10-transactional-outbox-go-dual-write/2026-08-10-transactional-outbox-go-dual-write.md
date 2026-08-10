@@ -67,6 +67,26 @@ O verdadeiro problema não é decidir qual operação vem primeiro.
 
 É tentar tratar duas operações independentes como se fossem uma só.
 
+Visualmente, a janela de falha é esta:
+
+```text
+Sem Outbox
+
+PostgreSQL                 Broker
+    │                        │
+    │  pedido confirmado ✅  │
+    │                        │
+  COMMIT                     │
+    │                        │
+    X processo morreu        │
+                             │
+                        evento não chegou ❌
+
+Resultado:
+banco = "pedido confirmado"
+broker = "nunca ouvi falar desse pedido"
+```
+
 ## E se o evento fosse parte da transação?
 
 É aqui que o **Transactional Outbox** muda o desenho.
@@ -78,6 +98,26 @@ As duas gravações acontecem dentro da mesma transação SQL.
 Se uma delas falhar, fazemos rollback das duas.
 
 Se o `COMMIT` acontecer, sabemos que tanto o pedido quanto a intenção de publicar o evento foram persistidos.
+
+```text
+             UMA TRANSAÇÃO SQL
+
+        ┌──────────────────────┐
+        │ INSERT pedido        │
+        │ INSERT outbox_event  │
+        └──────────┬───────────┘
+                   │
+                 COMMIT
+                   │
+                   ▼
+             evento pendente
+                   │
+                   ▼
+                worker
+                   │
+                   ▼
+                broker
+```
 
 Podemos criar uma tabela simples para isso:
 
@@ -150,7 +190,7 @@ func (s *Service) ConfirmOrder(
     `,
         order.ID,
         "order.confirmed",
-        payload,
+        string(payload),
     )
     if err != nil {
         return fmt.Errorf("save outbox event: %w", err)
@@ -191,6 +231,8 @@ Se ambos consultarem o mesmo evento ao mesmo tempo, os dois podem tentar public�
 Uma solução interessante no PostgreSQL é usar `FOR UPDATE SKIP LOCKED`.
 
 Em termos simples, um worker pega alguns registros para trabalhar enquanto os outros ignoram temporariamente aqueles registros e procuram os próximos.
+
+Existe um preço para essa concorrência: `ORDER BY id` organiza quais eventos tentamos reservar primeiro, mas não garante a ordem final de publicação quando vários workers trabalham ao mesmo tempo. Um worker pode estar processando o evento 100 enquanto outro já publica o 101. Se a ordem for importante para eventos relacionados ao mesmo agregado, como várias mudanças consecutivas do mesmo pedido, essa exigência precisa ser tratada separadamente.
 
 Mas existe outro detalhe.
 
@@ -310,6 +352,8 @@ Se a publicação falhar, o evento continua na tabela.
 
 Quando o `locked_until` expirar, outro ciclo pode tentar novamente.
 
+Os 30 segundos são apenas um valor de exemplo. Em produção, o tempo do *lease* precisa considerar quanto a publicação pode demorar ou ser renovado enquanto o worker continua trabalhando. Se ele expirar antes de o primeiro worker terminar, outro worker poderá reservar o mesmo evento e gerar uma publicação duplicada. Esse é mais um motivo para não depender de uma promessa de *exactly once*.
+
 A partir daqui podemos acrescentar backoff, limite de tentativas, dead-letter queue e outras proteções. Mas elas são evolução operacional. O núcleo do padrão continua pequeno.
 
 ## O problema que ainda não desapareceu
@@ -353,7 +397,11 @@ VALUES ($1)
 ON CONFLICT DO NOTHING;
 ```
 
-Se aquele identificador já existir, o consumidor sabe que a mensagem é repetida.
+Se a inserção realmente criar uma linha, o evento ainda não havia sido registrado. Se houver conflito com a chave já existente, a aplicação pode tratá-lo como uma mensagem repetida.
+
+Existe um detalhe essencial aqui: registrar o `event_id` não basta. Quando o efeito do evento também acontece no mesmo banco, o registro em `processed_events` e a alteração de negócio devem fazer parte da mesma transação. Assim, ou marcamos a mensagem como processada **e** aplicamos seu efeito, ou fazemos rollback dos dois.
+
+Sem isso, apenas deslocaríamos o dual write para o consumidor. O processo poderia registrar o `event_id`, morrer antes de atualizar o estado de negócio e, na próxima entrega, ignorar a mensagem por acreditar que ela já foi processada.
 
 Em cenários mais complexos, principalmente quando o efeito envolve outro sistema externo, a estratégia de idempotência precisa acompanhar a natureza daquela operação. Não existe um `ON CONFLICT` universal que torne qualquer integração exatamente uma vez.
 
