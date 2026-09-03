@@ -41,10 +41,10 @@
     "@semantic-release/git": "^11.0.1",
     "concurrently": "^10.0.5",
     "conventional-changelog-conventionalcommits": "^10.4.0",
-    "eslint": "^10.9.0",
+    "eslint": "^10.9.1",
     "globals": "^17.11.0",
     "purgecss": "^8.0.0",
-    "rollup": "^4.62.5",
+    "rollup": "^4.63.1",
     "semantic-release": "^25.0.9",
     "stylelint": "^17.14.1",
     "stylelint-config-standard-scss": "^17.0.0"
