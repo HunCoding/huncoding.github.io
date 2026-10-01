@@ -3,7 +3,7 @@ layout: post
 title: "How to stop AI from writing Go like it's 2020"
 subtitle: "JetBrains released Modern Go Guidelines to teach AI agents to use the latest language features"
 author: otavio_celestino
-date: 2026-10-01 08:00:00 +0200
+date: 2026-10-08 08:00:00 +0200
 categories: [Go, AI, Tools]
 tags: [go, golang, ai, goland, jetbrains, go-fix, modernize, llm, agents]
 comments: true

@@ -3,7 +3,7 @@ layout: post
 title: "Como evitar que a IA escreva Go de 2020"
 subtitle: "A JetBrains lançou Modern Go Guidelines para ensinar agentes de IA a usar as features mais recentes da linguagem"
 author: otavio_celestino
-date: 2026-10-01 08:00:00 +0200
+date: 2026-10-08 08:00:00 +0200
 categories: [Go, IA, Ferramentas]
 tags: [go, golang, ia, ai, goland, jetbrains, go-fix, modernize, llm, agentes]
 comments: true
