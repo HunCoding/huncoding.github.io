@@ -9,7 +9,6 @@ tags: [go, ai, open-source, copyright, cla, llm, claude, contributions]
 comments: true
 image: "/assets/img/posts/2026-11-01-go-ai-contributions-debate.png"
 lang: pt-BR
-original_post: "/ia-no-open-source-go-debate-contribuicoes/"
 ---
 
 E aí, pessoal!
