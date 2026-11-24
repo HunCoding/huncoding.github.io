@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "sync.Counter vai entrar no Go 1.28 — e deveríamos ter tido isso anos atrás"
+title: "sync.Counter vai entrar no Go 1.28... e deveríamos ter tido isso anos atrás"
 subtitle: "Um contador 100x mais rápido que atomic.Int64, com uma decisão de API que parece errada mas é a correta"
 author: otavio_celestino
 date: 2026-11-24 08:00:00 -0300

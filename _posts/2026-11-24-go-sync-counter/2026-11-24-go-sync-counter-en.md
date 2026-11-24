@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "sync.Counter is coming in Go 1.28 — and we should have had it years ago"
+title: "sync.Counter is coming in Go 1.28... and we should have had it years ago"
 subtitle: "A counter 100x faster than atomic.Int64, with an API decision that looks wrong but is actually right"
 author: otavio_celestino
 date: 2026-11-24 08:00:00 -0300
